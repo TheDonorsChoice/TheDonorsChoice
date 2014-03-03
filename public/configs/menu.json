@@ -1,0 +1,36 @@
+{
+  "links": [
+    {
+      "title": "Contribute",
+      "id" : "contribute",
+      "dropdown": [
+        {
+          "title": "Find Local Charities",
+          "link": "#donate"
+        },
+        {
+          "title": "Find Shelters in Need",
+          "link": "#shelters"
+        }
+      ]
+    },
+    {
+      "title": "Find Resources",
+      "id" : "resources",
+      "dropdown": [
+        {
+          "title": "Connect with donors",
+          "link": "#connect"
+        },
+        {
+          "title": "View Available Resources",
+          "link": "#resources"
+        }
+      ]
+    },
+    {
+      "title": "Get Help",
+      "link": "#help"
+    }
+  ]
+}
