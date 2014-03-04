@@ -1,6 +1,15 @@
 // Self-executing wrapper
 (function($) {
 
+    var AppRouter = Backbone.Router.extend({
+    routes: {
+        "*actions": "show"
+        }
+    });
+
+    // Create the App Router for the application
+    var app_router = new AppRouter();
+
     var Body = Backbone.View.extend({
             el: $('#main'),
 
@@ -160,15 +169,6 @@
         });
     });
 
-    var AppRouter = Backbone.Router.extend({
-    routes: {
-        "*actions": "show"
-        }
-    });
-
-    // Create the App Router for the application
-    var app_router = new AppRouter();
-
     // Default route
     app_router.on('route:show', function(actions) {
         var body = new Body();
@@ -185,8 +185,8 @@
 
     var header = new Header({
         model: {
-            title: "The Donors Choice",
-            slogan: "It’s The Donors Choice on how, where and when you donate, let us help you.. help us!"
+            title: "TheDonorsChoice",
+            slogan: "It’s The Donor's Choice on how, where and when you donate, let us help you... help us!"
         }
     });
 
