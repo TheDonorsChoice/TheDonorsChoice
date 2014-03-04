@@ -1,18 +1,15 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import play.*;
 import play.data.*;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 
-import java.util.Map;
-
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render(""));
+        return ok(index.render());
     }
 
     public static Result authenticate() {
