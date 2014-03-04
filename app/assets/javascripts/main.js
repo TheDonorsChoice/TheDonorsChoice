@@ -1,6 +1,22 @@
 // Self-executing wrapper
 (function($) {
 
+    var Body = Backbone.View.extend({
+            el: $('#main'),
+
+            initialize: function() {
+                _.bindAll(this, 'render');
+                this.render();
+            },
+
+            render: function() {
+
+                var template = Handlebars.compile($("#body-template").html());
+                var html = template();
+                $(this.el).html(html);
+            }
+        });
+
     var Menu = Backbone.View.extend({
         el: $('#navbar-items'),
 
@@ -49,12 +65,11 @@
     });
 
     var UserModel = Backbone.Model.extend({
-        loggedIn: true,
-        login: function(login) {
-            this.set({
-                loggedIn: login
-            });
-        }
+        defaults: {
+            "first_name": "Unset",
+            "last_name" : "Unset",
+            "loggedIn":  false
+          }
     });
 
     var UserView = Backbone.View.extend({
@@ -62,13 +77,10 @@
 
         initialize: function() {
             _.bindAll(this, 'render');
-            this.render();
+            _.bindAll(this, 'login');
 
-            this.model.on("change", function() {
-                if (this.model.hasChanged("loggedIn")) {
-                    this.render();
-                }
-            })
+            this.render();
+            this.listenTo(this.model, "change", this.render);
         },
 
         events: {
@@ -82,12 +94,18 @@
 
             var username = $('#login-username').val();
             var password = $('#login-password').val();
+            var model = this.model;
 
             $.post("login", {
                 username: username,
                 password: password
             }, function(data) {
                 // We received a non-error... It must have been a huge success.
+                model.set("loggedIn", true);
+
+                model.set("first_name", data.first_name);
+                model.set("last_name", data.last_name);
+
                 var alert = new Alert({
                     model: {
                         message: "You have been logged-in successfully."
@@ -103,13 +121,13 @@
                 });
 
             });
-
-
         },
 
         render: function() {
             if (this.model.get("loggedIn")) {
-
+                var template = Handlebars.compile($("#user-template").html());
+                var html = template(this.model.attributes);
+                $(this.el).html(html);
             } else {
                 var template = Handlebars.compile($("#login-template").html());
                 var html = template();
@@ -118,17 +136,21 @@
         }
     });
 
-    var AppRouter = Backbone.Router.extend({
-        routes: {
-            "*actions": "show"
-        }
-    });
-    // Create the App Router for the application
-    var app_router = new AppRouter();
+    var UserDropdownView = Backbone.View.extend({
+        el: $('#user-action'),
+        initialize: function() {
+                _.bindAll(this, 'render');
 
-    // Default route
-    app_router.on('route:show', function(actions) {
+                this.render();
+                this.listenTo(this.model, "change", this.render);
+            },
+        render: function() {
+                var template = Handlebars.compile($("#user-dropdown-template").html());
+                var text = { text: this.model.get("loggedIn") ? this.model.get("first_name") : "Login" };
 
+                var html = template(text);
+                $(this.el).html(html);
+            }
     });
 
     // Initialize the Menu from the json file.
@@ -138,10 +160,28 @@
         });
     });
 
+    var AppRouter = Backbone.Router.extend({
+    routes: {
+        "*actions": "show"
+        }
+    });
+
+    // Create the App Router for the application
+    var app_router = new AppRouter();
+
+    // Default route
+    app_router.on('route:show', function(actions) {
+        var body = new Body();
+    });
+
     var user = new UserModel();
     var userView = new UserView({
         model: user
     });
+
+    var userDropdownView = new UserDropdownView({
+            model: user
+        });
 
     var header = new Header({
         model: {
