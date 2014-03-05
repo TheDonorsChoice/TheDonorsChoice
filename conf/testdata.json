@@ -1,0 +1,31 @@
+{
+    "users" : [
+        {
+            "name"  : "Evan Panahi",
+            "email" : "evan@epanahi.com",
+            "password" : "epanahiepanahi",
+            "type" : "INDIVIDUAL"
+        },
+        {
+            "name" : "Chris Theberge",
+            "email": "chris@theberge.com",
+            "password" : "chrischris",
+            "type" : "COMMERCIAL"
+        },
+        {
+            "name" : "Karen Palmer",
+            "email": "karen@palmer.com",
+            "password": "karenkaren",
+            "type" : "PANTRY",
+            "taxId" : "12345"
+        },
+        {
+            "name" : "Charyn Egan",
+            "email": "charyn@egan.com",
+            "password": "charyncharyn",
+            "type" : "SHELTER",
+            "taxId": "54321"
+        }
+
+    ]
+}
