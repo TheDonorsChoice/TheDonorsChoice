@@ -3,6 +3,8 @@
 
     var AppRouter = Backbone.Router.extend({
     routes: {
+        "register": "register",
+        "logout": "logout",
         "*actions": "show"
         }
     });
@@ -13,14 +15,18 @@
     var Body = Backbone.View.extend({
             el: $('#main'),
 
-            initialize: function() {
+            initialize: function(options) {
                 _.bindAll(this, 'render');
+                this.options = options;
                 this.render();
             },
 
             render: function() {
-
-                var template = Handlebars.compile($("#body-template").html());
+                //
+                // Temporary code to allow us to put in temporary views until the full support for the User is complete.
+                //
+                var template_name = this.options.template_name;
+                var template = Handlebars.compile($(template_name).html());
                 var html = template();
                 $(this.el).html(html);
             }
@@ -100,9 +106,12 @@
 
             // Hide the Login Dropdown.
             $('#user-dropdown').removeClass('open');
+            app_router.navigate('show', {trigger: true});
 
             var username = $('#login-username').val();
             var password = $('#login-password').val();
+
+            // Scope workaround, once the post completes "this" is inaccessible.
             var model = this.model;
 
             $.post("login", {
@@ -169,14 +178,31 @@
         });
     });
 
+    var user = new UserModel();
+        var userView = new UserView({
+            model: user
+        });
+
     // Default route
     app_router.on('route:show', function(actions) {
-        var body = new Body();
+        var body = new Body({ template_name: "#body-template" });
     });
 
-    var user = new UserModel();
-    var userView = new UserView({
-        model: user
+    app_router.on('route:register', function(actions) {
+        var body = new Body({ template_name: "#user-account-template" });
+    });
+
+    app_router.on('route:logout', function(actions) {
+        // Some quick code just to demo the login/out sequence.
+        var alert = new Alert({
+            model: {
+                message: "You have been logged-out."
+            }
+        });
+        user.set("loggedIn", false);
+
+        // Drop the user back to the home page.
+        app_router.navigate('show', {trigger: true});
     });
 
     var userDropdownView = new UserDropdownView({

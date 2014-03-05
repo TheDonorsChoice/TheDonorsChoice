@@ -84,6 +84,65 @@
         <span class="glyphicon glyphicon-user" style="padding-right: 10px;"></span>{{text}} <span class="caret"></span>
     </script>
 
+    <script id="user-account-template" type="text/x-handlebars-template">
+        <hr>
+        <div class="well bs-component">
+            <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>New Account</legend>
+                        <div class="form-group">
+                            <label for="inputFirstName" class="col-lg-2 control-label">First Name</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLastName" class="col-lg-2 control-label">Last Name</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputConfirmPassword" class="col-lg-2 control-label">Confirm Password</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Account Type</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select">
+                                    <option>Donor</option>
+                                    <option>Recipient</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary" id="createAccount">Create Account</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        </div>
+    </script>
+
     <script id="login-template" type="text/x-handlebars-template">
         <div>
             <h2>Login</h2>
@@ -112,7 +171,7 @@
             <div class="form-group">
                 <div class="col-md-12 control">
                     <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                        Need an account? <a href="#">Sign Up Here</a>
+                        Need an account? <a href="#register">Sign Up Here</a>
                     </div>
                 </div>
             </div>
@@ -127,7 +186,7 @@
             <a href="#">Account Settings</a>
         </div>
         <div class="col-md-12" style="margin-bottom: 25px">
-            <a href="#">Logout</a>
+            <a href="#logout">Logout</a>
         </div>
     </script>
 
@@ -181,7 +240,7 @@
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("underscore.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("backbone.js"))'></script>
 
-    <script src="@routes.Assets.at("javascripts/main.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/main.js")"></script>
 </body>
 
 </html>
