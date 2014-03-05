@@ -1,6 +1,4 @@
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Donor;
-import models.Receiver;
 import models.User;
 import play.Application;
 import play.GlobalSettings;
@@ -28,16 +26,7 @@ public class Global extends GlobalSettings {
         while (iter.hasNext())
         {
             JsonNode nextUserJson = (JsonNode) iter.next();
-            User user;
-            if (nextUserJson.hasNonNull("taxId"))
-            {
-                user = Json.fromJson(nextUserJson, Receiver.class);
-            }
-            else
-            {
-                user = Json.fromJson(nextUserJson, Donor.class);
-            }
-
+            User user = Json.fromJson(nextUserJson, User.class);
             user.guid = UUID.randomUUID().toString().replaceAll("-", "");
             user.save();
         }

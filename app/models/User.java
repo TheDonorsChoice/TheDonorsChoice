@@ -15,8 +15,7 @@ import java.util.List;
  * @since 3/4/2014
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class User extends Model {
+public class User extends Model {
 
     @Id
     public Long id;
@@ -37,6 +36,8 @@ public abstract class User extends Model {
 
     @Constraints.Required
     public UserType type;
+
+    public String taxId;
 
     public enum UserType
     {
