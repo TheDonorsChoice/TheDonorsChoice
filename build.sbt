@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "handlebars" % "1.2.1",
   "org.webjars" % "backbonejs" % "1.1.2",
   "org.webjars" % "underscorejs" % "1.6.0-1",
-  "commons-io" % "commons-io" % "2.4"
+  "commons-io" % "commons-io" % "2.4",
+  "com.lambdaworks" % "scrypt" % "1.4.0"
 )
 
 play.Project.playJavaSettings

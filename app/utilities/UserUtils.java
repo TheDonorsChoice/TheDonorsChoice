@@ -1,15 +1,16 @@
 package utilities;
 
-import org.apache.commons.codec.binary.Hex;
+import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import play.Logger;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 public class UserUtils {
+    private static int CPU_COST = 65536;
+    private static int MEMORY_COST = 16;
+    private static int PARALLELIZATION = 1;
+
     private static Logger.ALogger log = play.Logger.of(UserUtils.class);
 
     public static String createGUID() {
@@ -31,21 +32,6 @@ public class UserUtils {
         if (StringUtils.isEmpty(givenPassword) || StringUtils.isEmpty(salt)) {
             throw new UnsupportedOperationException("Can't hash an empty password, or use an empty salt");
         }
-
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException algoEx) {
-            log.error("Failed to generate a sha-512 digest");
-        }
-
-        if (digest != null) {
-            String saltedPass = salt + givenPassword;
-            digest.update(saltedPass.getBytes());
-            byte[] hashedBytes = digest.digest();
-            return ImmutablePair.of(salt, new String(Hex.encodeHex(hashedBytes)));
-        } else {
-            throw new UnsupportedOperationException("Null message digest");
-        }
+        return ImmutablePair.of(salt, SCryptUtil.scrypt(salt + givenPassword, CPU_COST, MEMORY_COST, PARALLELIZATION));
     }
 }
