@@ -54,13 +54,18 @@ public class User extends Model {
         SHELTER
     }
 
-    public static Finder<Long, User> find = new Finder<>(Long.class, User.class);
+    public static Finder<Long, User> findById = new Finder<>(Long.class, User.class);
+    public static Finder<String, User> findByString = new Finder<>(String.class, User.class);
 
     public static void create(User user) {
         user.save();
     }
 
     public static List<User> all() {
-        return find.all();
+        return findById.all();
+    }
+
+    public static boolean exists(User user) {
+        return findByString.where().eq("email", user.email).findIds().size() != 0;
     }
 }

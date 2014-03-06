@@ -3,6 +3,7 @@ import models.User;
 import play.Application;
 import play.GlobalSettings;
 import play.libs.Json;
+import utilities.UserUtils;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class Global extends GlobalSettings {
         {
             JsonNode nextUserJson = (JsonNode) iter.next();
             User user = Json.fromJson(nextUserJson, User.class);
-            user.guid = UUID.randomUUID().toString().replaceAll("-", "");
+            user.guid = UserUtils.createGUID();
             user.save();
         }
     }

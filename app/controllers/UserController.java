@@ -2,34 +2,49 @@ package controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.User;
-import play.libs.Json;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utilities.UserUtils;
 
-/**
- * Created by epanahi on 3/5/14.
- */
 public class UserController extends Controller {
+    private static Logger.ALogger log = play.Logger.of(UserController.class);
 
     public static Result createUser()
     {
         ObjectMapper mapper = new ObjectMapper();
-        User newUser = null;
+        User newUser;
         try
         {
-            System.out.println(request().body().asJson());
+            log.info(request().body().asJson().toString());
             newUser = mapper.convertValue(request().body().asJson(), User.class);
         }
         catch (Exception ex)
         {
-            System.out.println(ex);
+            log.error("Failed to create a member given data " + request().body().asJson().toString());
+            return internalServerError("Unable to create member");
         }
 
         if (newUser == null)
         {
-            System.out.println("couldn't make a user");
+            log.error("Failed to create a member or throw exception given data " + request().body().asJson().toString());
+            return internalServerError("Unable to create member");
+        }
+        else
+        {
+            if (User.exists(newUser))
+            {
+                log.info("User " + newUser.email + " already exists");
+                return badRequest("user exists");
+            }
+            else
+            {
+                log.info("Adding new user for email " + newUser.email);
+                newUser.guid = UserUtils.createGUID();
+                newUser.save();
+            }
         }
 
-        return ok(Json.toJson(newUser));
+        return ok(newUser.guid);
     }
 }
