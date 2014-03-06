@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootswatch-flatly" % "3.1.1",
   "org.webjars" % "handlebars" % "1.2.1",
   "org.webjars" % "backbonejs" % "1.1.2",
-  "org.webjars" % "underscorejs" % "1.6.0-1"
-)     
+  "org.webjars" % "underscorejs" % "1.6.0-1",
+  "commons-io" % "commons-io" % "2.4"
+)
 
 play.Project.playJavaSettings

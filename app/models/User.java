@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -21,6 +22,7 @@ public class User extends Model {
     public Long id;
 
     @Constraints.Required
+    @JsonProperty(required = true)
     public String name;
 
     @Column(unique=true)
@@ -29,12 +31,18 @@ public class User extends Model {
 
     @Constraints.Required
     @Column(unique=true)
+    @JsonProperty(required = true)
     public String email;
 
     @Constraints.Required
+    @JsonProperty(required = true)
     public String password;
 
     @Constraints.Required
+    public String salt;
+
+    @Constraints.Required
+    @JsonProperty(required = true)
     public UserType type;
 
     public String taxId;
