@@ -233,14 +233,15 @@
             </div>
         </div>
     </footer>
-
+<!--
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("handlebars.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("underscore.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("backbone.js"))'></script>
+-->
+	@helper.requireJs(core = routes.Assets.at("js/lib/require.js").url, module = routes.Assets.at("js/main").url)
 
-    <script src="@routes.Assets.at("javascripts/main.js")"></script>
 </body>
 
 </html>
