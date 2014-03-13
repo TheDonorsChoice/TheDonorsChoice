@@ -81,8 +81,7 @@
 
     var UserModel = Backbone.Model.extend({
         defaults: {
-            "first_name": "Unset",
-            "last_name" : "Unset",
+            "name": "Unset",
             "loggedIn":  false
           }
     });
@@ -120,9 +119,7 @@
             }, function(data) {
                 // We received a non-error... It must have been a huge success.
                 model.set("loggedIn", true);
-
-                model.set("first_name", data.first_name);
-                model.set("last_name", data.last_name);
+                model.set("name", data.name);
 
                 var alert = new Alert({
                     model: {
@@ -163,7 +160,7 @@
             },
         render: function() {
                 var template = Handlebars.compile($("#user-dropdown-template").html());
-                var text = { text: this.model.get("loggedIn") ? this.model.get("first_name") : "Login" };
+                var text = { text: this.model.get("loggedIn") ? this.model.get("name") : "Login" };
 
                 var html = template(text);
                 $(this.el).html(html);

@@ -2,11 +2,13 @@ package controllers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import play.data.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import play.Logger;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utilities.UserUtils;
@@ -55,7 +57,9 @@ public class UserController extends Controller {
         User userForEmail = User.findByString.where().eq("email", email).findUnique();
         if (userForEmail != null) {
             if (UserUtils.check(password, userForEmail.password)) {
-                return ok(userForEmail.guid);
+                ObjectNode result = Json.newObject();
+                result.put("name", userForEmail.name);
+                return ok(result);
             } else {
                 return notFound();
             }
