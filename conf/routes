@@ -8,8 +8,7 @@ GET     /                           controllers.Application.index()
 ###############################################################################
 ##  User Management
 ###############################################################################
-##TODO switch to use UserController
-POST    /login                      controllers.Application.authenticate()
+POST    /login                      controllers.UserController.authenticate()
 POST    /user                       controllers.UserController.createUser()
 
 # Map static resources from the /public folder to the /assets URL path

@@ -24,14 +24,15 @@ public class UserUtils {
      *
      * This version is intended to be used for initial password creation
      */
-    public static ImmutablePair<String, String> hashPassword(String givenPassword) {
-        return hashPassword(createGUID(), givenPassword);
-    }
-
-    public static ImmutablePair<String, String> hashPassword(String salt, String givenPassword) {
-        if (StringUtils.isEmpty(givenPassword) || StringUtils.isEmpty(salt)) {
+    public static String hashPassword(String givenPassword) {
+        if (StringUtils.isEmpty(givenPassword)) {
             throw new UnsupportedOperationException("Can't hash an empty password, or use an empty salt");
         }
-        return ImmutablePair.of(salt, SCryptUtil.scrypt(salt + givenPassword, CPU_COST, MEMORY_COST, PARALLELIZATION));
+        return SCryptUtil.scrypt(givenPassword, CPU_COST, MEMORY_COST, PARALLELIZATION);
+    }
+
+    public static boolean check(String input, String hashed) {
+
+        return SCryptUtil.check(input, hashed);
     }
 }

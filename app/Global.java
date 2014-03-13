@@ -6,7 +6,6 @@ import play.libs.Json;
 import utilities.UserUtils;
 
 import java.util.Iterator;
-import java.util.UUID;
 
 public class Global extends GlobalSettings {
 
@@ -28,6 +27,9 @@ public class Global extends GlobalSettings {
         {
             JsonNode nextUserJson = (JsonNode) iter.next();
             User user = Json.fromJson(nextUserJson, User.class);
+
+            // Get the password field from the user and generate the salt.
+            user.password = UserUtils.hashPassword(user.password);
             user.guid = UserUtils.createGUID();
             user.save();
         }

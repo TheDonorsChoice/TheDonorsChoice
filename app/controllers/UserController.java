@@ -3,12 +3,14 @@ package controllers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.User;
+import play.data.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utilities.UserUtils;
+import views.html.helper.form;
 
 public class UserController extends Controller {
     private static Logger.ALogger log = play.Logger.of(UserController.class);
@@ -35,10 +37,7 @@ public class UserController extends Controller {
             else
             {
                 log.info("Adding new user for email " + newUser.email);
-                ImmutablePair<String, String> saltAndPassPair = UserUtils.hashPassword(newUser.password);
-                log.debug(String.format("Given password %s, added salt %s and hashed to %s", newUser.password, saltAndPassPair.left, saltAndPassPair.right));
-                newUser.salt = saltAndPassPair.left;
-                newUser.password = saltAndPassPair.right;
+                newUser.password = UserUtils.hashPassword(newUser.password);
                 newUser.guid = UserUtils.createGUID();
                 newUser.save();
             }
@@ -49,21 +48,21 @@ public class UserController extends Controller {
 
     public static Result authenticate()
     {
-        ObjectMapper mapper = new ObjectMapper();
-        UserAuthenticationRequest authRequest = mapper.convertValue(request().body().asJson(), UserAuthenticationRequest.class);
-        User userForEmail = User.findByString.where().eq("email", authRequest.email).findUnique();
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String email = requestData.get("email");
+        String password = requestData.get("password");
+
+        User userForEmail = User.findByString.where().eq("email", email).findUnique();
         if (userForEmail != null) {
-            ImmutablePair<String, String> saltAndHashedPass = UserUtils.hashPassword(authRequest.password, userForEmail.salt);
-            if (StringUtils.equals(saltAndHashedPass.getRight(), userForEmail.password)) {
+            if (UserUtils.check(password, userForEmail.password)) {
                 return ok(userForEmail.guid);
             } else {
                 return notFound();
             }
         } else {
-            log.info("Authentication attempt for non-existent user email " + authRequest.email);
+            log.info("Authentication attempt for non-existent user email " + email);
             return notFound();
         }
-
     }
 
     private static class UserAuthenticationRequest

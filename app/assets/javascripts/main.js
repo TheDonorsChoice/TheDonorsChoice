@@ -114,8 +114,8 @@
             // Scope workaround, once the post completes "this" is inaccessible.
             var model = this.model;
 
-            $.post("login", {
-                username: username,
+            $.post("/login", {
+                email: username,
                 password: password
             }, function(data) {
                 // We received a non-error... It must have been a huge success.
@@ -137,7 +137,6 @@
                         attribute: "danger"
                     }
                 });
-
             });
         },
 
