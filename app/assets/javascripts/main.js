@@ -102,6 +102,7 @@
         },
 
         events: {
+            "submit form": "login",
             "click #btn-login": "login",
             "click #btn-logout": "logout"
         },
@@ -116,7 +117,8 @@
             });
         },
 
-        login: function() {
+        login: function(e) {
+            e.preventDefault();
 
             // Hide the Login Dropdown.
             $('#user-dropdown').removeClass('open');
