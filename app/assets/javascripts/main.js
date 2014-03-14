@@ -92,13 +92,28 @@
         initialize: function() {
             _.bindAll(this, 'render');
             _.bindAll(this, 'login');
+            _.bindAll(this, 'get_user');
 
             this.render();
             this.listenTo(this.model, "change", this.render);
+
+            // Try to get the user data to prime the UI
+            this.get_user();
         },
 
         events: {
-            "click #btn-login": "login"
+            "click #btn-login": "login",
+            "click #btn-logout": "logout"
+        },
+
+        get_user: function()  {
+            var model = this.model;
+            $.get("/user", {  }, function(data) {
+                // We received a non-error... It must have been a huge success.
+                model.set("loggedIn", true);
+                model.set("name", data.name);
+                model.set("email", data.email);
+            });
         },
 
         login: function() {
@@ -134,6 +149,26 @@
                         attribute: "danger"
                     }
                 });
+            });
+        },
+
+        logout: function() {
+
+            // Hide the Login Dropdown.
+            app_router.navigate('show', {trigger: true});
+
+            var alert = new Alert({
+                model: {
+                    message: "You have been logged-out."
+                }
+            });
+
+            // Scope workaround, once the post completes "this" is inaccessible.
+            var model = this.model;
+
+            $.post("/logout", { }, function(data) {
+                // We received a non-error... It must have been a huge success.
+                model.set("loggedIn", false);
             });
         },
 
@@ -177,7 +212,7 @@
     var user = new UserModel();
         var userView = new UserView({
             model: user
-        });
+     });
 
     // Default route
     app_router.on('route:show', function(actions) {
@@ -188,22 +223,9 @@
         var body = new Body({ template_name: "#user-account-template" });
     });
 
-    app_router.on('route:logout', function(actions) {
-        // Some quick code just to demo the login/out sequence.
-        var alert = new Alert({
-            model: {
-                message: "You have been logged-out."
-            }
-        });
-        user.set("loggedIn", false);
-
-        // Drop the user back to the home page.
-        app_router.navigate('show', {trigger: true});
-    });
-
     var userDropdownView = new UserDropdownView({
-            model: user
-        });
+        model: user
+    });
 
     var header = new Header({
         model: {

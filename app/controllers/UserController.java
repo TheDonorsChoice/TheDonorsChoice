@@ -5,17 +5,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import play.data.*;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utilities.UserUtils;
-import views.html.helper.form;
 
 public class UserController extends Controller {
     private static Logger.ALogger log = play.Logger.of(UserController.class);
+
+    public static Result currentUser()  {
+        String guide = session().get("guid");
+        User userForGuid =  User.findByString.where().eq("guid", guide).findUnique();
+        ObjectNode result = Json.newObject();
+        result.put("name", userForGuid.name);
+        result.put("email", userForGuid.email);
+        return ok(result);
+    }
+
+    public static Result logout()  {
+        session().clear();
+        return ok();
+    }
 
     public static Result createUser()
     {
@@ -57,9 +68,8 @@ public class UserController extends Controller {
         User userForEmail = User.findByString.where().eq("email", email).findUnique();
         if (userForEmail != null) {
             if (UserUtils.check(password, userForEmail.password)) {
-                ObjectNode result = Json.newObject();
-                result.put("name", userForEmail.name);
-                return ok(result);
+                session().put("guid", userForEmail.guid);
+                return UserController.currentUser();
             } else {
                 return notFound();
             }
