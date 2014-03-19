@@ -1,0 +1,104 @@
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="../" class="navbar-brand">TheDonorsChoice</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav" id="navbar-items">
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" id="user-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" id="user-action"></a>
+
+                            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px; width: 400px;" aria-labelledby="user-dropdown">
+                                <div id="user-container">
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="alert" style="display: none;">
+
+    </div>
+
+    <div class="bs-docs-header" id="header">
+    </div>
+
+    <div id="wrap">
+        <div id="main" class="container clear-top">
+
+        </div>
+    </div>
+
+    <script id="body-template" type="text/x-handlebars-template">
+        <hr>
+        <div class="bs-component">
+            <div class="jumbotron">
+                <h1><img style="padding-right: 5px;" src="@routes.Assets.at("images/clock.png")" /> Coming soon</h1>
+                <br />
+                Soon this website will be jam packed full of features becoming your portal for helping those in need.
+                Whether you are looking to donate time, goods, or services to local shelters and other organizations, we will help you connect with local organizations.
+            </div>
+        </div>
+    </script>
+
+    <script id="user-dropdown-template" type="text/x-handlebars-template">
+        <span class="glyphicon glyphicon-user" style="padding-right: 10px;"></span>{{text}} <span class="caret"></span>
+    </script>
+
+
+    <script id="alert-template" type="text/x-handlebars-template">
+        <div class="alert alert-dismissable alert-{{#if attribute}}{{attribute}}{{else}}success{{/if}}">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{message}}
+        </div>
+    </script>
+
+    <script id="header-template" type="text/x-handlebars-template">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"><img style="height:100px;width:100px;" src="@routes.Assets.at("images/logo.png")" /></div>
+                <div class="col-md-10"><h1>{{title}}</h1>
+                    <p>{{slogan}}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="menu-template" type="text/x-handlebars-template">
+        {{#each links}}
+        {{#if dropdown}}
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" id="{{id}}">{{title}} <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="{{id}}">
+                {{#each dropdown}}
+                <li><a href="{{link}}">{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </li>
+        {{else}}
+        <li><a href="{{link}}">{{title}}</a></li>
+        {{/if}}
+        {{/each}}
+    </script>
+
+    <footer id="footer">
+        <div class="container">
+            <div>© 2014 TheDonorsChoice.org</div>
+            <div>
+                Theme: <a href="http://bootswatch.com/flatly/">Bootswatch Flatly</a> Icons: <a href="http://medialoot.com/item/free-mini-vector-app-icons/">Medialoot</a>
+            </div>
+        </div>
+    </footer>

@@ -1,19 +1,19 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
-], function($, _, Backbone){
+  'views/baseView',
+  'hbs!templates/user-account-template'
+], function(baseView, template){
 
-	var UserView = Backbone.View.extend({
-		el: $('#user-container'),
-		template_name: "#user-account-template",
+	var view = Backbone.View.extend({
+		el: $('#user-container', context),
 
-		initialize: function() {
+		initialize: function(options) {
 		    _.bindAll(this, 'render');
 		    _.bindAll(this, 'login');
 
+			this.options = options;
+
 		    this.render();
-		    this.listenTo(this.model, "change", this.render);
+		    //this.listenTo(this.model, "change", this.render);
 		},
 
 		events: {
@@ -59,22 +59,16 @@ define([
 		    });
 		},
 
-		render: function() {
-		    if (this.model.get("loggedIn")) {
-			var template = Handlebars.compile($("#user-template").html());
-			var html = template(this.model.attributes);
-			$(this.el).html(html);
-		    } else {
-			var template = Handlebars.compile($("#login-template").html());
-			var html = template();
-			$(this.el).html(html);
-		    }
-		}
-	    });
+		render: function(context) {
+		    if (true){//this.model.get("loggedIn")) {
 
-	return function(user) {
-		return new UserView({
-        	    		model: user
-        });
-	};
+		    } else {
+
+		    }
+			var $html = template(context);
+			this.$el.html($html);
+		}
+	});
+
+	return view;
 });

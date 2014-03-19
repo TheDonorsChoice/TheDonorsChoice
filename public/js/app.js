@@ -2,15 +2,16 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'controllers/mainController',
+  'hbs',
+  'controllers/baseController',
   'controllers/userController'
-], function($, _, Backbone, mainController, userController){
+], function($, _, Backbone, hbs, baseController, userController){
 
 	var AppRouter = Backbone.Router.extend({
 		routes: {
 			"register": userController.register,
 			"logout": userController.logout,
-			"*actions": mainController.show
+			"*actions": baseController.show
 			}
 		});
 

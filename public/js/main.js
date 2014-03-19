@@ -5,15 +5,29 @@
 // Their usage will become more apparent futher along in the tutorial.
 require.config({
   paths: {
+	lib: 'lib/',
     jquery: 'lib/jquery-min',
     underscore: 'lib/underscore',
+    handlebars: 'lib/handlebars',
     backbone: 'lib/backbone',
-    handlebars: 'lib/handlebars-v1.3.0'
+    i18nprecompile: 'lib/i18nprecompile',
+    hbs: 'lib/hbs',
+
+    templates: '../templates'
   },
   shim: {
-          "backbone": ["handlebars"]
-    }
+	  'handlebars': {
+	              exports: 'Handlebars'
+        },
+      "backbone": {deps:["handlebars"]},
+	  "hbs": {deps:["handlebars", "text"]}
+  },
 
+  hbs: {
+          helpers: true,            // default: true
+          i18n: false,              // default: false
+          partialsUrl: ''           // default: ''
+  },
 });
 
 require([
