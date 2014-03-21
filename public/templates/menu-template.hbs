@@ -1,0 +1,14 @@
+        {{#each links}}
+        {{#if dropdown}}
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" id="{{id}}">{{title}} <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="{{id}}">
+                {{#each dropdown}}
+                <li><a href="{{link}}">{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </li>
+        {{else}}
+        <li><a href="{{link}}">{{title}}</a></li>
+        {{/if}}
+        {{/each}}
