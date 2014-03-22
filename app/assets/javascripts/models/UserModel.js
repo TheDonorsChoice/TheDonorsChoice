@@ -1,8 +1,7 @@
 define([
   'jquery',
-  'underscore',
-  'backbone',
-], function($, _, Backbone){
+  'backbonejs'
+], function($, Backbone){
 	var UserModel = Backbone.Model.extend({
 		defaults: {
 		    "first_name": "Unset",

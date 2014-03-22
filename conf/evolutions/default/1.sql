@@ -9,7 +9,6 @@ create table user (
   guid                      varchar(255),
   email                     varchar(255),
   password                  varchar(255),
-  salt                      varchar(255),
   type                      varchar(10),
   tax_id                    varchar(255),
   constraint ck_user_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),

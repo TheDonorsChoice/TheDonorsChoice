@@ -39,9 +39,6 @@ public class User extends Model {
     public String password;
 
     @Constraints.Required
-    public String salt;
-
-    @Constraints.Required
     @JsonProperty(required = true)
     public UserType type;
 

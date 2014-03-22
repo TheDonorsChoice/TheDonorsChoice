@@ -1,10 +1,11 @@
 define([
-  'views/baseView',
-  'hbs!templates/user-account-template'
-], function(baseView, template){
+  'models/UserModel',
+  'compiled-templates'
+], function(UserModel, Templates){
 
 	var view = Backbone.View.extend({
-		el: $('#user-container', context),
+		el: $('#user-container'),
+        template:Templates['user-login-template'],
 
 		initialize: function(options) {
 		    _.bindAll(this, 'render');
@@ -13,7 +14,7 @@ define([
 			this.options = options;
 
 		    this.render();
-		    //this.listenTo(this.model, "change", this.render);
+		    this.listenTo(this.model, "change", this.render);
 		},
 
 		events: {
@@ -65,7 +66,7 @@ define([
 		    } else {
 
 		    }
-			var $html = template(context);
+			var $html = this.template(context);
 			this.$el.html($html);
 		}
 	});
