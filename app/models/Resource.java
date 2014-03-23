@@ -4,6 +4,7 @@ import com.avaje.ebean.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 import javax.persistence.*;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class Resource extends Model {
 
     @Id
-    public Long ResourceID;
+    public Long id;
 
     @Constraints.Required
     @JsonProperty(required = true)
@@ -41,7 +42,7 @@ public class Resource extends Model {
     
     @Constraints.Required
     @JsonProperty(required = true)
-    public String UserID;
+    public Long UserID;
     
     @Constraints.Required
     @JsonProperty(required = false)
@@ -50,5 +51,19 @@ public class Resource extends Model {
     @Constraints.Required
     @JsonProperty(required = true)
     public String itemsNeeded;
+    
+	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);
+	
+	public static List<Resource> all(){
+		return find.all();
+	}
+	
+	public static void create(Resource resource){
+		resource.save(); 
+	}
+	
+	public static void delete(Long id){
+		find.ref(id).delete(); 
+	}
 }
 
