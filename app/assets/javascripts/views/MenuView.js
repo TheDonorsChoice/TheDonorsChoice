@@ -17,9 +17,6 @@ define([
             this.listenTo(this.collection, "change", this.render);
 
             this.collection.fetch({success: function(collection, response, options) {
-                _(response).each(function(resp) {
-                    collection.add(resp);
-                });
                 collection.trigger("change");
             }});
         },
