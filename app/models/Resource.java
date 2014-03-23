@@ -26,4 +26,29 @@ public class Resource extends Model {
     @Constraints.Required
     @JsonProperty(required = true)
     public String orgName;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String address;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String phoneNumber;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String email;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String UserID;
+    
+    @Constraints.Required
+    @JsonProperty(required = false)
+    public String Type;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String itemsNeeded;
 }
+
