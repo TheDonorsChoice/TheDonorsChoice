@@ -2,35 +2,37 @@
 
 @import helper._
 
-@main("Resource List") {
 
-    <h1>@resources.size() Resource(s)</h1>
+    <h1>Resource(s)</h1>
     
-    <ul>
+    <table border="1" style="width:700px">
+    
     	@for(resource <- resources){
-    		<li>
-    			@resource.orgName
-    		</li>	
-    		<li>
-    			@resource.address
-    		</li>
-    		<li>
-    			@resource.phoneNumber
-    		</li>
-    		<li>
-    			@resource.email
-    		</li>
-    		<li>
-    			@resource.UserID
-    		</li>
-    		<li>
-    			@resource.Type
-    		</li>
-    		<li>
-    			@resource.itemsNeeded
-    		</li>
+    		<tr>
+	    		<td>
+	    			@resource.orgName
+	    		</td>	
+	    		<td>
+	    			@resource.address
+	    		</td>
+	    		<td>
+	    			@resource.phoneNumber
+	    		</td>
+	    		<td>
+	    			<a href="mailto:@resource.email">@resource.email</a>
+	    		</td>
+	    		<td>
+	    			@resource.UserID
+	    		</td>
+	    		<td>
+	    			@resource.Type
+	    		</td>
+	    		<td>
+	    			@resource.itemsNeeded
+	    		</td>
+	    		<td>
+	    			@form(routes.ResourceController.deleteResource(resource.id)){<input type="submit" value="Delete">}
+	    		</td>
+    		</tr>
     	}		
     </ul>
-    
-
-}
