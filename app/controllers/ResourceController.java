@@ -28,8 +28,8 @@ public class ResourceController extends Controller {
 	}
 
 	public static Result resources() {
-		//if( size == 0 )
-		//	populateForm(); 
+		if( Resource.size == 0 )
+			populateForm(); 
 		return ok(resource.render(Resource.all(), resourceForm));
 	}
 	
