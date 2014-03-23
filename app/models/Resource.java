@@ -52,6 +52,16 @@ public class Resource extends Model {
     @JsonProperty(required = true)
     public String itemsNeeded;
     
+    public Resource(String name, String address, String phone, String email, Long userid, String type, String items){ 
+    	orgName = name; 
+    	this.address = address; 
+    	phoneNumber = phone; 
+    	this.email = email; 
+    	UserID = userid; 
+    	Type = type; 
+    	itemsNeeded = items; 
+    }
+    
 	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);
 	
 	public static List<Resource> all(){
