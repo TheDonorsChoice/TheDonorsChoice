@@ -30,13 +30,15 @@ define([
   'backbonejs',
    'bootstrap',
   'controllers/MenuController',
+  'controllers/StaticController',
   'controllers/UserController'
-], function($, _, Backbone, Bootstrap, MenuController, UserController){
+], function($, _, Backbone, Bootstrap, MenuController, StaticController, UserController){
 
 	var AppRouter = Backbone.Router.extend({
 		routes: {
 			"register": UserController.register,
-			"logout": UserController.logout
+			"logout": UserController.logout,
+            "*actions" : StaticController.show('body-comingsoon-template')
 			}
 		});
 
