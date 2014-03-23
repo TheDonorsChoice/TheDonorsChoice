@@ -7,6 +7,6 @@ define([
         model: MenuModel,
         url: "/assets/configs/menu.json"
     });
-    // You don't usually return a collection instantiated
+    // Return the Collection class to allow others to instantiate it.
     return MenuCollection;
 });

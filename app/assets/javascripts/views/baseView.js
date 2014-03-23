@@ -9,7 +9,6 @@ define([
         template: Templates[''],
 		el: $('#main'),
 
-
 		initialize: function(options) {
 			_.bindAll(this, 'render');
 			this.options = options;
