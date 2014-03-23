@@ -18,3 +18,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Route for getting assets provided by webjars
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
+
+# Resource
+GET 	/resource					controllers.ResourceController.resource()
