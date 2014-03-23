@@ -16,18 +16,19 @@ define([
             _.bindAll(this, 'logout_callback');
         },
 
-        login: function(username, password) {
+        login: function(username, password, success, failure) {
             $.post("/login", {
                 email: username,
                 password: password
-            }, this.update_user).fail(this.update_user);
+            }, this.update_user).success(success).fail(this.update_user).fail(failure);
         },
 
-        logout: function() {
-            $.post("/logout", { }, this.logout_callback);
+        logout: function(success, failure) {
+            $.post("/logout", { }, this.logout_callback).success(success).fail(failure);
         },
 
         logout_callback: function() {
+
             this.set("loggedIn", false);
             this.trigger('change', this);
         },
@@ -37,20 +38,17 @@ define([
         },
 
         update_user: function(data, status) {
-            if (status === "error") {
-
+            if (status === "error" || data === "") {
+                this.set("loggedIn", false);
             } else {
-                this.set("loggedIn", data !== "");
-
-                if (this.get("loggedIn")) {
-                    this.set("name", data.name);
-                    this.set("email", data.email);
-                }
+                this.set("loggedIn", true);
+                this.set("name", data.name);
+                this.set("email", data.email);
             }
 
             this.trigger('change', this);
         }
 
-	    });
+	 });
 	 return UserModel;
 });

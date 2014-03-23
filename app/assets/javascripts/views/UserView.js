@@ -2,8 +2,9 @@ define([
   'underscorejs',
   'router',
   'models/UserModel',
+  'controllers/AlertController',
   'compiled-templates'
-], function(_, app_router, UserModel, Templates){
+], function(_, app_router, UserModel, AlertController, Templates){
 
 	var view = Backbone.View.extend({
         el: $('#user-container'),
@@ -28,31 +29,42 @@ define([
         login: function(e) {
             e.preventDefault();
 
-            // Hide the Login Dropdown.
-            $('#user-dropdown').removeClass('open');
-            app_router.navigate('show', {trigger: true});
-
             var username = $('#login-username').val();
             var password = $('#login-password').val();
 
-            this.model.login(username, password);
+            this.model.login(username, password, function() {
+                    // Hide the Login Dropdown and navigate to the default page.
+                    $('#user-dropdown').removeClass('open');
+                    app_router.navigate('show', {trigger: true});
+
+                    AlertController.show("You have been logged in successfully.");
+                },
+                function() {
+                    AlertController.show("You were unable to be logged in. Please check your username/password.", "danger");
+                }
+            );
         },
 
         logout: function() {
 
-            // Hide the Login Dropdown.
-            //app_router.navigate('show', {trigger: true});
-
-            this.model.logout();
+            this.model.logout(function() {
+                // Hide the Login Dropdown and navigate to the default page.
+                app_router.navigate('show', {trigger: true});
+                $('#user-dropdown').removeClass('open');
+                AlertController.show("You have been logged out successfully.");
+            },
+            function() {
+                AlertController.show("An error was encountered attempting to log you out.", "danger");
+            });
         },
 
         render: function() {
 
-            var dropdownEl = $("#user-login-item");
+            var dropdown = $("#user-login-item");
             if (this.model.get("loggedIn")) {
-                dropdownEl.html(this.model.get("name"));
+                dropdown.html(this.model.get("name"));
             } else {
-                dropdownEl.html("Login")
+                dropdown.html("Login")
             }
 
             var html = this.template(this.model);
