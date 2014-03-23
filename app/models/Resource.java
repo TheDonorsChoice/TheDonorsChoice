@@ -52,6 +52,8 @@ public class Resource extends Model {
     @JsonProperty(required = true)
     public String itemsNeeded;
     
+    public static int size = 0; 
+    
     public Resource(String name, String address, String phone, String email, Long userid, String type, String items){ 
     	orgName = name; 
     	this.address = address; 
@@ -70,10 +72,12 @@ public class Resource extends Model {
 	
 	public static void create(Resource resource){
 		resource.save(); 
+		size++; 
 	}
 	
 	public static void delete(Long id){
-		find.ref(id).delete(); 
+		find.ref(id).delete();
+		size--; 
 	}
 }
 
