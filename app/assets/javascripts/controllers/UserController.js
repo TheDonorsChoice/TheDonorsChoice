@@ -3,15 +3,22 @@ define([
   'models/UserModel',
   'views/UserView'
 ], function($, UserModel, UserView){
+    var initialize = function() {
+        var user = new UserModel();
+        new UserView({ model: user });
+    };
+
+    var register = function() {
+
+    };
+
+    var logout = function() {
+
+    };
 
 	return {
-		register: function(){
-			var user = new UserModel();
-			new UserView(user);
-		},
-
-		logout: function(){
-
-		}
+        initialize: initialize,
+		register: register,
+		logout: logout
 	}
 });

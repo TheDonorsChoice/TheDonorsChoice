@@ -1,74 +1,63 @@
 define([
+  'underscorejs',
+  'router',
   'models/UserModel',
   'compiled-templates'
-], function(UserModel, Templates){
+], function(_, app_router, UserModel, Templates){
 
 	var view = Backbone.View.extend({
-		el: $('#user-container'),
-        template:Templates['user-login-template'],
+        el: $('#user-container'),
+        template: Templates['user-login-template'],
 
-		initialize: function(options) {
-		    _.bindAll(this, 'render');
-		    _.bindAll(this, 'login');
+        initialize: function() {
+            _.bindAll(this, 'render');
+            _.bindAll(this, 'login');
 
-			this.options = options;
+            this.listenTo(this.model, "change", this.render);
 
-		    this.render();
-		    this.listenTo(this.model, "change", this.render);
-		},
+            // Try to get the user data to prime the UI
+            this.model.get_user();
+        },
 
-		events: {
-		    "click #btn-login": "login"
-		},
+        events: {
+            "submit form": "login",
+            "click #btn-login": "login",
+            "click #btn-logout": "logout"
+        },
 
-		login: function() {
+        login: function(e) {
+            e.preventDefault();
 
-		    // Hide the Login Dropdown.
-		    $('#user-dropdown').removeClass('open');
-		    app_router.navigate('show', {trigger: true});
+            // Hide the Login Dropdown.
+            $('#user-dropdown').removeClass('open');
+            app_router.navigate('show', {trigger: true});
 
-		    var username = $('#login-username').val();
-		    var password = $('#login-password').val();
+            var username = $('#login-username').val();
+            var password = $('#login-password').val();
 
-		    // Scope workaround, once the post completes "this" is inaccessible.
-		    var model = this.model;
+            this.model.login(username, password);
+        },
 
-		    $.post("login", {
-			username: username,
-			password: password
-		    }, function(data) {
-			// We received a non-error... It must have been a huge success.
-			model.set("loggedIn", true);
+        logout: function() {
 
-			model.set("first_name", data.first_name);
-			model.set("last_name", data.last_name);
+            // Hide the Login Dropdown.
+            //app_router.navigate('show', {trigger: true});
 
-			var alert = new Alert({
-			    model: {
-				message: "You have been logged-in successfully."
-			    }
-			});
-		    }).fail(function(data) {
+            this.model.logout();
+        },
 
-			var alert = new Alert({
-			    model: {
-				message: "Unable to log you in at this time. Are you sure your username/password are correct?",
-				attribute: "danger"
-			    }
-			});
+        render: function() {
 
-		    });
-		},
+            var dropdownEl = $("#user-login-item");
+            if (this.model.get("loggedIn")) {
+                dropdownEl.html(this.model.get("name"));
+            } else {
+                dropdownEl.html("Login")
+            }
 
-		render: function(context) {
-		    if (true){//this.model.get("loggedIn")) {
-
-		    } else {
-
-		    }
-			var $html = this.template(context);
-			this.$el.html($html);
-		}
+            var html = this.template(this.model);
+            this.$el.html(html);
+        }
 	});
 
 	return view;

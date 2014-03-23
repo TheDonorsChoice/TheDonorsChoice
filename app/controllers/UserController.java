@@ -15,6 +15,10 @@ public class UserController extends Controller {
     private static Logger.ALogger log = play.Logger.of(UserController.class);
 
     public static Result currentUser()  {
+        if (session().isEmpty()) {
+            return ok();
+        }
+
         String guide = session().get("guid");
         User userForGuid =  User.findByString.where().eq("guid", guide).findUnique();
         ObjectNode result = Json.newObject();

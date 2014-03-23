@@ -1,12 +1,12 @@
-{{#if user}}
+{{#if this.attributes.loggedIn}}
     <div>
-        <h2>{{first_name}} {{last_name}}</h2>
+        <h2>{{this.attributes.name}}</h2>
     </div>
     <div class="col-md-12">
         <a href="#">Account Settings</a>
     </div>
     <div class="col-md-12" style="margin-bottom: 25px">
-        <a href="#logout">Logout</a>
+        <a id="btn-logout">Logout</a>
     </div>
 {{else}}
     <div>
@@ -15,20 +15,20 @@
     <form id="loginform" class="form-horizontal" role="form">
 
         <div style="margin-bottom: 25px" class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
-            </span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                </span>
             <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Email">
         </div>
 
         <div style="margin-bottom: 25px" class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i>
-            </span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i>
+                </span>
             <input id="login-password" type="password" class="form-control" name="password" placeholder="Password">
         </div>
 
         <div style="margin-top:10px" class="form-group">
             <div class="col-sm-12 controls">
-                <a id="btn-login" class="btn btn-success">Login</a>
+                <button id="btn-login" class="btn btn-success">Login</button>
             </div>
         </div>
 

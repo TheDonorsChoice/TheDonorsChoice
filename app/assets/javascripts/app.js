@@ -28,29 +28,15 @@ define([
   'jquery',
   'underscorejs',
   'backbonejs',
-   'bootstrap',
+  'bootstrap',
+  'router',
   'controllers/MenuController',
-  'controllers/StaticController',
   'controllers/UserController'
-], function($, _, Backbone, Bootstrap, MenuController, StaticController, UserController){
-
-	var AppRouter = Backbone.Router.extend({
-		routes: {
-			"register": UserController.register,
-			"logout": UserController.logout,
-            "*actions" : StaticController.show('body-comingsoon-template')
-			}
-		});
-
-    // Create the App Router for the application
-    var app_router = new AppRouter();
+], function($, _, Backbone, Bootstrap, AppRouter, MenuController, UserController){
 
 	var initialize = function() {
-
+        UserController.initialize();
         MenuController.show();
-
-		// Start Backbone history a necessary step for bookmarkable URL's
-		Backbone.history.start();
 	};
 
     return { initialize: initialize };
