@@ -8,6 +8,7 @@ define([
             "register": UserController.register,
             "logout": UserController.logout,
             "faq": "faq",
+            "aboutus": "aboutus",
             "*actions" : "defaultRoute"
         }
     });
@@ -17,6 +18,10 @@ define([
 
     app_router.on("route:faq", function(){
           StaticController.show('faq-template');
+    });
+
+    app_router.on("route:aboutus", function(){
+           StaticController.show('aboutus-template');
     });
 
     app_router.on("route:defaultRoute", function(){
