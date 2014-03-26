@@ -12,7 +12,6 @@ POST   /login                      controllers.UserController.authenticate()
 POST   /user                       controllers.UserController.createUser()
 GET    /user                       controllers.UserController.currentUser()
 POST   /logout                     controllers.UserController.logout()
-GET    /logout                     controllers.UserController.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -22,4 +21,5 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
 # Resource
 GET 	/resource					controllers.ResourceController.resources()
+GET 	/resources.json		        controllers.ResourceController.jsonResources()
 POST    /resource/:id/delete        controllers.ResourceController.deleteResource(id: Long)
