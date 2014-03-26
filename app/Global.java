@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
+import models.Resource;
 import play.Application;
 import play.GlobalSettings;
 import play.libs.Json;
@@ -15,6 +16,10 @@ public class Global extends GlobalSettings {
     public void onStart(Application app) {
         if (User.all().size() == 0) {
             populateUsers(app);
+        }
+
+        if (Resource.all().size() == 0) {
+            populateResources(app);
         }
     }
 
@@ -32,6 +37,21 @@ public class Global extends GlobalSettings {
             user.password = UserUtils.hashPassword(user.password);
             user.guid = UserUtils.createGUID();
             user.save();
+        }
+    }
+
+    public static void populateResources(Application app) {
+        JsonNode root = Json.parse(app.resourceAsStream("testdata.json"));
+        JsonNode resourceList = root.findPath("resources");
+
+        Iterator resourceIterator = resourceList.elements();
+        while (resourceIterator.hasNext())
+        {
+            JsonNode nextResourceJson = (JsonNode) resourceIterator.next();
+            Resource resource = Json.fromJson(nextResourceJson, Resource.class);
+
+            // Save the user to the database...
+            resource.save();
         }
     }
 }

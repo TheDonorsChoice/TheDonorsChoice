@@ -26,6 +26,53 @@
             "type" : "SHELTER",
             "taxId": "54321"
         }
+    ],
 
+    "resources" : [
+        {
+            "orgName" : "Pantry1",
+            "address" : "100 Fake St",
+            "phoneNumber" : "800-123-4567",
+            "email" : "email@email.com",
+            "UserID" : "1",
+            "Type" : "Pantry",
+            "itemsNeeded": "Canned Food"
+        },
+        {
+            "orgName" : "Shelter1",
+            "address" : "200 Fake St",
+            "phoneNumber" : "800-999-4567",
+            "email" : "email2@email.com",
+            "UserID" : "2",
+            "Type" : "Shelter",
+            "itemsNeeded": "Towels"
+        },
+        {
+            "orgName" : "Pantry2",
+            "address" : "300 Fake St",
+            "phoneNumber" : "800-123-9997",
+            "email" : "email3@email.com",
+            "UserID" : "2",
+            "Type" : "Pantry",
+            "itemsNeeded": "Food"
+        },
+        {
+            "orgName" : "Shelter2",
+            "address" : "400 Fake St",
+            "phoneNumber" : "999-123-4567",
+            "email" : "email4@email.com",
+            "UserID" : "2",
+            "Type" : "Shelter",
+            "itemsNeeded": "Sheets"
+        },
+        {
+            "orgName" : "Shelter2",
+            "address" : "400 Fake St",
+            "phoneNumber" : "999-123-4567",
+            "email" : "email4@email.com",
+            "UserID" : "2",
+            "Type" : "Shelter",
+            "itemsNeeded": "Underwear"
+        }
     ]
 }
