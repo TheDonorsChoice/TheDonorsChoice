@@ -1,38 +1,40 @@
 [
     {
-      "title": "Contribute",
-      "id" : "contribute",
-      "dropdown": [
-        {
-          "title": "Find Local Charities",
-          "link": "#donate"
-        },
-        {
-          "title": "Find Shelters in Need",
-          "link": "#shelters"
-        }
-      ]
+        "title": "Contribute",
+        "id": "contribute",
+        "dropdown": [
+            {
+                "title": "Find Local Charities",
+                "link": "#donate"
+            },
+            {
+                "title": "Find Shelters in Need",
+                "link": "#shelters"
+            }
+        ]
     },
     {
-      "title": "Find Resources",
-      "id" : "resources",
-      "dropdown": [
-        {
-          "title": "Connect with donors",
-          "link": "#connect"
-        },
-        {
-          "title": "View Available Resources",
-          "link": "#resources"
-        }
-      ]
+        "title": "Find Resources",
+        "id": "resources",
+        "dropdown": [
+            {
+                "title": "Connect with donors",
+                "link": "#connect"
+            },
+            {
+                "title": "View Available Resources",
+                "link": "#resources"
+            }
+        ]
     },
     {
-      "title": "FAQ",
-      "link": "#faq"
+        "title": "FAQ",
+        "id": "faq",
+        "link": "#faq"
     },
     {
-      "title": "About Us",
-      "link": "#aboutus"
+        "title": "About Us",
+        "id": "about-us",
+        "link": "#aboutus"
     }
 ]
