@@ -7,13 +7,21 @@ define([
         routes: {
             "register": UserController.register,
             "logout": UserController.logout,
-            "*actions" : StaticController.show('body-comingsoon-template')
+            "faq": "faq",
+            "*actions" : "defaultRoute"
         }
     });
 
     // Create the App Router for the application
     var app_router = new AppRouter;
 
+    app_router.on("route:faq", function(){
+          StaticController.show('faq-template');
+    });
+
+    app_router.on("route:defaultRoute", function(){
+      StaticController.show('body-comingsoon-template');
+    });
     Backbone.history.start();
     return app_router;
 });
