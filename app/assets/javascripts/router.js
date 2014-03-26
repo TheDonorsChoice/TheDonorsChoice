@@ -9,6 +9,7 @@ define([
             "logout": UserController.logout,
             "faq": "faq",
             "aboutus": "aboutus",
+            "": "landing",
             "*actions" : "defaultRoute"
         }
     });
@@ -24,9 +25,14 @@ define([
            StaticController.show('aboutus-template');
     });
 
-    app_router.on("route:defaultRoute", function(){
-      StaticController.show('body-comingsoon-template');
+    app_router.on("route:landing", function(){
+        StaticController.show('body-comingsoon-template');
     });
+
+    app_router.on("route:defaultRoute", function(){
+      StaticController.show('body-error-template');
+    });
+
     Backbone.history.start();
     return app_router;
 });
