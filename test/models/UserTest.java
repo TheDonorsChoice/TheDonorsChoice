@@ -29,13 +29,32 @@ public class UserTest {
 
     @Test
     public void testUserEntity() {
-        
+    //   User testUser = new User();
+	//	testUser.setName("Test");
+	//	testUser.setGuid();
+	//	testUser.setEmail("test@aol.com");
+	//	testUser.setPassword("passw0rd");
+	//	testUser.set
     }
 
     @Test
-    public void testUserCreate() {
+    public void testUserReset() {
         
     }
-
+	
+	@Test
+	public void testRecipientView() {
+	
+	}
+	
+	@Test
+	public void testFindUserByUser() {
+	
+	}
+	
+	@Test
+	public void testFindAllUsers() {
+	
+	}
 
 }
