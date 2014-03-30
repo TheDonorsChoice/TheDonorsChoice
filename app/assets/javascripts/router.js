@@ -1,10 +1,13 @@
 define([
     'backbonejs',
-    'controllers/MenuController',
-    'controllers/StaticController'
-], function(Backbone, UserController, StaticController) {
+    'controllers/UserController',
+    'controllers/StaticController',
+    'controllers/ContactController'
+], function(Backbone, UserController, StaticController, ContactController) {
+
     var AppRouter = Backbone.Router.extend({
         routes: {
+            "contact" : ContactController.show,
             "register": UserController.register,
             "logout": UserController.logout,
             "faq": "faq",

@@ -23,3 +23,6 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 GET 	/resource					controllers.ResourceController.resources()
 GET 	/resources.json		        controllers.ResourceController.jsonResources()
 POST    /resource/:id/delete        controllers.ResourceController.deleteResource(id: Long)
+
+# Contact
+POST   /contact                     controllers.ContactController.contact()
