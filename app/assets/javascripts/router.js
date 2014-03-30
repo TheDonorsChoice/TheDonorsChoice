@@ -1,16 +1,19 @@
 define([
     'backbonejs',
     'controllers/MenuController',
-    'controllers/StaticController'
-], function(Backbone, UserController, StaticController) {
+    'controllers/StaticController',
+    'controllers/ResourceController'
+], function(Backbone, UserController, StaticController, ResourceController) {
     var AppRouter = Backbone.Router.extend({
         routes: {
+        	// these are paths off our main URL.  ex www.thedonorschoice.org/#register
             "register": UserController.register,
             "logout": UserController.logout,
             "faq": "faq",
             "aboutus": "aboutus",
-            "": "landing",
-            "*actions" : "defaultRoute"
+            "donate": "donate",
+            "": "landing", // <-- our main URL -- www.thedonorschoice.org
+            "*actions" : "defaultRoute" // <-- default page for unimplemented urls
         }
     });
 
@@ -27,6 +30,11 @@ define([
 
     app_router.on("route:landing", function(){
         StaticController.show('body-comingsoon-template');
+    });
+    
+    app_router.on("route:donate", function(){
+    	// call the controller associated to the resource path.  located here: /app/assets/controllers/ResoureController.js
+        ResourceController.show('resource-template');
     });
 
     app_router.on("route:defaultRoute", function(){
