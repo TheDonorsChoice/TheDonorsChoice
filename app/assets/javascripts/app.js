@@ -16,7 +16,7 @@ require.config({
         'bootstrap/bootstrap-dropdown': { deps: ['jquery'], exports: '$.fn.dropdown' },
         'bootstrap/bootstrap-modal': { deps: ['jquery'], exports: '$.fn.modal' },
         'bootstrap/bootstrap-popover': { deps: ['jquery'], exports: '$.fn.popover' },
-        'bootstrap/bootstrap-scrollspy': { deps: ['jquery'], exports: '$.fn.scrollspy'        },
+        'bootstrap/bootstrap-scrollspy': { deps: ['jquery'], exports: '$.fn.scrollspy' },
         'bootstrap/bootstrap-tab': { deps: ['jquery'], exports: '$.fn.tab' },
         'bootstrap/bootstrap-tooltip': { deps: ['jquery'], exports: '$.fn.tooltip' },
         'bootstrap/bootstrap-transition': { deps: ['jquery'], exports: '$.support.transition' },
@@ -32,7 +32,7 @@ define([
   'router',
   'controllers/MenuController',
   'controllers/UserController'
-], function($, _, Backbone, Bootstrap, AppRouter, MenuController, UserController){
+], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
 
 	var initialize = function() {
         UserController.initialize();

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import play.data.*;
+import play.data.Form;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -12,7 +13,6 @@ import play.mvc.Result;
 import utilities.UserUtils;
 
 public class UserController extends Controller {
-    private static Logger.ALogger log = play.Logger.of(UserController.class);
 
     public static Result currentUser()  {
         if (session().isEmpty()) {
@@ -34,33 +34,44 @@ public class UserController extends Controller {
 
     public static Result createUser()
     {
-        ObjectMapper mapper = new ObjectMapper();
-        User newUser;
-        log.info(request().body().asJson().toString());
-        newUser = mapper.convertValue(request().body().asJson(), User.class);
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String email = requestData.get("email");
+        String password = requestData.get("password");
+        String name = requestData.get("name");
 
-        if (newUser == null)
+        Logger.debug(requestData.toString());
+
+        if (!validInput(email) || !validInput(password) || !validInput(name))
         {
-            log.error("Failed to create a member or throw exception given data " + request().body().asJson().toString());
+            Logger.error("Failed to create a member or throw exception given data " + requestData.toString());
             return internalServerError("Unable to create member");
         }
         else
         {
+            User newUser = new User();
+            newUser.name = name;
+            newUser.email = email;
+            Logger.info(newUser.toString());
+
             if (User.exists(newUser))
             {
-                log.info("User " + newUser.email + " already exists");
+                Logger.info("User " + newUser.email + " already exists");
                 return badRequest("user exists");
             }
             else
             {
-                log.info("Adding new user for email " + newUser.email);
-                newUser.password = UserUtils.hashPassword(newUser.password);
+                Logger.info("Adding new user for email " + newUser.email);
+                newUser.password = UserUtils.hashPassword(password);
                 newUser.guid = UserUtils.createGUID();
                 newUser.save();
             }
-        }
 
-        return ok(newUser.guid);
+            return ok(newUser.guid);
+        }
+    }
+
+    private static boolean validInput(String field) {
+        return field != null && field.length() > 0;
     }
 
     public static Result authenticate()
@@ -78,7 +89,7 @@ public class UserController extends Controller {
                 return notFound();
             }
         } else {
-            log.info("Authentication attempt for non-existent user email " + email);
+            Logger.info("Authentication attempt for non-existent user email " + email);
             return notFound();
         }
     }
