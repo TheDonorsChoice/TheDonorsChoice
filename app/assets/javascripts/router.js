@@ -16,6 +16,7 @@ define([
             "faq": "faq",
             "aboutus": "aboutus",
             "donate": "donate",
+            "resource": ResourceController.show,
             "": "landing", // <-- our main URL -- www.thedonorschoice.org
             "*actions" : "defaultRoute" // <-- (404) default page for unimplemented urls
         }

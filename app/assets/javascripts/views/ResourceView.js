@@ -19,11 +19,17 @@ define([ // <- requireJS stuff
         // this function is implicitly called
         initialize: function() {
             _.bindAll(this, 'render');
+
+            this.listenTo(this.collection, "change", this.render);
+
+            this.collection.fetch({success: function(collection, response, options) {
+                collection.trigger("change");
+            }});
         },
 
         render: function() {
         	// build the page using the template and store the results in 'resourcehtml'
-            var resourcehtml = this.template();
+            var resourcehtml = this.template(this.collection);
             this.$el.html(resourcehtml); // <-- jquery stuff to append "resourcehtml" to "#main"
         }
     });
