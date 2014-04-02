@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "backbonejs" % "1.1.2",
   "org.webjars" % "underscorejs" % "1.6.0-1",
   "commons-io" % "commons-io" % "2.4",
-  "com.lambdaworks" % "scrypt" % "1.4.0"
+  "com.lambdaworks" % "scrypt" % "1.4.0",
+  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
 
 play.Project.playJavaSettings
