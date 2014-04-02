@@ -14,6 +14,7 @@ public class Global extends GlobalSettings {
      * Methods to run when launching the app.  Currently loads some test data
      */
     public void onStart(Application app) {
+        /*
         if (User.all().size() == 0) {
             populateUsers(app);
         }
@@ -21,6 +22,7 @@ public class Global extends GlobalSettings {
         if (Resource.all().size() == 0) {
             populateResources(app);
         }
+        */
     }
 
     public static void populateUsers(Application app){
