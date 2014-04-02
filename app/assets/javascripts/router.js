@@ -12,6 +12,7 @@ define([
             "contact" : ContactController.show,
             // these are paths off our main URL.  ex www.thedonorschoice.org/#register
             "register": UserController.register,
+            "resetpassword":ResetPasswordController.show,
             "logout": UserController.logout,
             "faq": "faq",
             "aboutus": "aboutus",
