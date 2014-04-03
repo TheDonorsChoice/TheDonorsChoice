@@ -80,7 +80,7 @@ public class UserController extends Controller {
         String email = requestData.get("email");
         String password = requestData.get("password");
 
-        User userForEmail = User.findByString.where().eq("email", email).findUnique();
+        User userForEmail = User.findByString.where().ieq("email", email).findUnique();
         if (userForEmail != null) {
             if (UserUtils.check(password, userForEmail.password)) {
                 session().put("guid", userForEmail.guid);

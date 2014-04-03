@@ -72,6 +72,6 @@ public class User extends Model {
     }
 
     public static boolean exists(User user) {
-        return findByString.where().eq("email", user.email).findIds().size() != 0;
+        return findByString.where().ieq("email", user.email).findIds().size() != 0;
     }
 }
