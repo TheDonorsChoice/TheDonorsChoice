@@ -15,7 +15,7 @@ create table resource (
   constraint pk_resource primary key (id))
 ;
 
-create table user (
+create table DonorsChoiceUser (
   id                        bigint not null,
   name                      varchar(255),
   guid                      varchar(255),
@@ -23,15 +23,15 @@ create table user (
   password                  varchar(255),
   type                      varchar(10),
   tax_id                    varchar(255),
-  constraint ck_user_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),
-  constraint uq_user_guid unique (guid),
-  constraint uq_user_email unique (email),
-  constraint pk_user primary key (id))
+  constraint ck_DonorsChoiceUser_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),
+  constraint uq_DonorsChoiceUser_guid unique (guid),
+  constraint uq_DonorsChoiceUser_email unique (email),
+  constraint pk_DonorsChoiceUser primary key (id))
 ;
 
 create sequence resource_seq;
 
-create sequence user_seq;
+create sequence DonorsChoiceUser_seq;
 
 
 
@@ -42,11 +42,11 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists resource;
 
-drop table if exists user;
+drop table if exists DonorsChoiceUser;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists resource_seq;
 
-drop sequence if exists user_seq;
+drop sequence if exists DonorsChoiceUser_seq;
 

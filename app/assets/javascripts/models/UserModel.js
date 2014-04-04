@@ -6,6 +6,9 @@ define([
 	var UserModel = Backbone.Model.extend({
 		defaults: {
 		    "name": "Unset",
+            "email": "",
+            "password": "",
+            "password_confirm": "",
 		    "loggedIn":  false
 		  },
 
@@ -23,12 +26,19 @@ define([
             }, this.update_user).success(success).fail(this.update_user).fail(failure);
         },
 
+        register: function(success, failure) {
+            $.post("/user", {
+                name: this.get("name"),
+                email: this.get("email"),
+                password: this.get("password")
+            }).success(success).fail(failure);
+        },
+
         logout: function(success, failure) {
             $.post("/logout", { }, this.logout_callback).success(success).fail(failure);
         },
 
         logout_callback: function() {
-
             this.set("loggedIn", false);
             this.trigger('change', this);
         },

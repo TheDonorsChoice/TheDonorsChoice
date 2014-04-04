@@ -1,15 +1,17 @@
 define([
   'jquery',
   'models/UserModel',
-  'views/UserView'
-], function($, UserModel, UserView){
+  'views/UserView',
+  'views/RegistrationView'
+], function($, UserModel, UserView, RegistrationView){
+    var user = new UserModel();
+
     var initialize = function() {
-        var user = new UserModel();
         new UserView({ model: user });
     };
 
     var register = function() {
-
+        new RegistrationView({ model: user });
     };
 
     var logout = function() {

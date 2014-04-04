@@ -16,7 +16,7 @@ require.config({
         'bootstrap/bootstrap-dropdown': { deps: ['jquery'], exports: '$.fn.dropdown' },
         'bootstrap/bootstrap-modal': { deps: ['jquery'], exports: '$.fn.modal' },
         'bootstrap/bootstrap-popover': { deps: ['jquery'], exports: '$.fn.popover' },
-        'bootstrap/bootstrap-scrollspy': { deps: ['jquery'], exports: '$.fn.scrollspy'        },
+        'bootstrap/bootstrap-scrollspy': { deps: ['jquery'], exports: '$.fn.scrollspy' },
         'bootstrap/bootstrap-tab': { deps: ['jquery'], exports: '$.fn.tab' },
         'bootstrap/bootstrap-tooltip': { deps: ['jquery'], exports: '$.fn.tooltip' },
         'bootstrap/bootstrap-transition': { deps: ['jquery'], exports: '$.support.transition' },
@@ -31,8 +31,19 @@ define([
   'bootstrap',
   'router',
   'controllers/MenuController',
-  'controllers/UserController'
+<<<<<<< HEAD
+<<<<<<< HEAD
+  'controllers/UserController',
+  'async!http://maps.google.com/maps/api/js?sensor=false'
 ], function($, _, Backbone, Bootstrap, AppRouter, MenuController, UserController){
+=======
+  'controllers/UserController'
+], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
+>>>>>>> FETCH_HEAD
+=======
+  'controllers/UserController'
+], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
+>>>>>>> FETCH_HEAD
 
 	var initialize = function() {
         UserController.initialize();

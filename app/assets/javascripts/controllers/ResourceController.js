@@ -4,18 +4,19 @@
 define([ // <-- requireJS stuff
     'jquery',
     'backbonejs',
-    'views/ResourceView'
-], function($, Backbone, ResourceView){
-	
+    'views/ResourceView',
+    'collections/ResourceCollection'
+], function($, Backbone, ResourceView, ResourceCollection){
+	var resources = new ResourceCollection();
+
 	// this function is implicitly called
     var initialize = function() {
     };
 
     var show = function() {
     	// Render the Resource page
-    	var resourceView = new ResourceView();
-    	resourceView.render(); // <-- call the render function in /app/assets/javascripts/views/ResourceView.js
-    }
+    	var resourceView = new ResourceView( {collection: resources} );
+    };
     
     // these are the available functions for this object
 	return {

@@ -1,31 +1,13 @@
 [
     {
-        "title": "Contribute",
+        "title": "Donor's Page",
         "id": "contribute",
-        "dropdown": [
-            {
-                "title": "Find Local Charities",
-                "link": "#donate"
-            },
-            {
-                "title": "Find Shelters in Need",
-                "link": "#shelters"
-            }
-        ]
+        "link": "#resource"
     },
     {
-        "title": "Find Resources",
+        "title": "Shelter/Pantry Page",
         "id": "resources",
-        "dropdown": [
-            {
-                "title": "Connect with donors",
-                "link": "#connect"
-            },
-            {
-                "title": "View Available Resources",
-                "link": "#resources"
-            }
-        ]
+        "link": "#"
     },
     {
         "title": "FAQ",
@@ -36,5 +18,10 @@
         "title": "About Us",
         "id": "about-us",
         "link": "#aboutus"
+    },
+    {
+        "title": "Contact Us",
+        "id": "contact",
+        "link": "#contact"
     }
 ]

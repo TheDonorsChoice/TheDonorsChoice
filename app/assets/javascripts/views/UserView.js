@@ -1,10 +1,10 @@
 define([
   'underscorejs',
-  'router',
+  'helpers/RoutingHelper',
   'models/UserModel',
   'controllers/AlertController',
   'compiled-templates'
-], function(_, app_router, UserModel, AlertController, Templates){
+], function(_, Router, UserModel, AlertController, Templates){
 
 	var view = Backbone.View.extend({
         el: $('#user-container'),
@@ -21,9 +21,17 @@ define([
         },
 
         events: {
+            "click #register": "removeDropdown",
+            "submit form": "removeDropdown",
+            "click #btn-login": "removeDropdown",
+
             "submit form": "login",
             "click #btn-login": "login",
             "click #btn-logout": "logout"
+        },
+
+        removeDropdown: function() {
+            $('#user-dropdown').removeClass('open');
         },
 
         login: function(e) {
@@ -33,10 +41,8 @@ define([
             var password = $('#login-password').val();
 
             this.model.login(username, password, function() {
-                    // Hide the Login Dropdown and navigate to the default page.
-                    $('#user-dropdown').removeClass('open');
-                    app_router.navigate('show', {trigger: true});
-
+                    // The user successfully logged in, route them to the default page.
+                    Router.navigateToRoot();
                     AlertController.show("You have been logged in successfully.");
                 },
                 function() {
@@ -49,7 +55,7 @@ define([
 
             this.model.logout(function() {
                 // Hide the Login Dropdown and navigate to the default page.
-                app_router.navigate('show', {trigger: true});
+                Router.navigateToRoot();
                 $('#user-dropdown').removeClass('open');
                 AlertController.show("You have been logged out successfully.");
             },
@@ -60,7 +66,7 @@ define([
 
         render: function() {
 
-            var dropdown = $("#user-login-item");
+            var dropdown = $(   "#user-login-item");
             if (this.model.get("loggedIn")) {
                 dropdown.html(this.model.get("name"));
             } else {
