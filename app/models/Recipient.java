@@ -12,9 +12,9 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Resource is the model for the organization that is looking for a donation. The following fields are included.
+ * Recipient is the model for the organization that is looking for a donation. The following fields are included.
  *
- * ResourceID, Entity Name (Pantry or organization name), Address, Phone Number, User1 (UserId), Type [Shelter/Food Pantry], Items Needed
+ * RecipientId, Entity Name (Pantry or organization name), Address, Phone Number, User1 (UserId), Type [Shelter/Food Pantry]
  * 
  * @since 3/22/2014
  */
@@ -48,27 +48,16 @@ public class Recipient extends Model {
     
     @Constraints.Required
     @JsonProperty(required = true)
-    public String category;
-    
-    @Constraints.Required
-    @JsonProperty(required = true)
-    public String description;
-    
-    @Constraints.Required
-    @JsonProperty(required = true)
-    public Long UserID;
+    public Long UserID; // should be a foreign key
     
     public static int size = 0; 
     
-    public Recipient(String name, String email, String phone, String address, String postTitle, String postCategory, String postDescription, Long userid) { 
-    	orgName = name; 
+    public Recipient(String name, String email, String phone, String address, Long userid) { 
+    	this.orgName = name; 
     	this.email = email;
-    	phoneNumber = phone;
+    	this.phoneNumber = phone;
     	this.address = address; 
-    	title = postTitle;
-    	category = postCategory; 
-    	description = postDescription; 
-    	UserID = userid;
+    	this.UserID = userid;
     }
     
 	public static Finder<Long, Recipient> find = new Finder<Long, Recipient>(Long.class, Recipient.class);
