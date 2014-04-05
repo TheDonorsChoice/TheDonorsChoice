@@ -4,8 +4,9 @@ define([
     'controllers/StaticController',
     'controllers/ContactController',
     'controllers/ResourceController',
+    'controllers/ResetPassword1Controller',
     'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, RoutingHelper){
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, ResetPasswordController, RoutingHelper){
 
     var AppRouter = Backbone.Router.extend({
         routes: {

@@ -31,7 +31,7 @@ define([
   'bootstrap',
   'router',
   'controllers/MenuController',
-  'controllers/UserController'
+  'controllers/UserController',
   'async!http://maps.google.com/maps/api/js?sensor=false'
 ], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
 
