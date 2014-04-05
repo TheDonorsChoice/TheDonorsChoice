@@ -23,7 +23,7 @@ public class Global extends GlobalSettings {
             populateResources(app);
         }
         
-        if (Resource.all().size() == 0) {
+        if (Recipient.all().size() == 0) {
         	populateRecipient(app);
         }
     }

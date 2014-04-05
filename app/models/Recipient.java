@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "recipient")
 public class Recipient extends Model {
 
     @Id
@@ -46,7 +48,7 @@ public class Recipient extends Model {
     
     @Constraints.Required
     @JsonProperty(required = true)
-    public Type category;
+    public String category;
     
     @Constraints.Required
     @JsonProperty(required = true)
@@ -56,17 +58,9 @@ public class Recipient extends Model {
     @JsonProperty(required = true)
     public Long UserID;
     
-    public enum Type {
-        @EnumValue("PANTRY")
-        PANTRY,
-
-        @EnumValue("SHELTER")
-        SHELTER
-    }
-    
     public static int size = 0; 
     
-    public Recipient(String name, String email, String phone, String address, String postTitle, Type postCategory, String postDescription, Long userid) { 
+    public Recipient(String name, String email, String phone, String address, String postTitle, String postCategory, String postDescription, Long userid) { 
     	orgName = name; 
     	this.email = email;
     	phoneNumber = phone;

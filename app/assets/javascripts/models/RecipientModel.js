@@ -10,7 +10,7 @@ define([
             address: "",
             title: "",
             category: "",
-            description: "",
+            description: ""
         }
     });
 

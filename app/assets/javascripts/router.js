@@ -4,9 +4,15 @@ define([
     'controllers/StaticController',
     'controllers/ContactController',
     'controllers/ResourceController',
+<<<<<<< HEAD
     'controllers/RecipientController',
     'helpers/RoutingHelper'
 ], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, RoutingHelper){
+=======
+    'controllers/ResetPassword1Controller',
+    'helpers/RoutingHelper'
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, ResetPasswordController, RoutingHelper){
+>>>>>>> FETCH_HEAD
 
     var AppRouter = Backbone.Router.extend({
         routes: {
