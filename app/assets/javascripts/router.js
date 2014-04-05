@@ -4,16 +4,11 @@ define([
     'controllers/StaticController',
     'controllers/ContactController',
     'controllers/ResourceController',
-<<<<<<< HEAD
-    'controllers/ResetPasswordController',
-    'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, RoutingHelper,ResetPasswordController){
-=======
     'controllers/RecipientController',
     'controllers/ResetPassword1Controller',
     'helpers/RoutingHelper'
 ], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, ResetPasswordController, RoutingHelper) {
->>>>>>> 3d7dc142095aefc7687fa147236f8191c7615b59
+
 
     var AppRouter = Backbone.Router.extend({
         routes: {
