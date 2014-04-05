@@ -74,5 +74,38 @@
             "Type" : "Shelter",
             "itemsNeeded": "Underwear"
         }
-    ]
+    ],
+    
+    "recipient" : [
+    	{
+            "orgName" : "RonCare",
+            "email" : "rondzik@roncare.com",
+            "phoneNumber" : "765-464-9653",
+            "address" : "101 N Russell St, 47906, West Lafayette, IN",
+            "title" : "Home in need",
+            "category" : "Shelter",
+            "description" : "We need a place for 10 homeless people around West Lafayette. We really appreciate your help. Thank you.",
+            "UserID" : "1"
+        },
+        {
+            "orgName" : "Bubulobo",
+            "email" : "christian@bubulobo.com",
+            "phoneNumber" : "617-383-7659",
+            "address" : "808 Commonwealth Avenue, 02215, Boston, MA",
+            "title" : "A meal for real",
+            "category" : "Pantry",
+            "description" : "We are an organization that helps homeless people and one of the things that we do is provide meals for them. We need sponsors. Please contact us if you are interested. Your help is much appreciated!",
+            "UserID" : "2"
+        },
+        {
+            "orgName" : "Rapid9",
+            "email" : "zidane@rapid9.com",
+            "phoneNumber" : "585-421-1228",
+            "address" : "20 Barcelona St, 55158, Barcelona, PA",
+            "title" : "It's not Spring yet",
+            "category" : "Shelter",
+            "description" : "Winter is not over yet and there are some people sleeping in the cold outside. We need space to provide them shelter.",
+            "UserID" : "3"
+        }
+	]
 }

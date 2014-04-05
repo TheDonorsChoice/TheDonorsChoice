@@ -1,0 +1,39 @@
+@(recipient: List[Recipient], recipientForm: Form[Recipient])
+
+@import helper._
+
+
+    <h1>Your Posts!(s)</h1>
+    
+    <table border="1" style="width:700px">
+    
+    	@for(recipient <- recipient) {
+    		<tr>
+	    		<td>
+	    			@recipient.orgName
+	    		</td>
+	    		<td>
+	    			@recipient.email
+	    		</td>
+	    		<td>
+	    			@recipient.phoneNumber
+	    		</td>
+	    		<td>
+	    			@recipient.address
+	    		</td>
+	    		<td>
+	    			@recipient.title
+	    		</td>
+	    		<td>
+	    			@{ /* @recipient.category */ }
+	    		</td>
+	    		<td>
+                    @{ /* @recipient.description */ }
+	    		</td>
+	    		<td>
+	    			@form(routes.RecipientController.deleteRecipient(recipient.id)){<input type="submit" value="Delete">}
+	    		</td>
+    		</tr>
+    	}		
+    </ul>
+    </table>

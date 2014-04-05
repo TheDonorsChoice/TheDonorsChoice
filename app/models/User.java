@@ -16,6 +16,7 @@ import java.util.List;
  * @since 3/4/2014
  */
 @Entity
+@Table(name = "DonorsChoiceUser")
 public class User extends Model {
 
     @Id
@@ -59,8 +60,8 @@ public class User extends Model {
         SHELTER
     }
 
-    public static Finder<Long, User> findById = new Finder<>(Long.class, User.class);
-    public static Finder<String, User> findByString = new Finder<>(String.class, User.class);
+    public static Finder<Long, User> findById = new Finder<Long, User>(Long.class, User.class);
+    public static Finder<String, User> findByString = new Finder<String, User>(String.class, User.class);
 
     public static void create(User user) {
         user.save();
@@ -71,6 +72,6 @@ public class User extends Model {
     }
 
     public static boolean exists(User user) {
-        return findByString.where().eq("email", user.email).findIds().size() != 0;
+        return findByString.where().ieq("email", user.email).findIds().size() != 0;
     }
 }

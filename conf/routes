@@ -24,5 +24,10 @@ GET 	/resource					controllers.ResourceController.resources()
 GET 	/resources.json		        controllers.ResourceController.jsonResources()
 POST    /resource/:id/delete        controllers.ResourceController.deleteResource(id: Long)
 
+# Recipient
+GET		/recipient					controllers.RecipientController.recipient()
+GET		/recipient.json				controllers.RecipientController.jsonRecipient()
+POST	/recipient/:id/delete		controllers.RecipientController.deleteRecipient(id: Long)
+
 # Contact
 POST   /contact                     controllers.ContactController.contact()
