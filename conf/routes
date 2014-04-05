@@ -36,3 +36,6 @@ POST	/recipient/:id/delete		controllers.RecipientController.deleteRecipient(id: 
 
 # Contact
 POST   /contact                     controllers.ContactController.contact()
+
+#Resetpassword1
+GET   /resetpassword1               controllers.ResetPassword1Controller.resetpassword1()

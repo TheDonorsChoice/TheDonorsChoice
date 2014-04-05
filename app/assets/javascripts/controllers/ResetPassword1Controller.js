@@ -1,14 +1,14 @@
 define([
     'jquery',
     'backbonejs',
-    'views/ResetPasswordView1',
-    'models/ResetPasswordModel1'
-], function($, Backbone, ResetPasswordView1, ResetPasswordModel1){
+    'views/ResetPassword1View',
+    'models/ResetPassword1Model'
+], function($, Backbone, ResetPassword1View, ResetPassword1Model){
 
     return {
         show: function(){
-            var model = new ResetPasswordModel1();
-            new ResetPasswordView1({ model: model });
+            var model = new ResetPassword1Model();
+            new ResetPassword1View({ model: model });
         }
     }
 });
