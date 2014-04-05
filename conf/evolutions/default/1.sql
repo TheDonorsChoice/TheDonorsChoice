@@ -3,6 +3,15 @@
 
 # --- !Ups
 
+create table address (
+  address_id                bigint not null,
+  street                    varchar(255),
+  city                      varchar(255),
+  state                     varchar(255),
+  zip                       varchar(255),
+  constraint pk_address primary key (address_id))
+;
+
 create table recipient (
   id                        bigint not null,
   org_name                  varchar(255),
@@ -49,6 +58,8 @@ create table DonorsChoiceUser (
   constraint pk_DonorsChoiceUser primary key (id))
 ;
 
+create sequence address_seq;
+
 create sequence recipient_seq;
 
 create sequence request_seq;
@@ -64,6 +75,8 @@ create sequence DonorsChoiceUser_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists address;
+
 drop table if exists recipient;
 
 drop table if exists request;
@@ -73,6 +86,8 @@ drop table if exists resource;
 drop table if exists DonorsChoiceUser;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists address_seq;
 
 drop sequence if exists recipient_seq;
 

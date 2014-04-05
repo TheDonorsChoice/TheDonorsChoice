@@ -27,6 +27,15 @@
             "taxId": "54321"
         }
     ],
+    
+    "addresses" : [
+        {
+            "street"  : "1 Fake St",
+            "city" : "Boston",
+            "state" : "MA",
+            "zip" : "02215"
+        }
+    ],
 
     "resources" : [
         {
