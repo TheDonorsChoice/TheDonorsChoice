@@ -20,8 +20,8 @@
             "taxId" : "12345"
         },
         {
-            "name" : "Charyn Egan",
-            "email": "charyn@egan.com",
+            "name" : "Charyn Eagan",
+            "email": "charyn@eagan.com",
             "password": "charyncharyn",
             "type" : "SHELTER",
             "taxId": "54321"
