@@ -8,9 +8,9 @@ define([
             email: ""
         },
 
-        // Post the data to the /contact route on the server where the email will be sent.
+        // Post the data to the /resetpassword route on the server where the email will be sent.
         submit: function(success, failure) {
-            $.post('/contact', this.attributes).success(success).fail(failure);//-----------------------how to change the contact part???????????
+            $.post('/resetpassword', this.attributes).success(success).fail(failure);//-----------resetpassword------------how to change the contact part???????????
         }
     });
 
