@@ -7,12 +7,12 @@ define([
 ], function($, _, Backbone, Templates, AlertController){
 
     var view = Backbone.View.extend({
-        template: Templates['contact-template'],
+        template: Templates['resetpassword1-template'],
         el: $('#main'),
 
         events: {
             "submit form": "submit",
-            "click #contact-submit": "submit"
+            "click #resetpassword-submit": "submit"// where is it, yet to find=================================
         },
 
         initialize: function(options) {
@@ -25,19 +25,19 @@ define([
             e.preventDefault();
 
             // Use the model setters and update the values from the UI
-            this.model.set("name", $('input#contact-name').val());
-            this.model.set("email", $('input#contact-email').val());
-            this.model.set("comment", $('input#contact-comment').val());
+            //this.model.set("name", $('input#contact-name').val());
+            this.model.set("email-resetpw", $('input#resetpassword-email').val());//==================================
+            //this.model.set("comment", $('input#contact-comment').val());
 
             //
             // Success/Error handlers which will allow us to perform UI updates.
             //
             var success = function() {
-                AlertController.show("Your message has been sent successfully", "info");
+                AlertController.show("The link to reset password has been sent successfully", "info");
             };
 
             var error = function() {
-                AlertController.show("Your message could not be sent", "danger");
+                AlertController.show("The user can not be found ", "danger");
             };
 
             // Request that the model submit the contact information to the server.

@@ -9,6 +9,7 @@ define([
     'helpers/RoutingHelper'
 ], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, ResetPasswordController, RoutingHelper) {
 
+
     var AppRouter = Backbone.Router.extend({
         routes: {
             "contact" : ContactController.show,
@@ -37,7 +38,7 @@ define([
     });
 
     app_router.on("route:landing", function(){
-        StaticController.show('body-comingsoon-template');
+        StaticController.show('index-template');
     });
 
     app_router.on("route:donate", function(){
