@@ -5,9 +5,15 @@ define([
     'controllers/ContactController',
     'controllers/ResourceController',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'controllers/RecipientController',
     'helpers/RoutingHelper'
 ], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, RoutingHelper){
+=======
+    'controllers/ResetPassword1Controller',
+    'helpers/RoutingHelper'
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, ResetPasswordController, RoutingHelper){
+>>>>>>> FETCH_HEAD
 =======
     'controllers/ResetPassword1Controller',
     'helpers/RoutingHelper'
