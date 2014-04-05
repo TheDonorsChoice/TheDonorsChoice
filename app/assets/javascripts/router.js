@@ -38,7 +38,7 @@ define([
     });
 
     app_router.on("route:landing", function(){
-        StaticController.show('body-comingsoon-template');
+        StaticController.show('index-template');
     });
 
     app_router.on("route:donate", function(){
