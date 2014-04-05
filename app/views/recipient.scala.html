@@ -7,7 +7,7 @@
     
     <table border="1" style="width:700px">
     
-    	@for(recipient <- recipient){
+    	@for(recipient <- recipient) {
     		<tr>
 	    		<td>
 	    			@recipient.orgName
@@ -25,10 +25,10 @@
 	    			@recipient.title
 	    		</td>
 	    		<td>
-	    			@recipient.category
+	    			@{ /* @recipient.category */ }
 	    		</td>
 	    		<td>
-	    			@recipient.description
+                    @{ /* @recipient.description */ }
 	    		</td>
 	    		<td>
 	    			@form(routes.RecipientController.deleteRecipient(recipient.id)){<input type="submit" value="Delete">}
@@ -36,3 +36,4 @@
     		</tr>
     	}		
     </ul>
+    </table>

@@ -22,10 +22,12 @@ public class Global extends GlobalSettings {
         if (Resource.all().size() == 0) {
             populateResources(app);
         }
-        
+
+        /*
         if (Recipient.all().size() == 0) {
         	populateRecipient(app);
         }
+        */
     }
 
     public static void populateUsers(Application app) {

@@ -52,8 +52,8 @@ public class Request extends Model {
     	this.name = name; 
     	this.description = description; 
     	this.userId = userId; 
-    	this.email = email; 
-    	this.type = type;
+    	//this.email = email;
+    	//this.type = type;
     }
     
 	public static Finder<Long, Request> find = new Finder<Long, Request>(Long.class, Request.class);
@@ -64,12 +64,12 @@ public class Request extends Model {
 	
 	public static void create(Request request){
 		request.save(); 
-		size++; 
+		//size++;
 	}
 	
 	public static void delete(Long id){
 		find.ref(id).delete();
-		size--; 
+		//size--;
 	}
 }
 

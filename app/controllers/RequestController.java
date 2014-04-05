@@ -22,13 +22,15 @@ public class RequestController extends Controller {
 		String description = requestData.get("description");
         String email = requestData.get("email");
         String type = requestData.get("type"); //is this a string or requesttype
-		
-		aRequest.setName(name);
-    	aRequest.setName(description);
-		aRequest.setName(email);
-		aRequest.setName(type);
+
+		//aRequest.setName(name);
+    	//aRequest.setName(description);
+		//aRequest.setName(email);
+		//aRequest.setName(type);
 		
 		//persist somehow
+
+        return null;
 	}
 	
 	public Result createRequest() {
@@ -38,21 +40,22 @@ public class RequestController extends Controller {
         String name = requestData.get("name");
 		String description = requestData.get("description");
 		// get current user
-		
-		// then some type of validation
-        Request newRequest = new Request();
-        newRequest.name = name;
-        newRequest.email = email;
-		newRequest.type = type;
-		newRequest.description = description; //setters?
-		newRequest.setUserId = "";//id
-        newRequest.save();
 
-		return ok(newRequest);
-        }
+		// then some type of validation
+        //Request newRequest = new Request();
+        //newRequest.name = name;
+        //newRequest.email = email;
+		//newRequest.type = type;
+		//newRequest.description = description; //setters?
+		//newRequest.setUserId = "";//id
+        //newRequest.save();
+
+		//return ok(newRequest);
+        return ok();
 	}
 	
 	public Result deleteRequest(Request aRequest) {
-		aRequest.delete(aRequest.getId());
+		//aRequest.delete(aRequest.getId());
+        return ok();
 	}
 }

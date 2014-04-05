@@ -4,21 +4,10 @@ define([
     'controllers/StaticController',
     'controllers/ContactController',
     'controllers/ResourceController',
-<<<<<<< HEAD
-<<<<<<< HEAD
     'controllers/RecipientController',
-    'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, RoutingHelper){
-=======
     'controllers/ResetPassword1Controller',
     'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, ResetPasswordController, RoutingHelper){
->>>>>>> FETCH_HEAD
-=======
-    'controllers/ResetPassword1Controller',
-    'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, ResetPasswordController, RoutingHelper){
->>>>>>> FETCH_HEAD
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, ResetPasswordController, RoutingHelper) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
