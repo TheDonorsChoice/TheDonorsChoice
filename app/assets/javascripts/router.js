@@ -4,20 +4,21 @@ define([
     'controllers/StaticController',
     'controllers/ContactController',
     'controllers/ResourceController',
+    'controllers/RecipientController',
     'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, RoutingHelper){
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, RoutingHelper){
 
     var AppRouter = Backbone.Router.extend({
         routes: {
             "contact" : ContactController.show,
             // these are paths off our main URL.  ex www.thedonorschoice.org/#register
             "register": UserController.register,
-            "resetpassword":ResetPasswordController.show,
             "logout": UserController.logout,
             "faq": "faq",
             "aboutus": "aboutus",
             "donate": "donate",
             "resource": ResourceController.show,
+            "recipient": RecipientController.show,
             "": "landing", // <-- our main URL -- www.thedonorschoice.org
             "*actions" : "defaultRoute" // <-- (404) default page for unimplemented urls
         }
@@ -43,6 +44,10 @@ define([
         ResourceController.show('resource-template');
     });
 
+	app_router.on("route:recipient", function(){
+        RecipientController.show('recipient-template');
+    });
+	
     app_router.on("route:defaultRoute", function(){
         StaticController.show('body-error-template');
     });

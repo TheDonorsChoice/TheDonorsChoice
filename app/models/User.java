@@ -60,8 +60,8 @@ public class User extends Model {
         SHELTER
     }
 
-    public static Finder<Long, User> findById = new Finder<>(Long.class, User.class);
-    public static Finder<String, User> findByString = new Finder<>(String.class, User.class);
+    public static Finder<Long, User> findById = new Finder<Long, User>(Long.class, User.class);
+    public static Finder<String, User> findByString = new Finder<String, User>(String.class, User.class);
 
     public static void create(User user) {
         user.save();
