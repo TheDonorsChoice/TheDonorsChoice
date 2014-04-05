@@ -42,6 +42,10 @@ public class User extends Model {
     @Constraints.Required
     @JsonProperty(required = true)
     public UserType type;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name="user_request")
+	 public List<Request> requests;
 
     public String taxId;
 

@@ -25,10 +25,10 @@ create table recipient (
 
 create table request (
   id                        bigint not null,
+  user_id                   bigint not null,
   name                      varchar(255),
   description               varchar(255),
   quantity                  integer,
-  user_id                   bigint,
   constraint pk_request primary key (id))
 ;
 
@@ -68,6 +68,8 @@ create sequence resource_seq;
 
 create sequence DonorsChoiceUser_seq;
 
+alter table request add constraint fk_request_DonorsChoiceUser_1 foreign key (user_id) references DonorsChoiceUser (id) on delete restrict on update restrict;
+create index ix_request_DonorsChoiceUser_1 on request (user_id);
 
 
 
