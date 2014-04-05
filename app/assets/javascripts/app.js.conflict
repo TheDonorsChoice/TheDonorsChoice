@@ -31,9 +31,24 @@ define([
   'bootstrap',
   'router',
   'controllers/MenuController',
-  'controllers/UserController'
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+  'controllers/UserController',
   'async!http://maps.google.com/maps/api/js?sensor=false'
+], function($, _, Backbone, Bootstrap, AppRouter, MenuController, UserController){
+=======
+  'controllers/UserController'
 ], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
+>>>>>>> FETCH_HEAD
+=======
+  'controllers/UserController'
+], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
+>>>>>>> FETCH_HEAD
+=======
+  'controllers/UserController'
+], function($, _, Backbone, Bootstrap, Router, MenuController, UserController){
+>>>>>>> FETCH_HEAD
 
 	var initialize = function() {
         UserController.initialize();
