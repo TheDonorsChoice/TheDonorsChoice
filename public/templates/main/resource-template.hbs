@@ -1,21 +1,18 @@
 <h1 style="text-align: center;">Welcome to the Donor's Page</h1>
 
-<!-- Use of this code assumes agreement with the Google Custom Search Terms of Service. -->
-<!-- The terms of service are available at http://www.google.com/cse/docs/tos.html -->
-<form style="text-align: center;" name="cse" id="searchbox_demo" action="http://www.google.com/cse">
-    <input type="hidden" name="cref" value="" />
-    <input type="hidden" name="ie" value="utf-8" />
-    <input type="hidden" name="hl" value="" />
-    <input name="q" type="text" size="40" />
-    <input type="submit" name="sa" value="Search" />
+
+<form id="searchform" >
+<input name="searchform" placeholder="Donor Search" type="text" />
+
+    <input type="submit" name="searchsubmit" value="submit" />
 </form>
 <script type="text/javascript" src="https://www.google.com/cse/tools/onthefly?form=searchbox_demo&lang="></script>
 
 <h5 style="text-align: left; ">Are you here to donate services or commodities?</h5>
 <form>
-    <input type="checkbox" name="donate" value="Services">Services<br>
-    <input type="checkbox" name="donate" value="Commodities">Commodities<br>
-    <input type="checkbox" name="donate" value="Both">Both
+    <input type="radio" name="donate" value="Services">Services<br>
+    <input type="radio" name="donate" value="Commodities">Commodities<br>
+    <input type="submit" name="radiosubmit" value="submit" />
 </form>
 <h3 style="text-align: left;">Requests Made By Recipients</h3>
 <table class="table table-striped table-hover ">
@@ -42,5 +39,16 @@
     {{/each}}
     </tbody>
 </table>
+<h3 style="text-align: left;">Google Maps</h3>
+<!-- Use of this code assumes agreement with the Google Custom Search Terms of Service. -->
+<!-- The terms of service are available at http://www.google.com/cse/docs/tos.html -->
+<form style="text-align: left;" name="cse" id="searchbox_demo" action="http://www.google.com/cse">
+    <input type="hidden" name="cref" value="" />
+    <input type="hidden" name="ie" value="utf-8" />
+    <input type="hidden" name="hl" value="" />
+    <input name="q" type="text" size="40" />
+    <input type="submit" name="sa" value="Search" />
+</form>
+</br>
 <div id="map-canvas" style="width:100%;height:400px"></div>
 </div>
