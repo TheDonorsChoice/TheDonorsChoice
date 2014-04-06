@@ -51,6 +51,7 @@ create table DonorsChoiceUser (
   email                     varchar(255),
   password                  varchar(255),
   type                      varchar(10),
+  address_address_id        bigint,
   tax_id                    varchar(255),
   constraint ck_DonorsChoiceUser_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),
   constraint uq_DonorsChoiceUser_guid unique (guid),
@@ -70,6 +71,8 @@ create sequence DonorsChoiceUser_seq;
 
 alter table request add constraint fk_request_DonorsChoiceUser_1 foreign key (user_id) references DonorsChoiceUser (id) on delete restrict on update restrict;
 create index ix_request_DonorsChoiceUser_1 on request (user_id);
+alter table DonorsChoiceUser add constraint fk_DonorsChoiceUser_address_2 foreign key (address_address_id) references address (address_id) on delete restrict on update restrict;
+create index ix_DonorsChoiceUser_address_2 on DonorsChoiceUser (address_address_id);
 
 
 

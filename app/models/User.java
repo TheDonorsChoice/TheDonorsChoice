@@ -43,9 +43,13 @@ public class User extends Model {
     @JsonProperty(required = true)
     public UserType type;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="user_request")
 	 public List<Request> requests;
+	 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="user_address")
+	public Address address;
 
     public String taxId;
 
