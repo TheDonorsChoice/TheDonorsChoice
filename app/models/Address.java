@@ -40,6 +40,9 @@ public class Address extends Model {
     @JsonProperty(required = true)
     public String zip;
     
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinTable(name="user_id")
+	public User user;
     
     public static int size = 0; 
     
