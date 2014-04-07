@@ -23,15 +23,14 @@ public class Global extends GlobalSettings {
         if (Resource.all().size() == 0) {
             populateResources(app);
         }
+        
         if (Address.all().size() == 0) {
             populateAddresses(app);
         }
 
-        /*
         if (Recipient.all().size() == 0) {
         	populateRecipient(app);
         }
-        */
     }
 
     public static void populateUsers(Application app) {

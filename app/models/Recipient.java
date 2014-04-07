@@ -43,8 +43,12 @@ public class Recipient extends Model {
     public String address;
     
     @Constraints.Required
-    @JsonProperty(required = false)
+    @JsonProperty(required = true)
     public String title;
+    
+    @Constraints.Required
+    @JsonProperty(required = true)
+    public String description;
     
     @Constraints.Required
     @JsonProperty(required = true)
@@ -52,11 +56,12 @@ public class Recipient extends Model {
     
     public static int size = 0; 
     
-    public Recipient(String name, String email, String phone, String address, Long userid) { 
+    public Recipient(String name, String email, String phone, String address, String description, Long userid) { 
     	this.orgName = name; 
     	this.email = email;
     	this.phoneNumber = phone;
-    	this.address = address; 
+    	this.address = address;
+    	this.description = description;
     	this.UserID = userid;
     }
     

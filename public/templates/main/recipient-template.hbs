@@ -1,22 +1,100 @@
-<h1 style="text-align: center;">Welcome</h1>
+<style>
+	div.post {   
+    	position: absolute;
+    	border: solid 1px black;
+    	margin-top: 30%;
+    	background-color: white;
+    	text-align: right
+    	width: 160px;
+	}
+	
+	#info td {padding-top: 8px; padding-bottom: 8px;}
+	
+	#heading th {padding-top: 8px; padding-bottom: 8px;}
+</style>
 
-<div class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-header">
-      	<h4 class="modal-title">Modal category</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Post</button>
-      </div>
-    </div>
-  </div>
+<script>
+	function showModal(id) {
+    	$("#" + id).fadeIn('slow');
+	}
+	
+	function hideModal(id) {
+    	$("#" + id).fadeOut('slow');
+	}
+	
+	$(function() {
+		$("td[colspan=4]").find("p").hide();
+		$("input").click(function(event) {
+			event.stopPropagation();
+        	var $target = $(event.target);
+        	
+        	if ( $target.closest("td").attr("colspan") > 1 ) {
+            	$target.slideUp();
+        	} else {
+            	$target.closest("tr").next().find("p").slideToggle();
+        	}                    
+    	});
+	});
+</script>
+
+<div id="post" class="modal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+     		<div class="modal-header">
+     			<div style="margin-bottom: 10px; padding-left: 15px;">New Post
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('post')>×</button>
+       			</div>
+       			<input type="text" class="form-control" id="inputEmail" placeholder="Title">
+       		</div>
+     		<div class="modal-body">
+        		<p>
+        			<textarea class="form-control" rows="10" id="textArea" placeholder="Description"></textarea>
+        		</p>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('post')>Close</button>
+        		<button type="button" class="btn btn-primary">Post</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<div id="page-wrap">
+	<h1 style="text-align: center;">Shelter/Pantry</h1>
+
+	<div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
+		<input type="button" class="btn btn-primary" value="New Post" style="float: right;" onclick=showModal('post') />
+	</div>
+
+	<table style="padding: 20px;">
+		<thead>
+			<tr id="heading">
+				<th></th>
+				<th width="80%">Title</th>
+				<th width="10%">Category</th>
+				<th width="10%">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each models}}
+			<tr id="info" style="border-top: solid 1px black;">
+				<td width="3%"><input type="button" class="btn btn-info btn-xs" value="+"></td>
+				<td width="77%">{{this.attributes.title}}</td>
+				<td width="10%">Shelter</td>
+				<td width="10%">04/05/2014</td>			
+			</tr>
+			<tr style="border-bottom: solid 1px black;">
+				<td colspan="4">
+					<p style="margin-left: 4%;">
+						{{this.attributes.orgName}}<br>
+						{{this.attributes.email}}<br>
+						{{this.attributes.phoneNumber}}<br>
+						{{this.attributes.address}}<br><br>
+						{{this.attributes.description}}
+					</p>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </div>

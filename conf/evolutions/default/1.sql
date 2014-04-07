@@ -20,6 +20,7 @@ create table recipient (
   phone_number              varchar(255),
   address                   varchar(255),
   title                     varchar(255),
+  description               varchar(255),
   user_id                   bigint,
   constraint pk_recipient primary key (id))
 ;

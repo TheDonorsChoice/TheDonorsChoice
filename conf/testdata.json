@@ -92,7 +92,6 @@
             "phoneNumber" : "765-464-9653",
             "address" : "101 N Russell St, 47906, West Lafayette, IN",
             "title" : "Home in need",
-            "category" : "Shelter",
             "description" : "We need a place for 10 homeless people around West Lafayette. We really appreciate your help. Thank you.",
             "UserID" : "1"
         },
@@ -102,7 +101,6 @@
             "phoneNumber" : "617-383-7659",
             "address" : "808 Commonwealth Avenue, 02215, Boston, MA",
             "title" : "A meal for real",
-            "category" : "Pantry",
             "description" : "We are an organization that helps homeless people and one of the things that we do is provide meals for them. We need sponsors. Please contact us if you are interested. Your help is much appreciated!",
             "UserID" : "2"
         },
@@ -112,9 +110,80 @@
             "phoneNumber" : "585-421-1228",
             "address" : "20 Barcelona St, 55158, Barcelona, PA",
             "title" : "It's not Spring yet",
-            "category" : "Shelter",
             "description" : "Winter is not over yet and there are some people sleeping in the cold outside. We need space to provide them shelter.",
             "UserID" : "3"
+        },
+        {
+            "orgName" : "The Script",
+            "email" : "unique@thescript.com",
+            "phoneNumber" : "797-307-6703",
+            "address" : "55 Stevens St, 45655, Urbana, IL",
+            "title" : "Sing for the Soul",
+            "description" : "Volunteers to provide shelter for buskers. Contact me via email or call the number above.",
+            "UserID" : "4"
+        },
+        {
+            "orgName" : "TVSunnah",
+            "email" : "faiz@tvsunnah.com",
+            "phoneNumber" : "321-927-7574",
+            "address" : "14 Linden St, 47500, Boulder, CO",
+            "title" : "Foster the people",
+            "description" : "Help! We don't need much. Just a few other things for us.",
+            "UserID" : "5"
+        },
+        {
+            "orgName" : "IQ",
+            "email" : "victor@iq.com",
+            "phoneNumber" : "787-252-0212",
+            "address" : "75 Broadway Rd, 87542, Santa Rosa, CA",
+            "title" : "Purge",
+            "description" : "Time to purge everyone. Let's do this!",
+            "UserID" : "6"
+        },
+        {
+            "orgName" : "Akamai",
+            "email" : "johan@akamai.com",
+            "phoneNumber" : "545-371-1345",
+            "address" : "100 Boston St, 02457, Arsenal, NH",
+            "title" : "Let's make a change",
+            "description" : "A bunch of people working for a change. Want to join? Please help us out. Contact us if you can.",
+            "UserID" : "7"
+        },
+        {
+            "orgName" : "Arduino",
+            "email" : "joseph@arduino.com",
+            "phoneNumber" : "636-951-1594",
+            "address" : "1 Best Rd, 25234, Palo Alto, CA",
+            "title" : "Live like a warrior",
+            "description" : "Feel like the world don't love you? They only wanna push you away. Somedays people don't see you, you feel like you're in the way. Today you feel as everyone hates, pointing their fingers looking at your mistakes.",
+            "UserID" : "8"
+        },
+        {
+            "orgName" : "Matisyahu",
+            "email" : "marley@matisyahu.com",
+            "phoneNumber" : "545-231-9567",
+            "address" : "25 Field Rd, 87521, Midfield, VA",
+            "title" : "Sunshine",
+            "description" : "Reach for the sky, keep your eye on the prize. Forever by my side you're my golden sunshine. If it's raining in your mind, well then push them clouds aside. Forevery by my side you're my golden sunshine.",
+            "UserID" : "9"
+        },
+        {
+            "orgName" : "uNique",
+            "email" : "muska@unique.com",
+            "phoneNumber" : "105-501-5555",
+            "address" : "55 Fire Rd, 78795, Houston, TX",
+            "title" : "Just another girl",
+            "description" : "I went to see a fortune teller that was a trip. Maybe this confusions got me losing my grip.",
+            "UserID" : "10"
+        },
+        {
+            "orgName" : "Oasis",
+            "email" : "mike@oasis.com",
+            "phoneNumber" : "547-777-7834",
+            "address" : "55 Pearl St, 54065, Striker, MO",
+            "title" : "She's just another girl",
+            "description" : "All of my friends say I should move on. She's just another girl. Don't let it stick to your heart so hard.",
+            "UserID" : "11"
         }
 	]
 }

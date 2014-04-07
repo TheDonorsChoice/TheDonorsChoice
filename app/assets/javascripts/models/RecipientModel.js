@@ -9,7 +9,6 @@ define([
             phoneNumber: "",
             address: "",
             title: "",
-            category: "",
             description: ""
         }
     });
