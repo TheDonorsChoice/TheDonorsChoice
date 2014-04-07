@@ -1,5 +1,5 @@
 <style>
-	div.post {   
+	div.post, div.reply {   
     	position: absolute;
     	border: solid 1px black;
     	margin-top: 30%;
@@ -23,15 +23,15 @@
 	}
 	
 	$(function() {
-		$("td[colspan=4]").find("p").hide();
+		$("td[colspan=4]").find("#expand").hide();
 		$("input").click(function(event) {
 			event.stopPropagation();
         	var $target = $(event.target);
         	
-        	if ( $target.closest("td").attr("colspan") > 1 ) {
+        	if ($target.closest("td").attr("colspan") > 1) {
             	$target.slideUp();
         	} else {
-            	$target.closest("tr").next().find("p").slideToggle();
+            	$target.closest("tr").next().find("#expand").slideToggle();
         	}                    
     	});
 	});
@@ -48,12 +48,34 @@
        		</div>
      		<div class="modal-body">
         		<p>
-        			<textarea class="form-control" rows="10" id="textArea" placeholder="Description"></textarea>
+        			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Description"></textarea>
         		</p>
       		</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('post')>Close</button>
         		<button type="button" class="btn btn-primary">Post</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<div id="reply" class="modal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+     		<div class="modal-header">
+     			<div style="margin-bottom: 10px; padding-left: 15px;">Reply Post
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('reply')>×</button>
+       			</div>
+       			<input type="text" class="form-control" id="inputTitle" placeholder="RE:">
+       		</div>
+     		<div class="modal-body">
+        		<p>
+        			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Message"></textarea>
+        		</p>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('reply')>Close</button>
+        		<button type="button" class="btn btn-primary">Reply</button>
       		</div>
     	</div>
   	</div>
@@ -66,11 +88,11 @@
 		<input type="button" class="btn btn-primary" value="New Post" style="float: right;" onclick=showModal('post') />
 	</div>
 
-	<table style="padding: 20px;">
+	<table style="padding: 20px; table-layout: fixed; width: 100%;">
 		<thead>
 			<tr id="heading">
-				<th></th>
-				<th width="80%">Title</th>
+				<th width="4%"></th>
+				<th width="76%">Title</th>
 				<th width="10%">Category</th>
 				<th width="10%">Date</th>
 			</tr>
@@ -79,19 +101,20 @@
 			{{#each models}}
 			<tr id="info" style="border-top: solid 1px black;">
 				<td width="3%"><input type="button" class="btn btn-info btn-xs" value="+"></td>
-				<td width="77%">{{this.attributes.title}}</td>
+				<td id="title" width="77%">{{this.attributes.title}}</td>
 				<td width="10%">Shelter</td>
 				<td width="10%">04/05/2014</td>			
 			</tr>
 			<tr style="border-bottom: solid 1px black;">
 				<td colspan="4">
-					<p style="margin-left: 4%;">
-						{{this.attributes.orgName}}<br>
-						{{this.attributes.email}}<br>
-						{{this.attributes.phoneNumber}}<br>
-						{{this.attributes.address}}<br><br>
-						{{this.attributes.description}}
-					</p>
+					<div id="expand" class="jumbotron" style="margin-left: 1%; margin-right: 1%;">
+						<div>{{this.attributes.orgName}}</div>
+						<div>{{this.attributes.email}}</div>
+						<div>{{this.attributes.phoneNumber}}</div>
+						<div>{{this.attributes.address}}</div><br>
+						<div>{{this.attributes.description}}</div>
+						<button type="button" class="btn btn-primary" style="margin-top: 5%;" onclick=showModal('reply')>Reply</button>
+					</div>
 				</td>
 			</tr>
 			{{/each}}
