@@ -40,7 +40,7 @@
     "resources" : [
         {
             "orgName" : "Pantry1",
-            "address" : "100 Fake St",
+            "address" : "4 Yawkey Way, Boston, MA 02215",
             "phoneNumber" : "800-123-4567",
             "email" : "email@email.com",
             "UserID" : "1",
@@ -49,7 +49,7 @@
         },
         {
             "orgName" : "Shelter1",
-            "address" : "200 Fake St",
+            "address" : "1545 Massachusetts Ave, Cambridge, MA 02138",
             "phoneNumber" : "800-999-4567",
             "email" : "email2@email.com",
             "UserID" : "2",
@@ -58,7 +58,7 @@
         },
         {
             "orgName" : "Pantry2",
-            "address" : "300 Fake St",
+            "address" : "77 Massachusetts Ave, Cambridge, MA 02139",
             "phoneNumber" : "800-123-9997",
             "email" : "email3@email.com",
             "UserID" : "2",
@@ -67,7 +67,7 @@
         },
         {
             "orgName" : "Shelter2",
-            "address" : "400 Fake St",
+            "address" : "755 Commonwealth Ave, Boston, MA 02215",
             "phoneNumber" : "999-123-4567",
             "email" : "email4@email.com",
             "UserID" : "2",
@@ -76,7 +76,7 @@
         },
         {
             "orgName" : "Shelter2",
-            "address" : "400 Fake St",
+            "address" : "419 Boston Ave, Medford, MA 02155‎",
             "phoneNumber" : "999-123-4567",
             "email" : "email4@email.com",
             "UserID" : "2",
