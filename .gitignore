@@ -15,7 +15,5 @@ dist
 /.settings
 /.metadata
 /.target
-/.target
-/.target
-/.target
 /bin
+.DS_Store
