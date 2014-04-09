@@ -47,6 +47,10 @@ public class User extends Model {
 	@JoinTable(name="user_request")
 	 public List<Request> requests;
 	 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="address_id")
+	public Address address;
+	
     public String taxId;
 
     public enum UserType
