@@ -3,9 +3,9 @@ package controllers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import models.User;
 import play.data.*;
-import play.data.Form;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -40,11 +40,27 @@ public class UserController extends Controller {
         String name = requestData.get("name");
 
         Logger.debug(requestData.toString());
+        
+//  the following rules are bases on US_UserRegistration_01 document located at google drive Team3/Draft Project1 Files
 
-        if (!validInput(email) || !validInput(password) || !validInput(name))
+        if (name.isEmpty())
         {
-            Logger.error("Failed to create a member or throw exception given data " + requestData.toString());
-            return internalServerError("Unable to create member");
+            Logger.error("Blank name---Failed to create a member or throw exception given data " + requestData.toString());
+            //  return internalServerError("Unable to create member");
+              return badRequest("Invlaid Name Input");
+
+        }
+        else if (email.isEmpty() || !validEmail(email))
+        {
+        	  Logger.error("wrong Email---Failed to create a member or throw exception given data " + requestData.toString());
+              //return internalServerError("Unable to create member");
+              return badRequest("Invlaid Email input");
+        }
+        else if (password.isEmpty() || !validPassword(password))
+        {
+        	  Logger.error("Week Password Failed to create a member or throw exception given data " + requestData.toString());
+              //return internalServerError("Unable to create member");
+              return badRequest("Weak Password");
         }
         else
         {
@@ -69,9 +85,56 @@ public class UserController extends Controller {
             return ok(newUser.guid);
         }
     }
+ 
+    private static boolean validEmail(String field) {
+       int Email_len = field.length();  
+       int count = 0;
+       int at=0;
+       int dot=0;
+       char ch; 
+            while(count < Email_len)  {  
+              ch = field.charAt(count);  
 
-    private static boolean validInput(String field) {
-        return field != null && field.length() > 0;
+              if(ch=='@'){  
+                at = at + 1;  
+              }  
+              if(ch=='.'){  
+                dot = dot + 1;  
+              }  
+
+                count = count + 1;  
+            }  
+       return at==1 && dot==1;
+    }
+    
+    private static boolean validPassword(String field) {
+    	 int Password_len = field.length();  
+         int count=0;
+         int digit = 0;  
+         int lowerCase = 0;  
+         int upperCase = 0;
+         char ch; 
+       if(Password_len < 7 || Password_len > 12) // according document between 6-12 
+    	   return false;
+    	   else {
+            while(count < Password_len)  {  
+              ch = field.charAt(count);  
+
+              if(Character.isDigit(ch)){  
+                digit = digit + 1;  
+              }  
+              if(Character.isLowerCase(ch)){  
+                lowerCase = lowerCase + 1;  
+              }  
+
+              if(Character.isUpperCase(ch))  {  
+                upperCase = upperCase + 1;  
+              }  
+                count = count + 1;  
+            }  
+          } 
+       return digit>=1 && lowerCase>=1 && upperCase>=1;
+
     }
 
     public static Result authenticate()
