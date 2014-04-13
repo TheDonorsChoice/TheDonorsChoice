@@ -11,7 +11,6 @@ define([
             Type: "",
             itemsNeeded: ""
         }
-
     });
 
     // Return the model for the module

@@ -60,6 +60,49 @@
   	</div>
 </div>
 
+<div id="edit" class="modal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+     		<div class="modal-header">
+     			<div style="margin-bottom: 10px; padding-left: 15px;">Edit Post
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('edit')>×</button>
+       			</div>
+       			<input type="text" class="form-control" id="inputEmail" placeholder="Title">
+       		</div>
+     		<div class="modal-body">
+        		<p>
+        			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Description"></textarea>
+        		</p>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('edit')>Close</button>
+        		<button type="button" class="btn btn-primary">Save</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<div id="delete" class="modal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+     		<div class="modal-header">
+     			<div style="margin-bottom: 10px; padding-left: 15px;">Delete Post
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('delete')>×</button>
+       			</div>
+       		</div>
+     		<div class="modal-body">
+        		<p>
+        			Are you sure you want to delete this post?
+        		</p>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('delete')>Close</button>
+        		<button type="button" class="btn btn-primary">Delete</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
 <div id="reply" class="modal">
   	<div class="modal-dialog">
     	<div class="modal-content">
@@ -85,11 +128,11 @@
 <div id="page-wrap">
 	<h1 style="text-align: center;">Shelter/Pantry</h1>
 
-	<div class="col-md-12">
+	<div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
 		<input type="button" class="btn btn-primary" value="New Post" style="float: right;" onclick=showModal('post') />
 	</div>
-	<div class="col-md-12">
-		<input type="button" value="View My Posts" style="float: left;" onclick="filter('recipient')/>
+	<div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
+		<input type="button" value="View My Posts" style="float: left;" />
 	</div>
 
 	<table style="padding: 20px; table-layout: fixed; width: 100%;">
@@ -118,6 +161,8 @@
 						<div>{{this.attributes.address}}</div><br>
 						<div>{{this.attributes.description}}</div>
 						<button type="button" class="btn btn-primary" style="margin-top: 5%;" onclick=showModal('reply')>Reply</button>
+						<button type="button" class="btn btn-primary" style="margin-top: 5%; margin-right: 2px;  float:right" onclick=showModal('edit')>Edit</button>
+						<button type="button" class="btn btn-primary" style="margin-top: 5%;  float:right" onclick=showModal('delete')>Delete</button>
 					</div>
 				</td>
 			</tr>
