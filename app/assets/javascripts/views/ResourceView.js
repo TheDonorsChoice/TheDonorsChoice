@@ -6,8 +6,9 @@ define([ // <- requireJS stuff
     'underscorejs',
     'backbonejs',
     'compiled-templates',
-    'compiled-partials'
-], function($, _, Backbone, Templates, Partials){
+    'compiled-partials',
+    '../helpers/jquery.quick.pagination'
+], function($, _, Backbone, Templates, Partials, QuickP){
 
 	var markers = [];
 	var map;
@@ -47,6 +48,8 @@ define([ // <- requireJS stuff
             // bind the map to map-canvas
 			map = new google.maps.Map($("#map-canvas")[0], mapOptions);
 			
+			$("#resourcelist").quickPagination({pagerLocation:"both",pageSize:"3"});
+			
 			// add the markers to the map
 			this.markmap();
         },
@@ -70,9 +73,6 @@ define([ // <- requireJS stuff
         	
         	// render the table (this table will be a filtered list)
         	$("#resourcelist").html(listhtml);
-        },
-        openMapWindow: function(event){
-        debugger;
         },
         
         // mark the map with the addresses in the collection
@@ -113,7 +113,6 @@ define([ // <- requireJS stuff
 						google.maps.event.addListener(marker, 'click', function() {
                               infowindow.open(map,marker);
 						});
-						debugger;
 						$("#resourcelist #" + orgName).on("click", function(event) {
 						    infowindow.open(map,marker);
 						});
