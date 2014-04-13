@@ -1,31 +1,10 @@
 {{> header-template }}
-<h1 style="text-align: center;">Welcome to the Donor's Page</h1>
 
 <input id="filterinput" name="searchform" placeholder="Keywords" type="text" />
-
-<script type="text/javascript" src="https://www.google.com/cse/tools/onthefly?form=searchbox_demo&lang="></script>
-
-<h5 style="text-align: left; ">Are you here to donate services or commodities?</h5>
-<form>
-    <input type="radio" name="donate" value="Services">Services<br>
-    <input type="radio" name="donate" value="Commodities">Commodities<br>
-    <input type="radio" name="donate" value="Both">Both<br>
-    <input type="submit" name="radiosubmit" value="Submit" />
-</form>
-<h3 style="text-align: left;">Requests Made By Recipients</h3>
 
     <div id="resourcelist">
     	{{> resource-list-template}}
 	</div>
-<h3 style="text-align: left;">Google Maps</h3>
-<!-- Use of this code assumes agreement with the Google Custom Search Terms of Service. -->
-<!-- The terms of service are available at http://www.google.com/cse/docs/tos.html -->
-<form style="text-align: left;" name="cse" id="searchbox_demo" action="http://www.google.com/cse">
-    <input type="hidden" name="cref" value="" />
-    <input type="hidden" name="ie" value="utf-8" />
-    <input type="hidden" name="hl" value="" />
-    <input name="q" type="text" size="40" />
-    <input type="submit" name="sa" value="Search" />
-</form>
+
 </br>
 <div id="map-canvas" style="width:100%;height:400px"></div>
