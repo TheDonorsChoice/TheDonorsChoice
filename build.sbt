@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "commons-io" % "commons-io" % "2.4",
   "com.lambdaworks" % "scrypt" % "1.4.0",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+  "javax.mail" % "mail" % "1.4"
 )
 
 play.Project.playJavaSettings
