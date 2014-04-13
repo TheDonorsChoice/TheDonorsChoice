@@ -15,6 +15,7 @@ define([ // <- requireJS stuff
     	// this is the template being used, which can be found here: /public/templates/resource-template.hbs
         template: Templates['resource-template'],
         listtemplate: Partials['resource-list-template'],
+        maptemplate: Templates['resource-mapwindow-template'],
         // our code will be appended to /app/views/main.scala.html
         // somewhere in that file there's an html element where id="main"
         // "el" is now a reference to that element
@@ -26,7 +27,7 @@ define([ // <- requireJS stuff
         },
         // this function is implicitly called
         initialize: function() {
-            _.bindAll(this, 'render','filterlist');
+            _.bindAll(this, 'render','filterlist', 'markmap');
 
             this.listenTo(this.collection, "change", this.render);
 
@@ -70,6 +71,9 @@ define([ // <- requireJS stuff
         	// render the table (this table will be a filtered list)
         	$("#resourcelist").html(listhtml);
         },
+        openMapWindow: function(event){
+        debugger;
+        },
         
         // mark the map with the addresses in the collection
         markmap: function() {	
@@ -84,11 +88,16 @@ define([ // <- requireJS stuff
         	var filtertext = $("#filterinput").val();
         	
 			// for each item mark its location on the map
-        	var col =  this.collection.find(filtertext);
+        	var col =  this.collection.find(filtertext),
+        	    maptemplate = this.maptemplate;
 			col.each(function(item) {
 				// get the address from this item
-				var address = item.get("address");
-				
+				var address = item.get("address"),
+                    orgName = item.get("orgName");
+                var infowindow = new google.maps.InfoWindow({
+                      content: maptemplate(item.attributes)
+                  });
+
 				// get the geocode
 				// geocodes are needed to mark locations on a google map
 				geocoder.geocode( { 'address': address}, function(results, status) {
@@ -102,7 +111,11 @@ define([ // <- requireJS stuff
 						
 						// add a listener for the marker, so when it's clicked we display something
 						google.maps.event.addListener(marker, 'click', function() {
-							alert(address); // ideally, we'll include details about the posting here
+                              infowindow.open(map,marker);
+						});
+						debugger;
+						$("#resourcelist #" + orgName).on("click", function(event) {
+						    infowindow.open(map,marker);
 						});
 						
 						// add the marker to an array
