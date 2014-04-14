@@ -11,6 +11,8 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utilities.UserUtils;
+import java.util.Scanner;
+import java.io.*;
 
 public class UserController extends Controller {
 
@@ -43,7 +45,7 @@ public class UserController extends Controller {
         
 //  the following rules are bases on US_UserRegistration_01 document located at google drive Team3/Draft Project1 Files
 
-        if (name.isEmpty())
+        if (name.isEmpty() || !NoSpecialCh(name))
         {
             Logger.error("Blank name---Failed to create a member or throw exception given data " + requestData.toString());
             //  return internalServerError("Unable to create member");
@@ -135,6 +137,20 @@ public class UserController extends Controller {
           } 
        return digit>=1 && lowerCase>=1 && upperCase>=1;
 
+    }
+    
+    private static boolean NoSpecialCh(String field) {
+    	char c;
+    	int specialcharCount=0;
+
+    	for(int j=0; j<field.length();j++){
+    	      c=field.charAt(j);
+    	      if(c== ' ');
+    	      else if(Character.isDigit(c));
+    	      else if(Character.isLetter(c));
+    	      else specialcharCount++;
+    	    }
+    	return specialcharCount==0;
     }
 
     public static Result authenticate()
