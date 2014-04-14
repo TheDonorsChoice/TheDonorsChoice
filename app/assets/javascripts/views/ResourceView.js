@@ -48,7 +48,7 @@ define([ // <- requireJS stuff
             // bind the map to map-canvas
 			map = new google.maps.Map($("#map-canvas")[0], mapOptions);
 			
-			$("#resourcelist").quickPagination({pagerLocation:"both",pageSize:"3"});
+			$("#resourcelist").quickPagination({pageSize:"4"});
 			
 			// add the markers to the map
 			this.markmap();
@@ -73,6 +73,7 @@ define([ // <- requireJS stuff
         	
         	// render the table (this table will be a filtered list)
         	$("#resourcelist").html(listhtml);
+        	$("#resourcelist").quickPagination({pageSize:"4"});
         },
         
         // mark the map with the addresses in the collection
@@ -122,7 +123,7 @@ define([ // <- requireJS stuff
 						markers.push(marker);
 					} 
 					else {
-						alert("Address not found.  Geocode error: " + status);
+						console.log("Address not found.  Geocode error: " + status);
 					}
 				});
 			});
