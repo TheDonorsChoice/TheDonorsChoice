@@ -128,12 +128,10 @@
 <div id="page-wrap">
 	<h1 style="text-align: center;">Shelter/Pantry</h1>
 
-	<div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
+	<p class="bs-component" style="margin-bottom: 25px; margin-top: 25px;">
 		<input type="button" class="btn btn-primary" value="New Post" style="float: right;" onclick=showModal('post') />
-	</div>
-	<div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
-		<input type="button" value="View My Posts" style="float: left;" />
-	</div>
+		<input type="button" class="btn btn-default" value="View My Posts" style="float: left;" />
+	</p>
 
 	<table style="padding: 20px; table-layout: fixed; width: 100%;">
 		<thead>
@@ -160,9 +158,11 @@
 						<div>{{this.attributes.phoneNumber}}</div>
 						<div>{{this.attributes.address}}</div><br>
 						<div>{{this.attributes.description}}</div>
-						<button type="button" class="btn btn-primary" style="margin-top: 5%;" onclick=showModal('reply')>Reply</button>
-						<button type="button" class="btn btn-primary" style="margin-top: 5%; margin-right: 2px;  float:right" onclick=showModal('edit')>Edit</button>
-						<button type="button" class="btn btn-primary" style="margin-top: 5%;  float:right" onclick=showModal('delete')>Delete</button>
+						<div style="margin-top: 5%; margin-right: 5px;">
+							<button type="button" class="btn btn-primary" onclick=showModal('reply')>Reply</button>
+							<button type="button" class="btn btn-danger" style="float: right;" onclick=showModal('delete')>Delete</button>
+							<button type="button" class="btn btn-primary" style="float: right; margin-right: 5px;" onclick=showModal('edit')>Edit</button>
+						</div>
 					</div>
 				</td>
 			</tr>
