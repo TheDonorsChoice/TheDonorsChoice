@@ -90,14 +90,13 @@ define([ // <- requireJS stuff
         	
 			// for each item mark its location on the map
         	var col =  this.collection.find(filtertext),
-        	    maptemplate = this.maptemplate;
+        	    maptemplate = this.maptemplate,
+        	    currWindow,
+        	    $currSelected;
 			col.each(function(item) {
 				// get the address from this item
 				var address = item.get("address"),
                     orgName = item.get("orgName");
-                var infowindow = new google.maps.InfoWindow({
-                      content: maptemplate(item.attributes)
-                  });
 
 				// get the geocode
 				// geocodes are needed to mark locations on a google map
@@ -109,14 +108,22 @@ define([ // <- requireJS stuff
 							map: map,
 							position: results[0].geometry.location
 						});
-						
+
+                        var $listEl = $("#resourcelist #" + orgName);
+
+                        var openMapWindow = function() {
+                            if (currWindow) currWindow.close();
+                            if ($currSelected)  $currSelected.removeClass("selected");
+                            currWindow = new google.maps.InfoWindow({
+                              content: maptemplate(item.attributes)
+                            });
+                            currWindow.open(map,marker);
+                            $currSelected = $listEl.addClass("selected");
+                        };
+
 						// add a listener for the marker, so when it's clicked we display something
-						google.maps.event.addListener(marker, 'click', function() {
-                              infowindow.open(map,marker);
-						});
-						$("#resourcelist #" + orgName).on("click", function(event) {
-						    infowindow.open(map,marker);
-						});
+						google.maps.event.addListener(marker, 'click', openMapWindow);
+						$listEl.on("click", openMapWindow);
 						
 						// add the marker to an array
 						// we're doing this so we have the ability to remove it, when needed
