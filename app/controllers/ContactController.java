@@ -9,7 +9,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-
+import play.Play;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -23,12 +23,11 @@ import javax.mail.internet.MimeMessage;
 public class ContactController extends Controller {
 
     public static Result contact()  {
-    	 // NOTE this is working but because we can not save THEDonrsChoice email in clear text
-    	 // i took it out : 
-    	 // need to work on saving email password as local environment variable chris has access to server
-    	 // need to work on the email is valid format
+    	 // NOTE this is working but because we can not save THEDonrsChoice email password in clear text
+    	// we mapped the password to a local environment variable 
+    	// need to work on the email is valid format
     	        
-    	System.out.println("check point");
+    //	System.out.println("check point");
         DynamicForm requestData = Form.form().bindFromRequest();
          String name = requestData.get("name");
          String email = requestData.get("email");
@@ -40,7 +39,10 @@ public class ContactController extends Controller {
         Logger.debug(email);
         Logger.debug(comment);
         
-    	//System.out.println("check point-----before assigning variables");
+    	
+    	String key = Play.application().configuration().getString("key"); 
+    	final String key1 = key;
+	
         Properties props = new Properties();
    		props.put("mail.smtp.host", "smtp.gmail.com");
    		props.put("mail.smtp.socketFactory.port", "465");
@@ -52,7 +54,9 @@ public class ContactController extends Controller {
    		Session session = Session.getInstance(props,
    			new javax.mail.Authenticator() {
    				protected PasswordAuthentication getPasswordAuthentication() {
-   					return new PasswordAuthentication("THE NEW EMAIL thedonorschoice","");// the password will be defined on our server and called from here as local environment variables
+   					return new PasswordAuthentication("thedonorschoice",key1);
+   					// the password is read from the application.conf file which is mapping to server 
+   					//local environment variables
    				}
    			});
            
