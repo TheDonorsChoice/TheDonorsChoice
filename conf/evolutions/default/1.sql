@@ -13,6 +13,15 @@ create table address (
   constraint pk_address primary key (address_id))
 ;
 
+create table request (
+  id                        bigint not null,
+  name                      varchar(255),
+  description               varchar(255),
+  quantity                  integer,
+  user_id                   bigint,
+  constraint pk_request primary key (id))
+;
+
 create table resource (
   id                        bigint not null,
   user_id                   bigint,
@@ -44,6 +53,8 @@ create table DonorsChoiceUser (
 
 create sequence address_seq;
 
+create sequence request_seq;
+
 create sequence resource_seq;
 
 create sequence DonorsChoiceUser_seq;
@@ -63,6 +74,8 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists address;
 
+drop table if exists request;
+
 drop table if exists resource;
 
 drop table if exists DonorsChoiceUser;
@@ -70,6 +83,8 @@ drop table if exists DonorsChoiceUser;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists address_seq;
+
+drop sequence if exists request_seq;
 
 drop sequence if exists resource_seq;
 
