@@ -1,15 +1,13 @@
 {{> header-template }}
 <style>
-	div.post, div.reply {   
-    	position: absolute;
-    	border: solid 1px black;
-    	margin-top: 30%;
-    	background-color: white;
-    	text-align: right
-    	width: 160px;
-	}
-	
 	#info td {padding-top: 8px; padding-bottom: 8px;}
+	
+	#page-wrap {
+		opacity: 1;
+		transition: opacity .25s ease-in-out;
+   		-moz-transition: opacity .25s ease-in-out;
+   		-webkit-transition: opacity .25s ease-in-out;
+   	}
 	
 	#heading th {padding-top: 8px; padding-bottom: 8px;}
 </style>
@@ -17,22 +15,28 @@
 <script>
 	function showModal(id) {
     	$("#" + id).fadeIn('slow');
+    	document.getElementById("page-wrap").setAttribute("style", "opacity: 0.3;");
 	}
 	
 	function hideModal(id) {
     	$("#" + id).fadeOut('slow');
+    	document.getElementById("page-wrap").setAttribute("style", "opacity: 1;");
 	}
 	
 	$(function() {
-		$("td[colspan=4]").find("#expand").hide();
-		$("input").click(function(event) {
+		$("td[colspan=5]").find("#expand").hide();
+		$("button").click(function(event) {
+			this.blur();
+			var icon = $(this).children();
 			event.stopPropagation();
         	var $target = $(event.target);
         	
-        	if ($target.closest("td").attr("colspan") > 1) {
-            	$target.slideUp();
-        	} else {
-            	$target.closest("tr").next().find("#expand").slideToggle();
+        	if (icon.hasClass("glyphicon glyphicon-minus-sign")) {
+        		icon.removeClass("glyphicon glyphicon-minus-sign").addClass("glyphicon glyphicon-plus-sign");
+           		$target.closest("tr").next().find("#expand").slideToggle();
+        	} else if (icon.hasClass("glyphicon glyphicon-plus-sign")) {
+        		icon.removeClass("glyphicon glyphicon-plus-sign").addClass("glyphicon glyphicon-minus-sign");
+           		$target.closest("tr").next().find("#expand").slideToggle();
         	}                    
     	});
 	});
@@ -45,9 +49,24 @@
      			<div style="margin-bottom: 10px; padding-left: 15px;">New Post
         			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('post')>×</button>
        			</div>
-       			<input type="text" class="form-control" id="inputEmail" placeholder="Title">
+       			<div style="margin-bottom: 10px">
+       				<input id="inputTitle" type="text" class="form-control" placeholder="Title">
+       			</div>
        		</div>
      		<div class="modal-body">
+     			<div class="input-group" style="margin-bottom: 25px">
+                	<span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+            		<input id="inputItemsNeeded" type="text" class="form-control" placeholder="Items Needed">
+            	</div>
+        		
+        		<div class="input-group" style="margin-bottom: 25px">
+        			<span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+        			<select class="form-control">
+        				<option>Shelter</option>
+        				<option>Pantry</option>
+        			</select>
+        		</div>
+        		
         		<p>
         			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Description"></textarea>
         		</p>
@@ -70,6 +89,19 @@
        			<input type="text" class="form-control" id="inputEmail" placeholder="Title">
        		</div>
      		<div class="modal-body">
+     			<div class="input-group" style="margin-bottom: 25px">
+                	<span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+            		<input id="inputItemsNeeded" type="text" class="form-control" placeholder="Items Needed">
+            	</div>
+        		
+        		<div class="input-group" style="margin-bottom: 25px">
+        			<span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+        			<select class="form-control">
+        				<option>Shelter</option>
+        				<option>Pantry</option>
+        			</select>
+        		</div>
+     		
         		<p>
         			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Description"></textarea>
         		</p>
@@ -103,55 +135,34 @@
   	</div>
 </div>
 
-<div id="reply" class="modal">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-     		<div class="modal-header">
-     			<div style="margin-bottom: 10px; padding-left: 15px;">Reply Post
-        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick=hideModal('reply')>×</button>
-       			</div>
-       			<input type="text" class="form-control" id="inputTitle" placeholder="RE:">
-       		</div>
-     		<div class="modal-body">
-        		<p>
-        			<textarea class="form-control" rows="10" id="textArea" style="resize: none;" placeholder="Message"></textarea>
-        		</p>
-      		</div>
-      		<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick=hideModal('reply')>Close</button>
-        		<button type="button" class="btn btn-primary">Reply</button>
-      		</div>
-    	</div>
-  	</div>
-</div>
-
 <div id="page-wrap">
 	<h1 style="text-align: center;">Shelter/Pantry</h1>
 
 	<p class="bs-component" style="margin-bottom: 25px; margin-top: 25px;">
 		<input type="button" class="btn btn-primary" value="New Post" style="float: right;" onclick=showModal('post') />
-		<input type="button" class="btn btn-default" value="View My Posts" style="float: left;" />
 	</p>
 
 	<table style="padding: 20px; table-layout: fixed; width: 100%;">
 		<thead>
 			<tr id="heading">
-				<th width="4%"></th>
-				<th width="76%">Title</th>
+				<th width="3%"></th>
+				<th width="67%">Title</th>
 				<th width="10%">Category</th>
+				<th width="10%">Items Needed</th>
 				<th width="10%">Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each models}}
 			<tr id="info" style="border-top: solid 1px black;">
-				<td width="3%"><input type="button" class="btn btn-info btn-xs" value="+"></td>
-				<td id="title" width="77%">{{this.attributes.title}}</td>
-				<td width="10%">Shelter</td>
+				<td width="3%"><button style="background: none; border: none;"><i id="icon" class="glyphicon glyphicon-plus-sign"></i></button></td>
+				<td id="title" width="67%">{{this.attributes.title}}</td>
+				<td width="10%">{{this.attributes.Type}}</td>
+				<td width="10%">{{this.attributes.itemsNeeded}}</td>
 				<td width="10%">04/05/2014</td>			
 			</tr>
 			<tr style="border-bottom: solid 1px black;">
-				<td colspan="4">
+				<td colspan="5">
 					<div id="expand" class="jumbotron" style="margin-left: 1%; margin-right: 1%;">
 						<div>{{this.attributes.orgName}}</div>
 						<div>{{this.attributes.email}}</div>
@@ -159,9 +170,8 @@
 						<div>{{this.attributes.address}}</div><br>
 						<div>{{this.attributes.description}}</div>
 						<div style="margin-top: 5%; margin-right: 5px;">
-							<button type="button" class="btn btn-primary" onclick=showModal('reply')>Reply</button>
-							<button type="button" class="btn btn-danger" style="float: right;" onclick=showModal('delete')>Delete</button>
-							<button type="button" class="btn btn-primary" style="float: right; margin-right: 5px;" onclick=showModal('edit')>Edit</button>
+							<input type="button" class="btn btn-primary" onclick=showModal('edit') value="Edit" />
+							<input type="button" class="btn btn-danger" style="margin-left: 5px;" onclick=showModal('delete') value="Delete" />
 						</div>
 					</div>
 				</td>
