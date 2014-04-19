@@ -2,7 +2,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.Resource;
 import models.Address;
-import models.Recipient;
 import play.Application;
 import play.GlobalSettings;
 import play.libs.Json;
@@ -26,10 +25,6 @@ public class Global extends GlobalSettings {
         
         if (Address.all().size() == 0) {
             populateAddresses(app);
-        }
-
-        if (Recipient.all().size() == 0) {
-        	populateRecipient(app);
         }
     }
 
@@ -73,22 +68,11 @@ public class Global extends GlobalSettings {
         {
             JsonNode nextResourceJson = (JsonNode) resourceIterator.next();
             Resource resource = Json.fromJson(nextResourceJson, Resource.class);
+            
+            resource.user = User.all().get(0);
 
             // Save the user to the database...
             resource.save();
         }
-    }
-    
-    public static void populateRecipient(Application app) {
-    	JsonNode root = Json.parse(app.resourceAsStream("testdata.json"));
-    	JsonNode recipientList = root.findPath("recipient");
-    	
-    	Iterator recipientIterator = recipientList.elements();
-    	while (recipientIterator.hasNext()) {
-    		JsonNode nextRecipientJson = (JsonNode) recipientIterator.next();
-    		Recipient recipient = Json.fromJson(nextRecipientJson, Recipient.class);
-    		
-    		recipient.save();
-    	}
     }
 }

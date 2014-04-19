@@ -1,11 +1,14 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 /**
@@ -37,6 +40,7 @@ public class User extends Model {
 
     @Constraints.Required
     @JsonProperty(required = true)
+    @JsonIgnore
     public String password;
 
     @Constraints.Required
@@ -45,7 +49,8 @@ public class User extends Model {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="user_request")
-	 public List<Request> requests;
+	@JsonIgnore
+	 public List<Resource> requests;
 	 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name="address_id")

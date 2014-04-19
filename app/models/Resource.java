@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -24,6 +25,10 @@ public class Resource extends Model {
     @Id
     public Long id;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinTable(name="user_id")
+	public User user;
+    
     @Constraints.Required
     @JsonProperty(required = true)
     public String orgName;
@@ -41,27 +46,32 @@ public class Resource extends Model {
     public String email;
     
     @Constraints.Required
-    @JsonProperty(required = true)
-    public Long UserID;
+    @JsonProperty(required = false)
+    public String Type;
     
     @Constraints.Required
     @JsonProperty(required = false)
-    public String Type;
+    public String title;
     
     @Constraints.Required
     @JsonProperty(required = true)
     public String itemsNeeded;
     
+    @Constraints.Required
+    @JsonProperty(required = false)
+    public String description;
+    
     public static int size = 0; 
     
-    public Resource(String name, String address, String phone, String email, Long userid, String type, String items){ 
-    	orgName = name; 
+    public Resource(String name, String address, String phone, String email, String type, String postTitle, String items, String postDescription){ 
+    	this.orgName = name; 
     	this.address = address; 
-    	phoneNumber = phone; 
-    	this.email = email; 
-    	UserID = userid; 
-    	Type = type; 
-    	itemsNeeded = items; 
+    	this.phoneNumber = phone; 
+    	this.email = email;
+    	this.Type = type; 
+    	this.title = postTitle;
+    	this.itemsNeeded = items;
+    	this.description = postDescription;
     }
     
 	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);

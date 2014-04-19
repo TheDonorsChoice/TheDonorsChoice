@@ -1,4 +1,4 @@
-@(recipient: List[Recipient], recipientForm: Form[Recipient])
+@(resources: List[Resource], resourceForm: Form[Resource])
 
 @import helper._
 
@@ -13,11 +13,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	@for(recipient <- recipient) {
+	@for(resource <- resources) {
 		<tr>
-			<td>@recipient.title</td>
-			<td>@recipient.email</td>
-			<td>@recipient.orgName</td>
+			<td>@resource.title</td>
+			<td>@resource.email</td>
+			<td>@resource.orgName</td>
 		</tr>
 	}
 	</tbody>
