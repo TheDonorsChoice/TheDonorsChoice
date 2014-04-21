@@ -37,7 +37,7 @@ define([
             };
 
             var error = function() {
-                AlertController.show("The user can not be found ", "danger");
+                AlertController.show("The user can not be found with this email address ", "danger");
             };
 
             // Request that the model submit the contact information to the server.
