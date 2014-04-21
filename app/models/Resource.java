@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -25,25 +26,14 @@ public class Resource extends Model {
     @Id
     public Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinTable(name="user_id")
-	public User user;
+   
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference("user-res")
+	public  User user;
     
     @Constraints.Required
     @JsonProperty(required = true)
     public String orgName;
-    
-    @Constraints.Required
-    @JsonProperty(required = true)
-    public String address;
-    
-    @Constraints.Required
-    @JsonProperty(required = true)
-    public String phoneNumber;
-    
-    @Constraints.Required
-    @JsonProperty(required = true)
-    public String email;
     
     @Constraints.Required
     @JsonProperty(required = false)
@@ -60,14 +50,25 @@ public class Resource extends Model {
     @Constraints.Required
     @JsonProperty(required = false)
     public String description;
+	
+	//Need to remove these but breaks the build
+    //------------------------------------------------
+	@Constraints.Required
+	@JsonProperty(required= false)
+	public String address;
     
+	@Constraints.Required
+	@JsonProperty(required= false)
+	public String phoneNumber;
+	
+	@Constraints.Required
+	@JsonProperty(required= false)
+	public String email;
+	//----------------------------------------------
     public static int size = 0; 
     
-    public Resource(String name, String address, String phone, String email, String type, String postTitle, String items, String postDescription){ 
+    public Resource(String name, String type, String postTitle, String items, String postDescription){ 
     	this.orgName = name; 
-    	this.address = address; 
-    	this.phoneNumber = phone; 
-    	this.email = email;
     	this.Type = type; 
     	this.title = postTitle;
     	this.itemsNeeded = items;

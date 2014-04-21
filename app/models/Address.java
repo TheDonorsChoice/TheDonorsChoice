@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -21,8 +22,8 @@ import java.util.List;
 @Entity
 public class Address extends Model {
 
-    @Id
-    public Long addressID;
+	@Id
+	public Long id;
 
     @Constraints.Required
     @JsonProperty(required = true)
@@ -39,11 +40,7 @@ public class Address extends Model {
     @Constraints.Required
     @JsonProperty(required = true)
     public String zip;
-    
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinTable(name="user_id")
-	public User user;
-    
+     
     public static int size = 0; 
     
     public Address(String street, String city, String state, String zip){ 

@@ -1,9 +1,8 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumValue;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -19,7 +18,6 @@ import java.util.List;
  * @since 3/4/2014
  */
 @Entity
-@Table(name = "DonorsChoiceUser")
 public class User extends Model {
 
     @Id
@@ -28,32 +26,31 @@ public class User extends Model {
     @Constraints.Required
     @JsonProperty(required = true)
     public String name;
-
+    
+    //Can we eventually get rid of this?
     @Column(unique=true)
     @Constraints.Required
     public String guid;
 
     @Constraints.Required
-    @Column(unique=true)
+    @Column(unique=true, nullable = false)
     @JsonProperty(required = true)
     public String email;
 
+    //Work on removing -- Move up to UserAccount
     @Constraints.Required
     @JsonProperty(required = true)
-    @JsonIgnore
     public String password;
 
     @Constraints.Required
     @JsonProperty(required = true)
     public UserType type;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="user_request")
-	@JsonIgnore
-	 public List<Resource> requests;
+	 @JsonManagedReference("user-res")
+	 @OneToMany(mappedBy="user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 public List<Resource> resources;
 	 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="address_id")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Address address;
 	
     public String taxId;
