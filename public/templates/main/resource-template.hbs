@@ -1,23 +1,7 @@
-{{> header-template }}
-<style>
-	div#rl {
-		width:33%;
-		height:410px;
-		float:left;
-	}
-	
-	div#rl ul li {
-		list-style-type: none;
-		display:block;
-		float:left;
-		width:15px;
-	}
-</style>
 <div id="rl">
-<input id="filterinput" name="searchform" placeholder="Keywords" type="text" />
+<input id="filterinput" class="form-control" name="searchform" placeholder="Keywords" type="text" />
 	<div id="resourcelist"">
 		{{> resource-list-template}}
 	</div>
 </div>
-</br>
-<div id="map-canvas" style="width:66%;height:410px;float:left;"></div>
+<div id="map-canvas"></div>

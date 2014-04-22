@@ -1,13 +1,10 @@
 {{#each models}}
 <div id="{{this.attributes.orgName}}" class="selectBox">
 	<div style="border-top:1px solid #fff;">
-    <h1>{{this.attributes.orgName}}</h1>
-    Needed: {{this.attributes.itemsNeeded}}<br/>
-    <p style="font-size: 10px;" class="info">{{this.attributes.address}}<br/>
-    {{this.attributes.phoneNumber}}<br/>
-    {{this.attributes.email}}<br/>
+    <table width="100%"><tr><td><h2>{{this.attributes.itemsNeeded}}</h2></td><td align="right"><button class="btn btn-primary">Email</button></td></tr></table>
+    {{this.attributes.orgName}}
+    <p style="font-size: 10px;" class="info">{{this.attributes.address}}
     </p>
-    <button class="contact" type="button">Contact</button>
     </div>
 </div>
 {{/each}}
