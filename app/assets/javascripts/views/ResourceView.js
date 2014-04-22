@@ -96,7 +96,7 @@ define([ // <- requireJS stuff
 			col.each(function(item) {
 				// get the address from this item
 				var address = item.get("address"),
-                    orgName = item.get("orgName");
+                    orgName = item.get("orgName").replace(/ /g, "\\ ");
 
 				// get the geocode
 				// geocodes are needed to mark locations on a google map
@@ -109,9 +109,11 @@ define([ // <- requireJS stuff
 							position: results[0].geometry.location
 						});
 
-                        var $listEl = $("#resourcelist #" + orgName);
+                        var $listEl = $("#resourcelist div#" + orgName);
+                        console.log(orgName);
 
                         var openMapWindow = function() {
+                        	console.log("click");
                             if (currWindow) currWindow.close();
                             if ($currSelected)  $currSelected.removeClass("selected");
                             currWindow = new google.maps.InfoWindow({
