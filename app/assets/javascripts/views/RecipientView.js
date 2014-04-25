@@ -26,6 +26,7 @@ define([
         },
         
         submit: function(e) {
+        	console.log("hi");
             e.preventDefault();
 
             // Use the model setters and update the values from the UI
@@ -44,7 +45,7 @@ define([
             };
 
             // Request that the model submit the contact information to the server.
-            this.model.submit(success, error);
+            this.model.create(success, error);
         },
         
         remove: function() {

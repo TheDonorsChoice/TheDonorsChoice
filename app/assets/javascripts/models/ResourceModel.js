@@ -14,6 +14,16 @@ define([
             description: ""
         },
         
+        create: function(success, failure) {
+        	console.log("Hi");
+            $.post("/resource", {
+                Type: this.get("Type"),
+                title: this.get("title"),
+                itemsNeeded: this.get("itemsNeeded"),
+                description: this.get("description")
+            }).success(success).fail(failure);
+        },
+        
     	update_resource: function(data) {
             this.set("orgName", data.orgName);
             this.set("address", data.address);
