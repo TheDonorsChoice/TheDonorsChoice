@@ -43,12 +43,12 @@ define([
 
             var name = $('#registration-name').val();
             var email = $('#registration-email').val();
-            var userType = $('#registration-account-type').val();
+            var type = $('#registration-account-type').val();
 
             this.model.set("name", name);
             this.model.set("email", email);
             this.model.set("password", password);
-            this.model.set("userType", userType);
+            this.model.set("type", type);
 
             var success = function() {
                 AlertController.show("Your account has been registered.");

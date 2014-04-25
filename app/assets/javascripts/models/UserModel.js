@@ -10,7 +10,7 @@ define([
             "password": "",
             "password_confirm": "",
 		    "loggedIn":  false,
-		    "userType": ""
+		    "type": ""
 		  },
 
         initialize: function() {
@@ -32,7 +32,7 @@ define([
                 name: this.get("name"),
                 email: this.get("email"),
                 password: this.get("password"),
-                userType: this.get("userType")
+                type: this.get("type")
             }).success(success).fail(failure);
         },
 
@@ -56,7 +56,7 @@ define([
                 this.set("loggedIn", true);
                 this.set("name", data.name);
                 this.set("email", data.email);
-                this.set("userType", data.userType);
+                this.set("type", data.type);
             }
 
             this.trigger('change', this);
