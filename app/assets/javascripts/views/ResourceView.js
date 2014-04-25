@@ -7,8 +7,9 @@ define([ // <- requireJS stuff
     'backbonejs',
     'compiled-templates',
     'compiled-partials',
-    '../helpers/jquery.quick.pagination'
-], function($, _, Backbone, Templates, Partials, QuickP){
+    '../helpers/jquery.quick.pagination',
+    'controllers/AlertController'
+], function($, _, Backbone, Templates, Partials, QuickP, AlertController){
 
 	var markers = [];
 	var map;
@@ -106,7 +107,7 @@ define([ // <- requireJS stuff
         	$("#resourcelist").html(listhtml);
         	$("#resourcelist").quickPagination({pageSize:"4"});
         },
-        
+
         // mark the map with the addresses in the collection
         markmap: function() {	
 	    	var geocoder = new google.maps.Geocoder();	
@@ -140,7 +141,8 @@ define([ // <- requireJS stuff
 							position: results[0].geometry.location
 						});
 
-                        var $listEl = $("#resourcelist div#" + orgName);
+                        var $listEl = $("#resourcelist div#" + orgName),
+                            $emailEl = $("#resourcelist div#" + orgName + " .btn-primary");
                         console.log(orgName);
 
                         var openMapWindow = function() {
@@ -157,6 +159,7 @@ define([ // <- requireJS stuff
 						// add a listener for the marker, so when it's clicked we display something
 						google.maps.event.addListener(marker, 'click', openMapWindow);
 						$listEl.on("click", openMapWindow);
+						$emailEl.on("click", sendEmail);
 						
 						// add the marker to an array
 						// we're doing this so we have the ability to remove it, when needed
@@ -169,5 +172,11 @@ define([ // <- requireJS stuff
 			});
         }
     });
+
+    var sendEmail = function(e) {
+        e.preventDefault();
+        // how do we access user model here to validate logged in user? - JT
+        AlertController.show("An email has been sent to this donor");
+    }
     return view;
 });
