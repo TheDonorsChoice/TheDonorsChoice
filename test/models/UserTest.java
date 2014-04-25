@@ -1,24 +1,10 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Date;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
-import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
-
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
+import static org.junit.Assert.*;
 
 
 /**
@@ -31,32 +17,38 @@ public class UserTest {
 
     @Test
     public void testUserEntity() {
-    //   User testUser = new User();
-	//	testUser.setName("Test");
-	//	testUser.setGuid();
-	//	testUser.setEmail("test@aol.com");
-	//	testUser.setPassword("passw0rd");
-	//	testUser.set
+       User testUser = new User();
+       testUser.name = "Jackie Aldama";
+       testUser.email = "jaldama@bu.edu";
+       testUser.guid = "123123";
+       testUser.id = (long) 123;
+       testUser.password = "passw0rd";
+       testUser.taxId = "00101";
+       
+       testUser.save();
+       assertTrue(User.exists(testUser));
     }
 
     @Test
-    public void testUserReset() {
+    public void testFindUserAccount() {
+    	User testUser = new User();
+        testUser.name = "Jackie Aldama";
+        testUser.email = "jaldama@bu.edu";
+        testUser.guid = "123124";
+        testUser.id = (long) 124;
+        testUser.password = "passw0rd";
+        testUser.taxId = "001202";
         
+        testUser.save();
+        
+        UserAccount account = new UserAccount();
+        account.user = testUser;
+        account.id = (long) 999;
+        account.password = "passw0rd123";
+        account.createdDate = new Date();
+        account.save();
+        
+        assertTrue(UserAccount.exists(account));
     }
-	
-	@Test
-	public void testRecipientView() {
-	
-	}
-	
-	@Test
-	public void testFindUserByUser() {
-	
-	}
-	
-	@Test
-	public void testFindAllUsers() {
-	
-	}
 
 }

@@ -41,5 +41,9 @@ public class UserAccount extends Model{
 	 {
 		 useraccount.save();
 	 }
+	 
+	 public static boolean exists(UserAccount userAccount) {
+	        return findById.where().eq("id", userAccount.id).findIds().size() != 0;
+	    }
 	 	
 }
