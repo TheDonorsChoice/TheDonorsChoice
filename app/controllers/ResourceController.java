@@ -22,4 +22,9 @@ public class ResourceController extends Controller {
   	  Resource.delete(id); 
   	  return redirect(routes.ResourceController.resources());
     }
+    //create resources
+    public static Result createResource(Resource resource) {
+    	  Resource.create(resource); 
+    	  return redirect(routes.ResourceController.resources());
+      }
 }
