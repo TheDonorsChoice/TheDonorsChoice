@@ -26,7 +26,7 @@ define([ // <- requireJS stuff
         	"keyup #filterinput" : "filterlist",
         	"blur #filterinput" : "markmap",
         	
-            "click #submit_post": "submit",
+            "click #submit_post": "create",
             "click #delete_post": "remove"
         		
         },
