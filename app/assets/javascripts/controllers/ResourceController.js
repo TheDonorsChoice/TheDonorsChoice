@@ -18,6 +18,15 @@ define([ // <-- requireJS stuff
     	var resourceView = new ResourceView( {collection: resources} );
     };
     
+    var create = function() {
+    	var resourceView = new ResourceView( {model: resource} );
+    };
+    
+    var remove = function() {
+    	var resourceView = new ResourceView( {model: resource} );
+    	resourceView.remove();
+    }
+    
     // these are the available functions for this object
 	return {
         initialize: initialize, // <-- implicitly called

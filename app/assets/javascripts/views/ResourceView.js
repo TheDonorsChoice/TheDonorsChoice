@@ -24,7 +24,11 @@ define([ // <- requireJS stuff
 
         events: {
         	"keyup #filterinput" : "filterlist",
-        	"blur #filterinput" : "markmap"
+        	"blur #filterinput" : "markmap",
+        	
+            "click #submit_post": "submit",
+            "click #delete_post": "remove"
+        		
         },
         // this function is implicitly called
         initialize: function() {
@@ -36,6 +40,33 @@ define([ // <- requireJS stuff
                 collection.trigger("change");
             }});
         },
+        
+        create: function(e) {
+        	console.log("hi");
+            e.preventDefault();
+
+            // Use the model setters and update the values from the UI
+            this.model.set("title", $('input#inputTitle').val());
+            this.model.set("description", $('input#textArea').val());
+
+            //
+            // Success/Error handlers which will allow us to perform UI updates.
+            //
+            var success = function() {
+               AlertController.show("Your post has been sent successfully", "info");
+            };
+
+            var error = function() {
+                AlertController.show("Your post could not be sent", "danger");
+            };
+
+            // Request that the model submit the contact information to the server.
+            this.model.create(success, error);
+        },
+        
+        remove: function() {
+        	this.model.remove(success, error);
+        },  
         render: function() {    
 			var mapOptions = {
 				center: new google.maps.LatLng(42.3736158, -71.1097335),

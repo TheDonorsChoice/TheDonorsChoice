@@ -24,6 +24,11 @@ define([
             }).success(success).fail(failure);
         },
         
+        remove: function(success, failure) {
+        	console.log("Delete");
+        	this.trigger('remove', this);
+        },
+        
     	update_resource: function(data) {
             this.set("orgName", data.orgName);
             this.set("address", data.address);
