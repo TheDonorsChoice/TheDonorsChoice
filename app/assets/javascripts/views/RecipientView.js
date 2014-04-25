@@ -11,7 +11,8 @@ define([
         el: $('#main'),
         
          events: {
-            "click #submit_post": "submit"
+            "click #submit_post": "submit",
+            "click #delete_post": "remove"
         },
 
         initialize: function() {
@@ -46,6 +47,9 @@ define([
             this.model.submit(success, error);
         },
         
+        remove: function() {
+        	this.model.remove(success, error);
+        },      
 
         render: function() {
             var recipienthtml = this.template(this.collection);
