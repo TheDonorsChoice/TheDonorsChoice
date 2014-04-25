@@ -65,6 +65,13 @@ define([ // <- requireJS stuff
         },
         
         remove: function() {
+        	 var success = function() {
+                 AlertController.show("Your post was deleted successfully", "info");
+              };
+
+              var error = function() {
+                  AlertController.show("Your post could not be deleted", "danger");
+              };
         	this.model.remove(success, error);
         },  
         render: function() {    
