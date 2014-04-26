@@ -26,13 +26,20 @@ public class ResourceController extends Controller {
     public static Result createResource() {
     	 DynamicForm requestData = Form.form().bindFromRequest();
     	 String title = requestData.get("title");
-    	 String type = requestData.get("type");
+    	 String type = requestData.get("Type");
+    	 String description = requestData.get("description");
+    	 String itemsNeeded = requestData.get("itemsNeeded");
 //         String password = requestData.get("password");
 //         String name = requestData.get("name");
     	 String items = "";
     	 //String name, String type, String postTitle, String items, String postDescription
-    	 Resource resource = new Resource("",type,title,items,"");
-    	 Resource.create(resource); 
+    	 Resource resource = new Resource();
+    	 resource.description = description;
+    	 resource.Type = type;
+    	 resource.itemsNeeded = itemsNeeded;
+    	 resource.title = title;
+    	 //Resource.create(resource); 
+    	 resource.save();
     	 return redirect(routes.ResourceController.resources());
       }
 }

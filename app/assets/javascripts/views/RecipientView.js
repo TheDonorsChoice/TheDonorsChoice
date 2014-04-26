@@ -3,35 +3,55 @@ define([
     'underscorejs',
     'backbonejs',
     'compiled-templates',
-    'controllers/AlertController'
-], function($, _, Backbone, Templates, AlertController){
+    'controllers/AlertController',
+    'models/ResourceModel'
+], function($,_, Backbone, Templates, AlertController, ResourceModel){
 
+	var model = new ResourceModel();
     var view = Backbone.View.extend({
         template: Templates['recipient-template'],
         el: $('#main'),
         
          events: {
-            "click #submit_post": "submit",
+            "click #submit_post": "create",
             "click #delete_post": "remove"
         },
 
         initialize: function() {
             _.bindAll(this, 'render');
+            _.bindAll(this, 'create');
+            _.bindAll(this, 'remove');
 
             this.listenTo(this.collection, "change", this.render);
+            
+
+            console.log("Printing from recipient view" + model );
+            console.log(model);
 
             this.collection.fetch({success: function(collection, response, options) {
                 collection.trigger("change");
             }});
-        },
-        
-        submit: function(e) {
-        	console.log("hi");
-            e.preventDefault();
+        },    
 
+        render: function() {
+        	console.log("hi...");
+            var recipienthtml = this.template(this.collection);
+            this.$el.html(recipienthtml);
+            // bind modal popup
+            $('#submit_post').on('click', this.create);
+            $('#delete_post').on('click', this.remove());
+            return this;
+        },
+       
+        create: function(e) {
+        	console.log("create function called");
+            e.preventDefault();
+            
             // Use the model setters and update the values from the UI
-            this.model.set("title", $('input#inputEmail').val());
-            this.model.set("description", $('input#textArea').val());
+            model.set("title", $('#inputTitle').val());
+            model.set("description", $('#textArea').val());
+            model.set("itemsNeeded", $('#inputItemsNeeded').val());
+            model.set("Type", $('#inputType').val())
 
             //
             // Success/Error handlers which will allow us to perform UI updates.
@@ -45,17 +65,19 @@ define([
             };
 
             // Request that the model submit the contact information to the server.
-            this.model.create(success, error);
+            model.create(success, error);
         },
         
         remove: function() {
-        	this.model.remove(success, error);
-        },      
+        	 var success = function() {
+                 AlertController.show("Your post was deleted successfully", "info");
+              };
 
-        render: function() {
-            var recipienthtml = this.template(this.collection);
-            this.$el.html(recipienthtml);
-        }
+              var error = function() {
+                  AlertController.show("Your post could not be deleted", "danger");
+              };
+        	model.remove(success, error);
+        } 
     });
     
     return view;

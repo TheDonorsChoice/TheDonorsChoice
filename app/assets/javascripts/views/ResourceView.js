@@ -34,6 +34,8 @@ define([ // <- requireJS stuff
         // this function is implicitly called
         initialize: function() {
             _.bindAll(this, 'render','filterlist', 'markmap');
+            _.bindAll(this, 'create');
+            _.bindAll(this, 'remove');
 
             this.listenTo(this.collection, "change", this.render);
 

@@ -67,13 +67,16 @@ public class Resource extends Model {
 	//----------------------------------------------
     public static int size = 0; 
     
-    public Resource(String name, String type, String postTitle, String items, String postDescription){ 
-    	this.orgName = name; 
-    	this.Type = type; 
-    	this.title = postTitle;
-    	this.itemsNeeded = items;
-    	this.description = postDescription;
+    public Resource() {
+    	
     }
+//    public Resource(String name, String type, String postTitle, String items, String postDescription){ 
+//    	this.orgName = name; 
+//    	this.Type = type; 
+//    	this.title = postTitle;
+//    	this.itemsNeeded = items;
+//    	this.description = postDescription;
+//    }
     
 	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);
 	

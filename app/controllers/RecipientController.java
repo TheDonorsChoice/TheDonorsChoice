@@ -17,9 +17,4 @@ public class RecipientController extends Controller {
     public static Result jsonResources() {
         return ok(play.libs.Json.toJson(Resource.all()));
     }
-	//delete resources
-    public static Result deleteResource(Long id) {
-  	  Resource.delete(id); 
-  	  return redirect(routes.ResourceController.resources());
-    }
 }

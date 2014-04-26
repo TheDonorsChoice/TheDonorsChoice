@@ -1,10 +1,11 @@
 define([
     'underscorejs',
-    'backbonejs'
+    'backbonejs',
+    'jquery'
 ], function(_, Backbone){
     var ResourceModel = Backbone.Model.extend({
         defaults: {
-            orgName: "",
+            orgName: "test",
             address: "",
             phoneNumber: "",
             email: "",
@@ -14,8 +15,15 @@ define([
             description: ""
         },
         
+        initialize: function() {
+            _.bindAll(this, 'create');
+            _.bindAll(this, 'remove');
+            _.bindAll(this, 'update_resource');
+            _.bindAll(this, 'get_resource');
+        },
+        
         create: function(success, failure) {
-        	console.log("Hi");
+        	console.log("ResourceModel.create()");
             $.post("/resource", {
                 Type: this.get("Type"),
                 title: this.get("title"),
@@ -39,7 +47,11 @@ define([
             this.set("itemsNeeded", data.itemsNeeded);
             this.set("description", data.description);
             this.trigger('change', this);
-    	}
+    	},
+    	
+    	get_resource: function() {
+            $.get("/resource", {  }, this.update_resource).fail(this.update_resource);
+        }
     });
         // Return the model for the module
         return ResourceModel;

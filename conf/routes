@@ -22,8 +22,6 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 # Resource
 GET 	/resource					controllers.ResourceController.resources()
 GET 	/resources.json		        controllers.ResourceController.jsonResources()
-POST    /resource/:id/delete        controllers.ResourceController.deleteResource(id: Long)
-POST	/resource					controllers.ResourceController.createResource()
 
 # Address
 GET 	/address					controllers.AddressController.addresses()
@@ -34,6 +32,7 @@ POST    /address/:id/delete        	controllers.AddressController.deleteAddress(
 GET		/resource					controllers.ResourceController.resources()
 GET		/resources.json				controllers.ResourceController.jsonResources()
 POST	/resource/:id/delete		controllers.ResourceController.deleteResource(id: Long)
+POST	/resource					controllers.ResourceController.createResource()
 
 # Contact
 POST   /contact                     controllers.ContactController.contact()
