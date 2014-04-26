@@ -18,7 +18,7 @@ define([ // <-- requireJS stuff
     	var resourceView = new ResourceView( {collection: resources} );
     };
     
-    var create = function() {
+    var createResource = function() {
     	var resourceView = new ResourceView( {model: resource} );
     };
     
