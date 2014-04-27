@@ -12,6 +12,7 @@ POST   /login                      controllers.UserController.authenticate()
 POST   /user                       controllers.UserController.createUser()
 GET    /user                       controllers.UserController.currentUser()
 POST   /logout                     controllers.UserController.logout()
+POST   /resetpassword              controllers.UserController.resetPassword()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -37,5 +38,3 @@ POST	/resource					controllers.ResourceController.createResource()
 # Contact
 POST   /contact                     controllers.ContactController.contact()
 
-#Resetpassword1
-GET   /resetpassword1               controllers.ResetPassword1Controller.resetpassword1()

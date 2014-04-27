@@ -81,6 +81,23 @@ public class UserController extends Controller {
         }
     }
 
+    public static Result resetPassword() {
+        //
+        // Take the data out of the Form posted to the contact method and send an email to our
+        // contact address (contact@thedonorschoice.com) with the information provided.
+        //
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String email = requestData.get("email");
+
+        Logger.info(email);
+
+        return ok();
+    }
+
+    public static Result setNewPassword() {
+        return ok();
+    }
+
     private static boolean validEmail(String field) {
         int Email_len = field.length();
         int count = 0;

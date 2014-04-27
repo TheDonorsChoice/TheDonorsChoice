@@ -12,7 +12,7 @@ define([
 
         events: {
             "submit form": "submit",
-            "click #resetpassword-submit": "submit"// where is it, yet to find=================================
+            "click #resetpassword-submit": "submit"
         },
 
         initialize: function(options) {
@@ -25,19 +25,17 @@ define([
             e.preventDefault();
 
             // Use the model setters and update the values from the UI
-            //this.model.set("name", $('input#contact-name').val());
-            this.model.set("email-resetpw", $('input#resetpassword-email').val());//==================================
-            //this.model.set("comment", $('input#contact-comment').val());
+            this.model.set("email", $('input#resetpassword-email').val());
 
             //
             // Success/Error handlers which will allow us to perform UI updates.
             //
             var success = function() {
-                AlertController.show("The link to reset password has been sent successfully", "info");
+                AlertController.show("The link to reset password has been sent to your email.", "info");
             };
 
             var error = function() {
-                AlertController.show("The user can not be found with this email address ", "danger");
+                AlertController.show("The password reset request was unable to be generated.", "danger");
             };
 
             // Request that the model submit the contact information to the server.
