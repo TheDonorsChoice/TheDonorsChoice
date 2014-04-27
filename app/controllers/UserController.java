@@ -213,12 +213,4 @@ public class UserController extends Controller {
             return notFound();
         }
     }
-
-    private static class UserAuthenticationRequest {
-        @JsonProperty(required = true)
-        public String email;
-
-        @JsonProperty(required = true)
-        public String password;
-    }
 }
