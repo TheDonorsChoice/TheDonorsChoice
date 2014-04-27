@@ -83,6 +83,10 @@ public class Resource extends Model {
 		return find.all();
 	}
 	
+	public static Resource findById(Long id){
+		return findById(id);
+	}
+	
 	public static void create(Resource resource){
 		resource.save(); 
 		size++; 

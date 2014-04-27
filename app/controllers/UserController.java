@@ -2,6 +2,8 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
+import models.Address;
+import play.data.*;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -95,6 +97,14 @@ public class UserController extends Controller {
                 newUser.guid = UserUtils.createGUID();
                 newUser.type = User.UserType.valueOf(type.toUpperCase());
                 newUser.save();
+                newUser.refresh();
+                Address addr = new Address();
+                addr.city = address_city;
+                addr.state = address_state;
+                addr.street = address_street;
+                addr.zip = address_zip;
+                newUser.addresses.add(addr);
+                newUser.update();
             }
 
             return ok(newUser.guid);

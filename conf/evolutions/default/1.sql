@@ -5,6 +5,7 @@
 
 create table address (
   id                        bigint not null,
+  user_id                   bigint,
   street                    varchar(255),
   city                      varchar(255),
   state                     varchar(255),
@@ -55,7 +56,6 @@ create table user (
   password                  varchar(255),
   reset_code                varchar(255),
   type                      varchar(10),
-  address_id                bigint,
   tax_id                    varchar(255),
   constraint ck_user_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),
   constraint uq_user_guid unique (guid),
@@ -83,10 +83,10 @@ create sequence user_seq;
 
 create sequence user_account_seq;
 
-alter table resource add constraint fk_resource_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_resource_user_1 on resource (user_id);
-alter table user add constraint fk_user_address_2 foreign key (address_id) references address (id) on delete restrict on update restrict;
-create index ix_user_address_2 on user (address_id);
+alter table address add constraint fk_address_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_address_user_1 on address (user_id);
+alter table resource add constraint fk_resource_user_2 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_resource_user_2 on resource (user_id);
 alter table user_account add constraint fk_user_account_user_3 foreign key (user_id) references user (id) on delete restrict on update restrict;
 create index ix_user_account_user_3 on user_account (user_id);
 

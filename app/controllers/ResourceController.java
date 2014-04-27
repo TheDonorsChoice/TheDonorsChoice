@@ -3,6 +3,7 @@ package controllers;
 
 import models.Resource;
 import models.User;
+import models.Address;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -31,6 +32,8 @@ public class ResourceController extends Controller {
 
     //delete resources
     public static Result deleteResource(Long id) {
+    	String guide = session().get("guid");
+        User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
         Resource.delete(id);
         return redirect(routes.ResourceController.resources());
     }
@@ -54,7 +57,11 @@ public class ResourceController extends Controller {
             resource.Type = userForGuid.type.toString();
             resource.itemsNeeded = itemsNeeded;
             resource.title = title;
-            Resource.create(resource);
+            Address addr = userForGuid.addresses.get(0);
+            resource.address = addr.street + " " + addr.city + " " + addr.state + " " + addr.zip;
+            userForGuid.resources.add(resource);
+            userForGuid.update();
+            
             return Results.created();
         } else {
             return Results.badRequest("Invalid User Type");
