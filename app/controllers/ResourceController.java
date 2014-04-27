@@ -59,6 +59,8 @@ public class ResourceController extends Controller {
             resource.title = title;
             Address addr = userForGuid.addresses.get(0);
             resource.address = addr.street + " " + addr.city + " " + addr.state + " " + addr.zip;
+            resource.orgName = userForGuid.name;
+            resource.email = userForGuid.email;
             userForGuid.resources.add(resource);
             userForGuid.update();
             
