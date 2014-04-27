@@ -11,8 +11,6 @@ public class UserUtils {
     private static int MEMORY_COST = 16;
     private static int PARALLELIZATION = 1;
 
-    private static Logger.ALogger log = play.Logger.of(UserUtils.class);
-
     public static String createGUID() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }

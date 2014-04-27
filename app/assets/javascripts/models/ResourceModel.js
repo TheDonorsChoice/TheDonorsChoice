@@ -53,7 +53,8 @@ define([
             $.get("/resource", {  }, this.update_resource).fail(this.update_resource);
         }
     });
-        // Return the model for the module
-        return ResourceModel;
-    });
+
+    // Return the model for the module
+    return ResourceModel;
+});
 

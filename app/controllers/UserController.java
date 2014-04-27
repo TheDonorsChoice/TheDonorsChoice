@@ -15,21 +15,30 @@ import java.util.UUID;
 
 public class UserController extends Controller {
 
-    public static Result currentUser() {
+    public static User getCurrentUser() {
         if (session().isEmpty()) {
-            return ok();
+            return null;
         }
 
         String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
         if (userForGuid == null) {
             session().clear();
-            return badRequest();
+            return null;
+        }
+
+        return userForGuid;
+    }
+
+    public static Result currentUser() {
+        User currentUser = getCurrentUser();
+        if (currentUser == null) {
+            return ok();
         }
 
         ObjectNode result = Json.newObject();
-        result.put("name", userForGuid.name);
-        result.put("email", userForGuid.email);
+        result.put("name", currentUser.name);
+        result.put("email", currentUser.email);
         return ok(result);
     }
 

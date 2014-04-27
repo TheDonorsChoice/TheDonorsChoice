@@ -25,7 +25,6 @@ public class Resource extends Model {
 
     @Id
     public Long id;
-
    
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference("user-res")
