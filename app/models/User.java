@@ -54,8 +54,9 @@ public class User extends Model {
 	 @OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 public List<Resource> resources;
 	 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	public Address address;
+	@JsonManagedReference("user-addr")
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	public List<Address> addresses;
 	
     public String taxId;
 

@@ -5,23 +5,12 @@
 
 create table address (
   id                        bigint not null,
+  user_id                   bigint,
   street                    varchar(255),
   city                      varchar(255),
   state                     varchar(255),
   zip                       varchar(255),
   constraint pk_address primary key (id))
-;
-
-create table recipient (
-  id                        bigint not null,
-  org_name                  varchar(255),
-  email                     varchar(255),
-  phone_number              varchar(255),
-  address                   varchar(255),
-  title                     varchar(255),
-  description               varchar(255),
-  user_id                   bigint,
-  constraint pk_recipient primary key (id))
 ;
 
 create table request (
@@ -55,7 +44,6 @@ create table user (
   password                  varchar(255),
   reset_code                varchar(255),
   type                      varchar(10),
-  address_id                bigint,
   tax_id                    varchar(255),
   constraint ck_user_type check (type in ('PANTRY','SHELTER','COMMERCIAL','INDIVIDUAL')),
   constraint uq_user_guid unique (guid),
@@ -73,8 +61,6 @@ create table user_account (
 
 create sequence address_seq;
 
-create sequence recipient_seq;
-
 create sequence request_seq;
 
 create sequence resource_seq;
@@ -83,10 +69,10 @@ create sequence user_seq;
 
 create sequence user_account_seq;
 
-alter table resource add constraint fk_resource_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_resource_user_1 on resource (user_id);
-alter table user add constraint fk_user_address_2 foreign key (address_id) references address (id) on delete restrict on update restrict;
-create index ix_user_address_2 on user (address_id);
+alter table address add constraint fk_address_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_address_user_1 on address (user_id);
+alter table resource add constraint fk_resource_user_2 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_resource_user_2 on resource (user_id);
 alter table user_account add constraint fk_user_account_user_3 foreign key (user_id) references user (id) on delete restrict on update restrict;
 create index ix_user_account_user_3 on user_account (user_id);
 
@@ -97,8 +83,6 @@ create index ix_user_account_user_3 on user_account (user_id);
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists address;
-
-drop table if exists recipient;
 
 drop table if exists request;
 
@@ -111,8 +95,6 @@ drop table if exists user_account;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists address_seq;
-
-drop sequence if exists recipient_seq;
 
 drop sequence if exists request_seq;
 

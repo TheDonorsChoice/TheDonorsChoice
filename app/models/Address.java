@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import play.data.validation.Constraints;
@@ -24,6 +25,10 @@ public class Address extends Model {
 
 	@Id
 	public Long id;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference("user-addr")
+	public  User user;
 
     @Constraints.Required
     @JsonProperty(required = true)
@@ -43,17 +48,15 @@ public class Address extends Model {
      
     public static int size = 0; 
     
-    public Address(String street, String city, String state, String zip){ 
-    	this.street = street; 
-    	this.city = city; 
-    	this.state = state; 
-    	this.zip = zip; 
-    }
     
 	public static Finder<Long, Address> find = new Finder<Long, Address>(Long.class, Address.class);
 	
 	public static List<Address> all(){
 		return find.all();
+	}
+	
+	public static Address findById(Long id){
+		return find.byId(id);
 	}
 	
 	public static void create(Address address){

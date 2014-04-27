@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.User;
+import models.Address;
 import play.data.*;
 import play.Logger;
 import play.libs.Json;
@@ -91,6 +92,14 @@ public class UserController extends Controller {
                 newUser.guid = UserUtils.createGUID();
                 newUser.type = User.UserType.valueOf(type.toUpperCase());
                 newUser.save();
+                newUser.refresh();
+                Address addr = new Address();
+                addr.city = "Boston";
+                addr.state = "MA";
+                addr.street = "808 Commonwealth Ave";
+                addr.zip = "03857";
+                newUser.addresses.add(addr);
+                newUser.update();
             }
 
             return ok(newUser.guid);
