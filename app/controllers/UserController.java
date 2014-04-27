@@ -36,6 +36,7 @@ public class UserController extends Controller {
         String email = requestData.get("email");
         String password = requestData.get("password");
         String name = requestData.get("name");
+        String type = requestData.get("type");
 
         //
         //  the following rules are bases on US_UserRegistration_01 document located at google drive Team3/Draft Project1 Files
@@ -62,6 +63,7 @@ public class UserController extends Controller {
             User newUser = new User();
             newUser.name = name;
             newUser.email = email;
+         
             Logger.info(newUser.toString());
 
             if (User.exists(newUser)) {
@@ -71,6 +73,7 @@ public class UserController extends Controller {
                 Logger.info("Adding new user for email " + newUser.email);
                 newUser.password = UserUtils.hashPassword(password);
                 newUser.guid = UserUtils.createGUID();
+                newUser.type = User.UserType.valueOf(type.toUpperCase());
                 newUser.save();
             }
 

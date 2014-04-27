@@ -1,6 +1,9 @@
 package controllers;
 
+
+
 import models.Resource;
+import models.User;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -24,22 +27,29 @@ public class ResourceController extends Controller {
     }
     //create resources
     public static Result createResource() {
+    	 
+    	 String guide = session().get("guid");
+         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
+         Logger.info(userForGuid.type.toString() + " " + userForGuid.name);
+         if((userForGuid.type == User.UserType.PANTRY) || (userForGuid.type == User.UserType.SHELTER))
+         {
     	 DynamicForm requestData = Form.form().bindFromRequest();
     	 String title = requestData.get("title");
-    	 String type = requestData.get("Type");
+    	 String type = requestData.get("type");
     	 String description = requestData.get("description");
     	 String itemsNeeded = requestData.get("itemsNeeded");
-//         String password = requestData.get("password");
-//         String name = requestData.get("name");
     	 String items = "";
-    	 //String name, String type, String postTitle, String items, String postDescription
     	 Resource resource = new Resource();
+    	 resource.user = userForGuid;
     	 resource.description = description;
-    	 resource.Type = type;
+    	 resource.Type = userForGuid.type.toString();
     	 resource.itemsNeeded = itemsNeeded;
     	 resource.title = title;
-    	 //Resource.create(resource); 
-    	 resource.save();
-    	 return redirect(routes.ResourceController.resources());
-      }
+    	 Resource.create(resource); 
+    	 return Results.created();
+         }else{
+        	 return Results.badRequest("Invalid User Type");
+         }
+        }
+      
 }
