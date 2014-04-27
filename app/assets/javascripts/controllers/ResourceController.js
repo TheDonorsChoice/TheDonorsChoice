@@ -28,7 +28,7 @@ define([ // <-- requireJS stuff
     var remove = function() {
     	var resourceView = new RecipientView( {model: resource} );
     	resourceView.remove();
-    }
+    };
     
     // these are the available functions for this object
 	return {

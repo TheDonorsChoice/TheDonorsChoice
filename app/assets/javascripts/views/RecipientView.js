@@ -4,8 +4,9 @@ define([
     'backbonejs',
     'compiled-templates',
     'controllers/AlertController',
-    'models/ResourceModel'
-], function($,_, Backbone, Templates, AlertController, ResourceModel){
+    'models/ResourceModel',
+    'helpers/RoutingHelper'
+], function($,_, Backbone, Templates, AlertController, ResourceModel, Router){
 
 	var model = new ResourceModel();
     var view = Backbone.View.extend({
@@ -23,7 +24,7 @@ define([
             _.bindAll(this, 'remove');
 
             this.listenTo(this.collection, "change", this.render);
-            
+            this.listenTo(this.collection, "error", this.displayError);
 
             console.log("Printing from recipient view" + model );
             console.log(model);
@@ -41,6 +42,11 @@ define([
             $('#submit_post').on('click', this.create);
             $('#delete_post').on('click', this.remove());
             return this;
+        },
+
+        displayError: function() {
+            AlertController.show("This page requires you to be authenticated.", "danger");
+            Router.navigateToRoot();
         },
        
         create: function(e) {

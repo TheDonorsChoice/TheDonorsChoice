@@ -39,6 +39,7 @@ define([ // <- requireJS stuff
             _.bindAll(this, 'remove');
 
             this.listenTo(this.collection, "change", this.render);
+            this.listenTo(this.collection, "error", this.displayError);
 
             this.collection.fetch({success: function(collection, response, options) {
                 collection.trigger("change");
@@ -66,7 +67,7 @@ define([ // <- requireJS stuff
             // Request that the model submit the contact information to the server.
             this.model.create(success, error);
         },
-        
+
         remove: function() {
         	 var success = function() {
                  AlertController.show("Your post was deleted successfully", "info");
@@ -96,6 +97,11 @@ define([ // <- requireJS stuff
 			
 			// add the markers to the map
 			this.markmap();
+        },
+
+        displayError: function() {
+            AlertController.show("This page requires you to be authenticated.", "danger");
+            Router.navigateToRoot();
         },
         
         // filter 
