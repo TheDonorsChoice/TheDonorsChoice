@@ -3,8 +3,9 @@ define([
     'underscorejs',
     'backbonejs',
     'compiled-templates',
-    'controllers/AlertController'
-], function($, _, Backbone, Templates, AlertController){
+    'controllers/AlertController',
+    'helpers/RoutingHelper'
+], function($, _, Backbone, Templates, AlertController, Router){
 
     var view = Backbone.View.extend({
         template: Templates['resetpassword2-template'],
@@ -12,7 +13,7 @@ define([
 
         events: {
             "submit form": "submit",
-            "click #newpassword-update": "update_pw"// where is it, yet to find=================================
+            "click #reset-submit": "update_pw"
         },
 
         initialize: function(options) {
@@ -29,34 +30,33 @@ define([
 
             
             // Validate that the password is present and matches.
-            var newpassword1 = $('#newpassword1').val();
-            var newpassword2 = $('#newpassword1').val();
+            var password = $('#reset-password').val();
+            var passwordConfirm = $('#reset-password-confirm').val();
 
-            if(newpassword1!==newpassword2){
+            if(password !== passwordConfirm){
                 AlertController.show("Unable to reset your password. Please check that the passwords match and try again.", "danger");
                 return;
             }
-            if(newpassword1.length==0){
+            if(password.length == 0){
                 AlertController.show("Please enter a valid password and try again.", "danger")
                 return;
             }
 
-            this.model.set("newpassword1", newpassword1);//==================================
+            this.model.set("password", password);
+            this.model.set("password_confirm", passwordConfirm);
 
             // Success/Error handlers which will allow us to perform UI updates.
-
             var success = function() {
                 AlertController.show("New password has been set for you successfully", "info");
                 Router.navigateToRoot();
             };
 
             var error = function() {
-                AlertController.show("Comfirmed password is not the same with New password ", "danger");
-                
+                AlertController.show("Your password was not updated successfully. Please try again.", "danger");
             };
 
             // Request that the model submit the contact information to the server.
-            this.model.update(success, error);
+            this.model.updatePassword(success, error);
         },
 
         render: function(context) {

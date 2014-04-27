@@ -10,6 +10,7 @@ define([
             "password": "",
             "password_confirm": "",
 		    "loggedIn":  false,
+            "resetCode": "",
 		    "type": ""
 		  },
 
@@ -33,6 +34,13 @@ define([
                 email: this.get("email"),
                 password: this.get("password"),
                 type: this.get("type")
+            }).success(success).fail(failure);
+        },
+
+        updatePassword: function(success, failure) {
+            $.post("/updatepassword", {
+                password: this.get("password"),
+                resetCode: this.get("resetCode")
             }).success(success).fail(failure);
         },
 

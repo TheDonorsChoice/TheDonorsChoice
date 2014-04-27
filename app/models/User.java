@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
@@ -37,17 +38,20 @@ public class User extends Model {
     @JsonProperty(required = true)
     public String email;
 
-    //Work on removing -- Move up to UserAccount
+    // Work on removing -- Move up to UserAccount
     @Constraints.Required
     @JsonProperty(required = true)
     public String password;
+
+    @JsonIgnore
+    public String resetCode;
 
     @Constraints.Required
     @JsonProperty(required = true)
     public UserType type;
 	
 	 @JsonManagedReference("user-res")
-	 @OneToMany(mappedBy="user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 public List<Resource> resources;
 	 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

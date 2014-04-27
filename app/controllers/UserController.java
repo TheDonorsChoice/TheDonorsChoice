@@ -9,7 +9,11 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utilities.EmailUtils;
 import utilities.UserUtils;
+
+import java.util.Random;
+import java.util.UUID;
 
 public class UserController extends Controller {
 
@@ -89,12 +93,40 @@ public class UserController extends Controller {
         DynamicForm requestData = Form.form().bindFromRequest();
         String email = requestData.get("email");
 
+        User userForEmail = User.findByString.where().ieq("email", email).findUnique();
+
+        userForEmail.resetCode = UUID.randomUUID().toString().replace("-", "").substring(0, 20);
+        userForEmail.save();
+
         Logger.info(email);
+        Logger.info(userForEmail.resetCode);
+
+        String body = String.format("Password reset requested.\n\n" +
+                "Please go here to reset your password: http://www.thedonorschoice.org/#resetpasswordconfirm/%s",
+                userForEmail.resetCode);
+
+        EmailUtils.sendEmail("noreply@thedonorschoice.org", userForEmail.email, "[TheDonorsChoice.org] Password Reset Request", body);
 
         return ok();
     }
 
-    public static Result setNewPassword() {
+    public static Result updatePassword() {
+        DynamicForm requestData = Form.form().bindFromRequest();
+
+        String password = requestData.get("password");
+        String resetCode = requestData.get("resetCode");
+
+        User userForRequestCode = User.findByString.where().ieq("resetCode", resetCode).findUnique();
+
+        if (userForRequestCode == null) {
+            Logger.info("User Not Found...");
+            return badRequest();
+        }
+
+        userForRequestCode.password = UserUtils.hashPassword(password);
+        userForRequestCode.resetCode = "";
+        userForRequestCode.save();
+
         return ok();
     }
 

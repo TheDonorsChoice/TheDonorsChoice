@@ -27,7 +27,7 @@ define([
             // Use the model setters and update the values from the UI
             this.model.set("name", $('input#contact-name').val());
             this.model.set("email", $('input#contact-email').val());
-            this.model.set("comment", $('input#contact-comment').val());
+            this.model.set("comment", $('textarea#contact-comment').val());
 
             //
             // Success/Error handlers which will allow us to perform UI updates.

@@ -53,6 +53,7 @@ create table user (
   guid                      varchar(255),
   email                     varchar(255) not null,
   password                  varchar(255),
+  reset_code                varchar(255),
   type                      varchar(10),
   address_id                bigint,
   tax_id                    varchar(255),

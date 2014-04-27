@@ -6,8 +6,9 @@ define([
     'controllers/ResourceController',
     'controllers/RecipientController',
     'controllers/ResetPassword1Controller',
+    'controllers/ResetPassword2Controller',
     'helpers/RoutingHelper'
-], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, ResetPassword1Controller, RoutingHelper) {
+], function(Backbone, UserController, StaticController, ContactController, ResourceController, RecipientController, ResetPassword1Controller, ResetPassword2Controller, RoutingHelper) {
 
 
     var AppRouter = Backbone.Router.extend({
@@ -15,6 +16,7 @@ define([
             "contact" : ContactController.show,
             // these are paths off our main URL.  ex www.thedonorschoice.org/#register
             "resetpassword1" :ResetPassword1Controller.show,
+            "resetpasswordconfirm/:resetcode" : ResetPassword2Controller.show,
             "register": UserController.register,
             "logout": UserController.logout,
             "faq": "faq",

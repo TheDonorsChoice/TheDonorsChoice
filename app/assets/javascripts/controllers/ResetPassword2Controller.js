@@ -2,12 +2,13 @@ define([
     'jquery',
     'backbonejs',
     'views/ResetPassword2View',
-    'models/ResetPassword2Model'
-], function($, Backbone, ResetPassword2View, ResetPassword2Model){
+    'models/UserModel'
+], function($, Backbone, ResetPassword2View, UserModel){
 
     return {
-        show: function(){
-            var model = new ResetPassword2Model();
+        show: function(resetCode){
+            var model = new UserModel();
+            model.set("resetCode", resetCode)
             new ResetPassword2View({ model: model });
         }
     }
