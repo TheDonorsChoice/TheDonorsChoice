@@ -3,7 +3,6 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.Address;
-import play.data.*;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -41,6 +40,13 @@ public class UserController extends Controller {
         ObjectNode result = Json.newObject();
         result.put("name", currentUser.name);
         result.put("email", currentUser.email);
+        if (currentUser.addresses.size() == 1) {
+            Address address = currentUser.addresses.get(0);
+            result.put("address_street", address.street);
+            result.put("address_zip", address.zip);
+            result.put("address_city", address.city);
+            result.put("address_state", address.state);
+        }
         return ok(result);
     }
 

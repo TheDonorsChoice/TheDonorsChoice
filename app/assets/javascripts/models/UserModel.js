@@ -12,10 +12,10 @@ define([
 		    "loggedIn":  false,
             "resetCode": "",
 		    "type": "",
-            "address-street": "",
-            "address-zip": "",
-            "address-city": "",
-            "address-state": ""
+            "address_street": "",
+            "address_zip": "",
+            "address_city": "",
+            "address_state": ""
 		  },
 
         initialize: function() {
@@ -38,10 +38,10 @@ define([
                 email: this.get("email"),
                 password: this.get("password"),
                 type: this.get("type"),
-                address_street: this.get("address-street"),
-                address_zip: this.get("address-zip"),
-                address_city: this.get("address-city"),
-                address_state: this.get("address-state")
+                address_street: this.get("address_street"),
+                address_zip: this.get("address_zip"),
+                address_city: this.get("address_city"),
+                address_state: this.get("address_state")
             }).success(success).fail(failure);
         },
 

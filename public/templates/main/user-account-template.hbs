@@ -1,70 +1,86 @@
 <div class="well bs-component">
     <div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-        <form class="form-horizontal">
-            <fieldset>
-                <legend>New Account</legend>
-                <div class="form-group">
-                    <label for="inputName" class="col-lg-4 control-label">Full Name</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" id="registration-name" placeholder="Full Name" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>New Account</legend>
+                    <div class="form-group">
+                        <label for="inputName" class="col-lg-4 control-label">Full Name</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="registration-name" placeholder="Full Name"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Email</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" id="registration-email" placeholder="Email" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-lg-4 control-label">Email</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="registration-email" placeholder="Email"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="col-lg-4 control-label">Password</label>
-                    <div class="col-lg-8">
-                        <input type="password" class="form-control" id="registration-password" placeholder="Password" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-lg-4 control-label">Password</label>
+
+                        <div class="col-lg-8">
+                            <input type="password" class="form-control" id="registration-password"
+                                   placeholder="Password" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputConfirmPassword" class="col-lg-4 control-label">Confirm Password</label>
-                    <div class="col-lg-8">
-                        <input type="password" class="form-control" id="registration-password-confirm" placeholder="Confirm Password" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <label for="inputConfirmPassword" class="col-lg-4 control-label">Confirm Password</label>
+
+                        <div class="col-lg-8">
+                            <input type="password" class="form-control" id="registration-password-confirm"
+                                   placeholder="Confirm Password" mouseev="true" autocomplete="off" keyev="true"
+                                   clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="addressInput" class="col-lg-4 control-label">Address</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" id="registration-address" placeholder="Address" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <label for="addressInput" class="col-lg-4 control-label">Address</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="registration-address" placeholder="Address"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-4 col-lg-4">
-                        <input type="text" class="form-control" id="registration-address-city" placeholder="City" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <div class="col-lg-offset-4 col-lg-4">
+                            <input type="text" class="form-control" id="registration-address-city" placeholder="City"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="registration-address-zip" placeholder="Zip"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" id="registration-address-zip" placeholder="Zip" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <div class="col-lg-offset-4 col-lg-8">
+                            <input type="text" class="form-control" id="registration-address-state" placeholder="State"
+                                   mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-4 col-lg-8">
-                        <input type="text" class="form-control" id="registration-address-state" placeholder="State" mouseev="true" autocomplete="off" keyev="true" clickev="true">
+                    <div class="form-group">
+                        <label for="select" class="col-lg-4 control-label">Account Type</label>
+
+                        <div class="col-lg-8">
+                            <select class="form-control" id="registration-account-type">
+                                <option value="INDIVIDUAL">Donor (Individual)</option>
+                                <option value="COMMERCIAL">Donor (Commercial)</option>
+                                <option value="PANTRY">Recipient (Pantry)</option>
+                                <option value="SHELTER">Recipient (Shelter)</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="select" class="col-lg-4 control-label">Account Type</label>
-                    <div class="col-lg-8">
-                        <select class="form-control" id="registration-account-type">
-                            <option value="INDIVIDUAL">Donor (Individual)</option>
-                            <option value="COMMERCIAL">Donor (Commercial)</option>
-                            <option value="PANTRY">Recipient (Pantry)</option>
-                            <option value="SHELTER">Recipient (Shelter)</option>
-                        </select>
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary" id="registration-submit">Create Account
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-8 col-lg-offset-4">
-                        <button type="submit" class="btn btn-primary" id="registration-submit">Create Account</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
+        </div>
     </div>
-</div>
 </div>

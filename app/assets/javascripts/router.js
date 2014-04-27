@@ -18,6 +18,7 @@ define([
             "resetpassword1" :ResetPassword1Controller.show,
             "resetpasswordconfirm/:resetcode" : ResetPassword2Controller.show,
             "register": UserController.register,
+            "settings": UserController.settings,
             "logout": UserController.logout,
             "faq": "faq",
             "aboutus": "aboutus",
