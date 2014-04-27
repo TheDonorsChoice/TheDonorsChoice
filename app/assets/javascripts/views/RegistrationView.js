@@ -44,11 +44,21 @@ define([
             var name = $('#registration-name').val();
             var email = $('#registration-email').val();
             var type = $('#registration-account-type').val();
+            var address_street = $('#registration-address').val();
+            var address_city = $('#registration-address-city').val();
+            var address_zip = $('#registration-address-zip').val();
+            var address_state = $('#registration-address-state').val();
 
             this.model.set("name", name);
             this.model.set("email", email);
             this.model.set("password", password);
             this.model.set("type", type);
+
+            // Address fields
+            this.model.set("address-street", address_street);
+            this.model.set("address-city", address_city);
+            this.model.set("address-zip", address_zip);
+            this.model.set("address-state", address_state);
 
             var success = function() {
                 AlertController.show("Your account has been registered.");

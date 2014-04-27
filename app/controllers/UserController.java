@@ -1,10 +1,10 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import models.User;
-import play.data.*;
 import play.Logger;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -53,6 +53,10 @@ public class UserController extends Controller {
         String password = requestData.get("password");
         String name = requestData.get("name");
         String type = requestData.get("type");
+        String address_street = requestData.get("address_street");
+        String address_zip = requestData.get("address_zip");
+        String address_city = requestData.get("address_city");
+        String address_state = requestData.get("address_state");
 
         //
         //  the following rules are bases on US_UserRegistration_01 document located at google drive Team3/Draft Project1 Files
@@ -79,7 +83,7 @@ public class UserController extends Controller {
             User newUser = new User();
             newUser.name = name;
             newUser.email = email;
-         
+
             Logger.info(newUser.toString());
 
             if (User.exists(newUser)) {
@@ -114,8 +118,9 @@ public class UserController extends Controller {
         Logger.info(userForEmail.resetCode);
 
         String body = String.format("Password reset requested.\n\n" +
-                "Please go here to reset your password: http://www.thedonorschoice.org/#resetpasswordconfirm/%s",
-                userForEmail.resetCode);
+                        "Please go here to reset your password: http://www.thedonorschoice.org/#resetpasswordconfirm/%s",
+                userForEmail.resetCode
+        );
 
         EmailUtils.sendEmail("noreply@thedonorschoice.org", userForEmail.email, "[TheDonorsChoice.org] Password Reset Request", body);
 

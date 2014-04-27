@@ -11,7 +11,11 @@ define([
             "password_confirm": "",
 		    "loggedIn":  false,
             "resetCode": "",
-		    "type": ""
+		    "type": "",
+            "address-street": "",
+            "address-zip": "",
+            "address-city": "",
+            "address-state": ""
 		  },
 
         initialize: function() {
@@ -33,7 +37,11 @@ define([
                 name: this.get("name"),
                 email: this.get("email"),
                 password: this.get("password"),
-                type: this.get("type")
+                type: this.get("type"),
+                address_street: this.get("address-street"),
+                address_zip: this.get("address-zip"),
+                address_city: this.get("address-city"),
+                address_state: this.get("address-state")
             }).success(success).fail(failure);
         },
 
