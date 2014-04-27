@@ -11,12 +11,12 @@ import java.util.Properties;
 public class EmailUtils {
 
     public static boolean sendEmail(String from, String to, String subject, String body) {
-        // Dump the submitted data to the console.
-        Logger.debug(from);
-        Logger.debug(to);
-        Logger.debug(body);
 
-        final String password = Play.application().configuration().getString("smtp_email");
+        final String password = Play.application().configuration().getString("smtp_password");
+        if (password == null || password.length() == 0) {
+            Logger.error("Unable to fetch SMTP Password, email sending skipped.");
+            return false;
+        }
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");

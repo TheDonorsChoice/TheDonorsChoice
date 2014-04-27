@@ -1,6 +1,5 @@
 package controllers;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.User;
@@ -12,7 +11,6 @@ import play.mvc.Result;
 import utilities.EmailUtils;
 import utilities.UserUtils;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class UserController extends Controller {
@@ -24,6 +22,11 @@ public class UserController extends Controller {
 
         String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
+        if (userForGuid == null) {
+            session().clear();
+            return badRequest();
+        }
+
         ObjectNode result = Json.newObject();
         result.put("name", userForGuid.name);
         result.put("email", userForGuid.email);
