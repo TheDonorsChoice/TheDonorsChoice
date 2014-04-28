@@ -66,7 +66,7 @@ define([
 
         render: function() {
 
-            var dropdown = $(   "#user-login-item");
+            var dropdown = $("#user-login-item");
             if (this.model.get("loggedIn")) {
                 dropdown.html(this.model.get("name"));
             } else {
