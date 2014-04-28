@@ -53,6 +53,10 @@ define([
         	console.log("create function called");
             e.preventDefault();
             
+            if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
+                AlertController.show("Missing form data please, complete form", "danger");
+                return;
+            }
             // Use the model setters and update the values from the UI
             model.set("title", $('#inputTitle').val());
             model.set("description", $('#textArea').val());
