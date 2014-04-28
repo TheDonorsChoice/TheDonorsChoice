@@ -12,22 +12,4 @@ public class Application extends Controller {
         return ok(index.render());
     }
 
-    public static Result authenticate() {
-
-        DynamicForm requestData = Form.form().bindFromRequest();
-        String username = requestData.get("username");
-        String password = requestData.get("password");
-
-        if (username.equals("admin") && password.equals("admin")) {
-
-            ObjectNode result = Json.newObject();
-            result.put("first_name", "Joe");
-            result.put("last_name", "Schmoe");
-
-            return ok(result);
-        } else {
-            return badRequest();
-        }
-    }
-
 }

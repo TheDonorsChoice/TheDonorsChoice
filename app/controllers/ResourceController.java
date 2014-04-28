@@ -11,14 +11,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
 import utilities.EmailUtils;
-import views.html.resource;
 
 public class ResourceController extends Controller {
-    static Form<Resource> resourceForm = Form.form(Resource.class);
-
-    public static Result resources() {
-        return ok(resource.render(Resource.all(), resourceForm));
-    }
 
     public static Result jsonResources() {
         // Restricting the resource page to registered users.
@@ -35,7 +29,7 @@ public class ResourceController extends Controller {
     	String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
         Resource.delete(id);
-        return redirect(routes.ResourceController.resources());
+        return ok();
     }
 
     //create resources
