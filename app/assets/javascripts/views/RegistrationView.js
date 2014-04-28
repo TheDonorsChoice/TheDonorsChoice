@@ -55,10 +55,10 @@ define([
             this.model.set("type", type);
 
             // Address fields
-            this.model.set("address-street", address_street);
-            this.model.set("address-city", address_city);
-            this.model.set("address-zip", address_zip);
-            this.model.set("address-state", address_state);
+            this.model.set("address_street", address_street);
+            this.model.set("address_city", address_city);
+            this.model.set("address_zip", address_zip);
+            this.model.set("address_state", address_state);
 
             var success = function() {
                 AlertController.show("Your account has been registered.");
