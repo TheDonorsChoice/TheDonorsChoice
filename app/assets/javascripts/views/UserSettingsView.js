@@ -44,7 +44,14 @@ define([
             this.model.set("address_city", address_city);
             this.model.set("address_zip", address_zip);
             this.model.set("address_state", address_state);
-            this.model.updateAccount();
+
+
+            this.model.updateAccount(function() {
+                    AlertController.show("Your account info has been successfully updated.", "info");
+                },
+                function() {
+                    AlertController.show("Your account information was unable to be updated.", "danger");
+                });
         }
     });
 
