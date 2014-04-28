@@ -26,11 +26,7 @@ define([ // <- requireJS stuff
 
         events: {
         	"keyup #filterinput" : "filterlist",
-        	"blur #filterinput" : "markmap",
-        	
-            "click #submit_post": "create",
-            "click #delete_post": "remove"
-        		
+        	"blur #filterinput" : "markmap"      		
         },
         // this function is implicitly called
         initialize: function() {

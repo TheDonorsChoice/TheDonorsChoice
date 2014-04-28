@@ -33,8 +33,8 @@ define([
         },
         
         remove: function(success, failure) {
-        	console.log("Delete");
-        	this.trigger('remove', this);
+        	console.log("Delete the selected post");
+        	this.destroy();
         },
         
     	update_resource: function(data) {
@@ -51,6 +51,12 @@ define([
     	
     	get_resource: function() {
             $.get("/resource", {  }, this.update_resource).fail(this.update_resource);
+        },
+        
+        delete_resource_by_id: function(int i) {
+        	$.get("/resource", { }, this.remove).fail(this.remove);
+        		
+        	})
         }
     });
 

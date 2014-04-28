@@ -40,7 +40,7 @@ define([
             this.$el.html(recipienthtml);
             // bind modal popup
             $('#submit_post').on('click', this.create);
-            $('#delete_post').on('click', this.remove());
+            $('#delete_post').on('click', this.remove);
             return this;
         },
 
@@ -74,7 +74,7 @@ define([
             model.create(success, error);
         },
         
-        remove: function() {
+        remove: function(ev) {
         	 var success = function() {
                  AlertController.show("Your post was deleted successfully", "info");
               };
@@ -82,7 +82,11 @@ define([
               var error = function() {
                   AlertController.show("Your post could not be deleted", "danger");
               };
-        	model.remove(success, error);
+              
+              var clicked = $(ev.currentTarget).data('rownum');
+              console.log(clicked);
+              
+              this.model.destroy();
         } 
     });
     
