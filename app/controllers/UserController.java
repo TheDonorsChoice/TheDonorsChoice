@@ -163,6 +163,41 @@ public class UserController extends Controller {
         return ok();
     }
 
+    public static Result updateUser() {
+        User currentUser = UserController.getCurrentUser();
+        if (currentUser == null) {
+            return badRequest();
+        }
+
+        DynamicForm requestData = Form.form().bindFromRequest();
+
+        String name = requestData.get("name");
+        String email = requestData.get("email");
+        String address_street = requestData.get("address_street");
+        String address_city = requestData.get("address_city");
+        String address_zip = requestData.get("address_zip");
+        String address_state = requestData.get("address_state");
+
+        currentUser.name = name;
+        currentUser.email = email;
+
+        Address address;
+        if (currentUser.addresses.size() >= 1) {
+            address = currentUser.addresses.get(0);
+        } else {
+            address = new Address();
+            currentUser.addresses.add(address);
+        }
+        address.street = address_street;
+        address.city = address_city;
+        address.zip = address_zip;
+        address.state = address_state;
+
+        currentUser.update();
+
+        return ok();
+    }
+
     private static boolean validEmail(String field) {
         int Email_len = field.length();
         int count = 0;

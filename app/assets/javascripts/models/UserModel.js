@@ -52,6 +52,17 @@ define([
             }).success(success).fail(failure);
         },
 
+        updateAccount: function(success, failure) {
+            $.post("/user/update", {
+                name: this.get("name"),
+                email: this.get("email"),
+                address_street: this.get("address_street"),
+                address_zip: this.get("address_zip"),
+                address_city: this.get("address_city"),
+                address_state: this.get("address_state")
+            }).success(success).fail(failure);
+        },
+
         logout: function(success, failure) {
             $.post("/logout", { }, this.logout_callback).success(success).fail(failure);
         },
@@ -73,6 +84,10 @@ define([
                 this.set("name", data.name);
                 this.set("email", data.email);
                 this.set("type", data.type);
+                this.set("address_street", data.address_street);
+                this.set("address_zip", data.address_street);
+                this.set("address_city", data.address_city);
+                this.set("address_state", data.address_state);
             }
 
             this.trigger('change', this);
