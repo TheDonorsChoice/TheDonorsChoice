@@ -51,12 +51,6 @@ define([
     	
     	get_resource: function() {
             $.get("/resource", {  }, this.update_resource).fail(this.update_resource);
-        },
-        
-        delete_resource_by_id: function(int i) {
-        	$.get("/resource", { }, this.remove).fail(this.remove);
-        		
-        	})
         }
     });
 
