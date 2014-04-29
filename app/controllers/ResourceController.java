@@ -25,11 +25,13 @@ public class ResourceController extends Controller {
     }
 
     //delete resources
-    public static Result deleteResource(Long id) {
-    	System.out.println("in deleteResource for id:" + id);
+    public static Result deleteResource() {
+    	DynamicForm requestData = Form.form().bindFromRequest();
+    	String iD = requestData.get("id");
     	String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
-        Resource delRec = Resource.findById(id);
+        Long id = Long.parseLong(iD);
+        Resource delRec = Resource.find.byId(id);
         if(delRec == null){
         	return Results.badRequest("Resource Could Not be found");
         }else {
@@ -46,7 +48,6 @@ public class ResourceController extends Controller {
 
     //create resources
     public static Result createResource() {
-
         String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
         Logger.info(userForGuid.type.toString() + " " + userForGuid.name);

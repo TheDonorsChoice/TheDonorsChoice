@@ -34,9 +34,9 @@ define([
         
         remove: function(id, success, failure) {
         	console.log("Delete the selected post");
-        	$.post("/resource", {
+        	$.post("/deleteresource", {
         		id: id
-        	}, "/delete").success(success).fail(failure);
+        	}).success(success).fail(failure);
         },
         
     	update_resource: function(data) {

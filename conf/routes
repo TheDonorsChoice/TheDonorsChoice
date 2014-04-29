@@ -32,7 +32,7 @@ POST    /address/:id/delete        	controllers.AddressController.deleteAddress(
 
 # Recipient
 GET		/resources.json				controllers.ResourceController.jsonResources()
-POST	/resource/:id/delete		controllers.ResourceController.deleteResource(id: Long)
+POST	/deleteresource		        controllers.ResourceController.deleteResource()
 POST	/resource					controllers.ResourceController.createResource()
 
 # Contact
