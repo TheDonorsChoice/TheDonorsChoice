@@ -36,7 +36,7 @@ public class ResourceController extends Controller {
         	return Results.badRequest("Resource Could Not be found");
         }else {
         	if(userForGuid.id == delRec.user.id){
-        		delRec.delete();
+        		Resource.delete(id);
         		return Results.ok();
         	}else {
         		return Results.badRequest("Cannot delete, you did not create this post");
