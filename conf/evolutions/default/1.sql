@@ -13,6 +13,18 @@ create table address (
   constraint pk_address primary key (id))
 ;
 
+create table recipient (
+  id                        bigint not null,
+  org_name                  varchar(255),
+  email                     varchar(255),
+  phone_number              varchar(255),
+  address                   varchar(255),
+  title                     varchar(255),
+  description               varchar(255),
+  user_id                   bigint,
+  constraint pk_recipient primary key (id))
+;
+
 create table request (
   id                        bigint not null,
   name                      varchar(255),
@@ -61,6 +73,8 @@ create table user_account (
 
 create sequence address_seq;
 
+create sequence recipient_seq;
+
 create sequence request_seq;
 
 create sequence resource_seq;
@@ -84,6 +98,8 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists address;
 
+drop table if exists recipient;
+
 drop table if exists request;
 
 drop table if exists resource;
@@ -95,6 +111,8 @@ drop table if exists user_account;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists address_seq;
+
+drop sequence if exists recipient_seq;
 
 drop sequence if exists request_seq;
 

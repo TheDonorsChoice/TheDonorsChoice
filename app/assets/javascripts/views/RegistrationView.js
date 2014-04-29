@@ -37,7 +37,23 @@ define([
             }
 
             if (password.length == 0) {
-                AlertController.show("Please enter a valid password and try again.", "danger");
+                AlertController.show("Your password cannot be blank.", "danger");
+                return;
+            }
+
+            if (password.length < 6) {
+                AlertController.show("Your password must be at least 6 characters long.", "danger");
+                return;
+            }
+
+            if (password.length > 13) {
+                AlertController.show("Your password must be less than 13 characters long.", "danger");
+                return;
+            }
+
+            var validPassword = validatePassword(password);
+            if (!validPassword) {
+                AlertController.show("Your password must contain at least one of the following: Lower Case, Upper Case, Symbol and Number.", "danger");
                 return;
             }
 
@@ -66,7 +82,7 @@ define([
             };
 
             var failure = function() {
-                AlertController.show("Please enter a valid password and try again.", "danger");
+                AlertController.show("Your account was unable to be registered due to an unknown error.", "danger");
             };
 
             this.model.register(success, failure);
@@ -77,6 +93,43 @@ define([
             this.$el.html(html);
         }
     });
+
+    var validatePassword = function(password) {
+        var hasSymbol = false;
+        var hasNumber = false;
+        var hasCapital = false;
+        var hasLower = false;
+        for (var i = 0; i < password.length; i++) {
+            if (password[i] >= 'a' && password[i] <= 'z') {
+                hasLower = true;
+            }
+
+            if (password[i] >= 'A' && password[i] <= 'Z') {
+                hasCapital = true;
+            }
+
+            if (password[i] >= '0' && password[i] <= '9') {
+                hasNumber = true;
+            }
+
+            //
+            // Stupid ASCII has three different defined sets of symbols in different groups.
+            //
+            if (password[i] >= '!' && password[i] <= '@') {
+                hasSymbol = true;
+            }
+
+            if (password[i] >= '[' && password[i] <= '`') {
+                hasSymbol = true;
+            }
+
+            if (password[i] >= '{' && password[i] <= '~') {
+                hasSymbol = true;
+            }
+        }
+
+        return hasSymbol && hasNumber && hasCapital && hasLower;
+    }
 
     return view;
 });
