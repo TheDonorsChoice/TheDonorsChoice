@@ -4,13 +4,13 @@ define([
     'models/UserModel',
     'controllers/AlertController',
     'compiled-templates'
-], function(_, Router, UserModel, AlertController, Templates){
+], function (_, Router, UserModel, AlertController, Templates) {
 
     var view = Backbone.View.extend({
         el: $('#main'),
         template: Templates['user-settings-template'],
 
-        initialize: function() {
+        initialize: function () {
             _.bindAll(this, 'render');
 
             this.listenTo(this.model, "change", this.render);
@@ -24,12 +24,12 @@ define([
             "#account-submit": "update"
         },
 
-        render: function() {
+        render: function () {
             var html = this.template(this.model);
             this.$el.html(html);
         },
 
-        update: function(e) {
+        update: function (e) {
             e.preventDefault();
             var name = $('#account-name').val();
             var email = $('#account-email').val();
@@ -46,10 +46,10 @@ define([
             this.model.set("address_state", address_state);
 
 
-            this.model.updateAccount(function() {
+            this.model.updateAccount(function () {
                     AlertController.show("Your account info has been successfully updated.", "info");
                 },
-                function() {
+                function () {
                     AlertController.show("Your account information was unable to be updated.", "danger");
                 });
         }

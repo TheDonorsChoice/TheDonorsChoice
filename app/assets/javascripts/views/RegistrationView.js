@@ -63,6 +63,11 @@ define([
             }
 
             var email = $('#registration-email').val();
+
+            if (!validEmail(email)) {
+                AlertController.show("The email address you entered is not valid. Please correct it and try again.", "danger");
+                return;
+            }
             var type = $('#registration-account-type').val();
             var address_street = $('#registration-address').val();
             var address_city = $('#registration-address-city').val();
@@ -134,6 +139,15 @@ define([
 
         return hasSymbol && hasNumber && hasCapital && hasLower;
     };
+
+    var validEmail = function (email) {
+        //
+        // Email Validation from Stack Overflow
+        // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+        //
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 
     return view;
 });
