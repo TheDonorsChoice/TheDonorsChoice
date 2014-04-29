@@ -21,7 +21,7 @@ define([
 
         events: {
             "submit form": "update",
-            "account-submit": "update"
+            "#account-submit": "update"
         },
 
         render: function() {
