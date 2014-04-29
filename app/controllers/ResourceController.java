@@ -27,10 +27,9 @@ public class ResourceController extends Controller {
     //delete resources
     public static Result deleteResource() {
     	DynamicForm requestData = Form.form().bindFromRequest();
-    	String iD = requestData.get("id");
+    	Long id = Long.parseLong(requestData.get("id"));
     	String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
-        Long id = Long.parseLong(iD);
         Resource delRec = Resource.find.byId(id);
         if(delRec == null){
         	return Results.badRequest("Resource Could Not be found");
@@ -54,10 +53,8 @@ public class ResourceController extends Controller {
         if ((userForGuid.type == User.UserType.PANTRY) || (userForGuid.type == User.UserType.SHELTER)) {
             DynamicForm requestData = Form.form().bindFromRequest();
             String title = requestData.get("title");
-            String type = requestData.get("type");
             String description = requestData.get("description");
             String itemsNeeded = requestData.get("itemsNeeded");
-            String items = "";
             Resource resource = new Resource();
             resource.user = userForGuid;
             resource.description = description;
@@ -75,6 +72,32 @@ public class ResourceController extends Controller {
         } else {
             return Results.badRequest("Invalid User Type");
         }
+    }
+    
+    public static Result updateResource(){
+    	DynamicForm requestData = Form.form().bindFromRequest();
+    	Long id = Long.parseLong(requestData.get("id"));
+    	String guide = session().get("guid");
+        User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
+        Resource upRec = Resource.find.byId(id);
+        String title = requestData.get("title");
+        String description = requestData.get("description");
+        String itemsNeeded = requestData.get("itemsNeeded");
+        if(upRec == null){
+        	return Results.badRequest("Resource Could Not be found");
+        }else {
+        	if(userForGuid.id == upRec.user.id){
+        		upRec.title = title;
+        		upRec.description = description;
+        		upRec.itemsNeeded = itemsNeeded;
+        		upRec.update();
+        		return Results.ok();
+        	}else {
+        		return Results.badRequest("Cannot update, you did not create this post");
+        	}
+        	
+        }
+    	
     }
 
     public static Result contactOrganization() {

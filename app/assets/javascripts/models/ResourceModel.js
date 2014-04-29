@@ -39,16 +39,14 @@ define([
         	}).success(success).fail(failure);
         },
         
-    	update_resource: function(data) {
-            this.set("orgName", data.orgName);
-            this.set("address", data.address);
-            this.set("phoneNumber", data.phoneNumber);
-            this.set("email", data.email);
-            this.set("Type", data.Type);
-            this.set("title", data.title);
-            this.set("itemsNeeded", data.itemsNeeded);
-            this.set("description", data.description);
-            this.trigger('change', this);
+    	update_resource: function(id, success, failure) {
+    		console.log("ResourceModel.update_resource()");
+            $.post("/updateresource", {
+            	id: id,
+                title: this.get("title"),
+                itemsNeeded: this.get("itemsNeeded"),
+                description: this.get("description")
+            }).success(success).fail(failure);
     	},
     	
     	get_resource: function() {

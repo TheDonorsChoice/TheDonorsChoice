@@ -41,6 +41,7 @@ define([
             // bind modal popup
             $('#submit_post').on('click', this.create);
             $('#delete_post').on('click', this.remove);
+            $('#edit_post').on('click', this.update);
             return this;
         },
 
@@ -91,8 +92,32 @@ define([
               console.log(clicked);
               
              // model.destroy();
-             model.remove(clicked);
-        } 
+             model.remove(clicked, success, error);
+        },
+        
+        update: function(ev){
+        	
+        	console.log("hi.. updating");
+       	 var success = function() {
+             AlertController.show("Your post was updated successfully", "info");
+          };
+
+          var error = function() {
+              AlertController.show("Your post could not be updated", "danger");
+          };
+          
+          if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
+              AlertController.show("Missing form data please, complete form", "danger");
+              return;
+          }
+          // Use the model setters and update the values from the UI
+          model.set("title", $('#inputTitle').val());
+          model.set("description", $('#textArea').val());
+          model.set("itemsNeeded", $('#inputItemsNeeded').val());
+          var clicked = $(ev.currentTarget).data('rownum');
+          console.log(clicked);  
+         model.update_resource(clicked, success, error);
+    } 
     });
     
     return view;

@@ -34,6 +34,7 @@ POST    /address/:id/delete        	controllers.AddressController.deleteAddress(
 GET		/resources.json				controllers.ResourceController.jsonResources()
 POST	/deleteresource		        controllers.ResourceController.deleteResource()
 POST	/resource					controllers.ResourceController.createResource()
+POST    /updateresource             controllers.ResourceController.updateResource()
 
 # Contact
 POST   /contact                     controllers.ContactController.contact()
