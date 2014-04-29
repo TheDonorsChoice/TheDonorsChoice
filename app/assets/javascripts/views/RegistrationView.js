@@ -12,8 +12,7 @@ define([
         el: $('#main'),
 
         events: {
-            "submit form": "register",
-            "click #registration-submit": "register"
+            "submit form": "register"
         },
 
         initialize: function(options) {
@@ -58,6 +57,11 @@ define([
             }
 
             var name = $('#registration-name').val();
+            if (name.length == 0) {
+                AlertController.show("Your name cannot be blank. Please correct it and try again.", "danger");
+                return;
+            }
+
             var email = $('#registration-email').val();
             var type = $('#registration-account-type').val();
             var address_street = $('#registration-address').val();
@@ -129,7 +133,7 @@ define([
         }
 
         return hasSymbol && hasNumber && hasCapital && hasLower;
-    }
+    };
 
     return view;
 });
