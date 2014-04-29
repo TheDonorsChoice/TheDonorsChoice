@@ -15,13 +15,15 @@ define([
 
         events: {
             "click #submit_post": "create",
-            "click #delete_post": "remove"
+            "click #delete_post": "remove",
+            "click #save_button": "update"
         },
 
         initialize: function () {
             _.bindAll(this, 'render');
             _.bindAll(this, 'create');
             _.bindAll(this, 'remove');
+            _.bindAll(this, 'update');
 
             this.listenTo(this.collection, "change", this.render);
             this.listenTo(this.collection, "error", this.displayError);
@@ -41,7 +43,7 @@ define([
             // bind modal popup
             $('#submit_post').on('click', this.create);
             $('#delete_post').on('click', this.remove);
-            $('#edit_post').on('click', this.update);
+            $('#save_button').on('click', this.update);
             return this;
         },
 
@@ -108,6 +110,8 @@ define([
         },
 
         update: function (ev) {
+        	
+        	console.log("In the update function of RecipientView.js");
 
             var success = function () {
                 AlertController.show("Your post was updated successfully", "info");
