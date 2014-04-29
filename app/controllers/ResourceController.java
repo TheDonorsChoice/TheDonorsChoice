@@ -26,6 +26,7 @@ public class ResourceController extends Controller {
 
     //delete resources
     public static Result deleteResource(Long id) {
+    	System.out.println("in deleteResource for id:" + id);
     	String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
         Resource delRec = Resource.findById(id);

@@ -32,9 +32,11 @@ define([
             }).success(success).fail(failure);
         },
         
-        remove: function(success, failure) {
+        remove: function(id, success, failure) {
         	console.log("Delete the selected post");
-        	this.destroy();
+        	$.post("/resource", {
+        		id: id
+        	}, "/delete").success(success).fail(failure);
         },
         
     	update_resource: function(data) {

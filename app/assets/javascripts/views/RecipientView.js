@@ -90,7 +90,8 @@ define([
               var clicked = $(ev.currentTarget).data('rownum');
               console.log(clicked);
               
-              this.model.destroy();
+             // model.destroy();
+             model.remove(clicked);
         } 
     });
     
