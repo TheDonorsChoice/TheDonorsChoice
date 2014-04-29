@@ -5,7 +5,7 @@ define([
     'compiled-templates',
     'controllers/AlertController',
     'helpers/RoutingHelper'
-], function($, _, Backbone, Templates, AlertController, Router){
+], function ($, _, Backbone, Templates, AlertController, Router) {
 
     var view = Backbone.View.extend({
         template: Templates['user-account-template'],
@@ -15,7 +15,7 @@ define([
             "submit form": "register"
         },
 
-        initialize: function(options) {
+        initialize: function (options) {
             _.bindAll(this, 'render');
             _.bindAll(this, 'register');
 
@@ -23,7 +23,7 @@ define([
             this.render();
         },
 
-        register: function(e) {
+        register: function (e) {
             e.preventDefault();
 
             // Validate that the password is present and matches.
@@ -85,25 +85,25 @@ define([
             this.model.set("address_zip", address_zip);
             this.model.set("address_state", address_state);
 
-            var success = function() {
+            var success = function () {
                 AlertController.show("Your account has been registered.");
                 Router.navigateToRoot();
             };
 
-            var failure = function() {
+            var failure = function () {
                 AlertController.show("Your account was unable to be registered due to an unknown error.", "danger");
             };
 
             this.model.register(success, failure);
         },
 
-        render: function(context) {
+        render: function (context) {
             var html = this.template(context);
             this.$el.html(html);
         }
     });
 
-    var validatePassword = function(password) {
+    var validatePassword = function (password) {
         var hasSymbol = false;
         var hasNumber = false;
         var hasCapital = false;
@@ -147,7 +147,7 @@ define([
         //
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
-    }
+    };
 
     return view;
 });
