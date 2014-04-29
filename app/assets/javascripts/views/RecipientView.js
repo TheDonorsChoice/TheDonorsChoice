@@ -6,19 +6,19 @@ define([
     'controllers/AlertController',
     'models/ResourceModel',
     'helpers/RoutingHelper'
-], function($,_, Backbone, Templates, AlertController, ResourceModel, Router){
+], function ($, _, Backbone, Templates, AlertController, ResourceModel, Router) {
 
-	var model = new ResourceModel();
+    var model = new ResourceModel();
     var view = Backbone.View.extend({
         template: Templates['recipient-template'],
         el: $('#main'),
-        
-         events: {
+
+        events: {
             "click #submit_post": "create",
             "click #delete_post": "remove"
         },
 
-        initialize: function() {
+        initialize: function () {
             _.bindAll(this, 'render');
             _.bindAll(this, 'create');
             _.bindAll(this, 'remove');
@@ -26,16 +26,16 @@ define([
             this.listenTo(this.collection, "change", this.render);
             this.listenTo(this.collection, "error", this.displayError);
 
-            console.log("Printing from recipient view" + model );
+            console.log("Printing from recipient view" + model);
             console.log(model);
 
-            this.collection.fetch({success: function(collection, response, options) {
+            this.collection.fetch({success: function (collection, response, options) {
                 collection.trigger("change");
             }});
-        },    
+        },
 
-        render: function() {
-        	console.log("hi...");
+        render: function () {
+            console.log("hi...");
             var recipienthtml = this.template(this.collection);
             this.$el.html(recipienthtml);
             // bind modal popup
@@ -45,15 +45,15 @@ define([
             return this;
         },
 
-        displayError: function() {
+        displayError: function () {
             AlertController.show("This page requires you to be authenticated.", "danger");
             Router.navigateToRoot();
         },
-       
-        create: function(e) {
-        	console.log("create function called");
+
+        create: function (e) {
+            console.log("create function called");
             e.preventDefault();
-            
+
             if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
                 AlertController.show("Missing form data please, complete form", "danger");
                 return;
@@ -67,58 +67,69 @@ define([
             //
             // Success/Error handlers which will allow us to perform UI updates.
             //
-            var success = function() {
-               AlertController.show("Your post has been sent successfully", "info");
+            var collection = this.collection;
+            var success = function () {
+                AlertController.show("Your post has been sent successfully", "info");
+
+                // Force a fetch since we need to force a full update.
+                collection.fetch({success: function (collection, response, options) {
+                    collection.trigger("change");
+                }});
             };
 
-            var error = function() {
+            var error = function () {
                 AlertController.show("Your post could not be sent", "danger");
             };
 
             // Request that the model submit the contact information to the server.
             model.create(success, error);
         },
-        
-        remove: function(ev) {
-        	 var success = function() {
-                 AlertController.show("Your post was deleted successfully", "info");
-              };
 
-              var error = function() {
-                  AlertController.show("Your post could not be deleted", "danger");
-              };
-              
-              var clicked = $(ev.currentTarget).data('rownum');
-              console.log(clicked);
-              
-             // model.destroy();
-             model.remove(clicked, success, error);
+        remove: function (ev) {
+            var collection = this.collection;
+            var success = function () {
+                AlertController.show("Your post was deleted successfully", "info");
+
+                // Force a fetch since we need to force a full update.
+                collection.fetch({success: function (collection, response, options) {
+                    collection.trigger("change");
+                }});
+            };
+
+            var error = function () {
+                AlertController.show("Your post could not be deleted", "danger");
+            };
+
+            var clicked = $(ev.currentTarget).data('rownum');
+            console.log(clicked);
+
+            // model.destroy();
+            model.remove(clicked, success, error);
         },
-        
-        update: function(ev){
-        	
-        	console.log("hi.. updating");
-       	 var success = function() {
-             AlertController.show("Your post was updated successfully", "info");
-          };
 
-          var error = function() {
-              AlertController.show("Your post could not be updated", "danger");
-          };
-          
-          if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
-              AlertController.show("Missing form data please, complete form", "danger");
-              return;
-          }
-          // Use the model setters and update the values from the UI
-          model.set("title", $('#inputTitle').val());
-          model.set("description", $('#textArea').val());
-          model.set("itemsNeeded", $('#inputItemsNeeded').val());
-          var clicked = $(ev.currentTarget).data('rownum');
-          console.log(clicked);  
-         model.update_resource(clicked, success, error);
-    } 
+        update: function (ev) {
+
+            var success = function () {
+                AlertController.show("Your post was updated successfully", "info");
+            };
+
+            var error = function () {
+                AlertController.show("Your post could not be updated", "danger");
+            };
+
+            if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
+                AlertController.show("Missing form data please, complete form", "danger");
+                return;
+            }
+            // Use the model setters and update the values from the UI
+            model.set("title", $('#inputTitle').val());
+            model.set("description", $('#textArea').val());
+            model.set("itemsNeeded", $('#inputItemsNeeded').val());
+            var clicked = $(ev.currentTarget).data('rownum');
+            console.log(clicked);
+            model.update_resource(clicked, success, error);
+        }
     });
-    
+
     return view;
 });
