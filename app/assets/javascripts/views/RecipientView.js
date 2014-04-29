@@ -117,14 +117,14 @@ define([
                 AlertController.show("Your post could not be updated", "danger");
             };
 
-            if ($('#inputTitle').val().length == 0 || $('#textArea').val().length == 0 || $('#inputItemsNeeded').val().length == 0) {
+            if ($('#update-inputTitle').val().length == 0 || $('#update-textArea').val().length == 0 || $('#update-inputItemsNeeded').val().length == 0) {
                 AlertController.show("Missing form data please, complete form", "danger");
                 return;
             }
             // Use the model setters and update the values from the UI
-            model.set("title", $('#inputTitle').val());
-            model.set("description", $('#textArea').val());
-            model.set("itemsNeeded", $('#inputItemsNeeded').val());
+            model.set("title", $('#update-inputTitle').val());
+            model.set("description", $('#update-textArea').val());
+            model.set("itemsNeeded", $('#update-inputItemsNeeded').val());
             var clicked = $(ev.currentTarget).data('rownum');
             console.log(clicked);
             model.update_resource(clicked, success, error);
