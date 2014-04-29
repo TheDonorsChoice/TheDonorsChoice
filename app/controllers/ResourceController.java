@@ -28,8 +28,19 @@ public class ResourceController extends Controller {
     public static Result deleteResource(Long id) {
     	String guide = session().get("guid");
         User userForGuid = User.findByString.where().eq("guid", guide).findUnique();
-        Resource.delete(id);
-        return ok();
+        Resource delRec = Resource.findById(id);
+        if(delRec == null){
+        	return Results.badRequest("Resource Could Not be found");
+        }else {
+        	if(userForGuid.id == delRec.user.id){
+        		delRec.delete();
+        		return Results.ok();
+        	}else {
+        		return Results.badRequest("Cannot delete, you did not create this post");
+        	}
+        	
+        }
+        
     }
 
     //create resources
