@@ -85,7 +85,7 @@ define([
                 this.set("email", data.email);
                 this.set("type", data.type);
                 this.set("address_street", data.address_street);
-                this.set("address_zip", data.address_street);
+                this.set("address_zip", data.address_zip);
                 this.set("address_city", data.address_city);
                 this.set("address_state", data.address_state);
             }
