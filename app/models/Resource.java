@@ -67,7 +67,7 @@ public class Resource extends Model {
     public Resource() {
     	
     }
-    
+
 	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);
 	
 	public static List<Resource> all(){
