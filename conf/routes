@@ -25,6 +25,7 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 # Resource
 POST 	/resource/contact			controllers.ResourceController.contactOrganization()
 GET 	/resources.json		        controllers.ResourceController.jsonResources()
+GET 	/user/resources.json		controllers.ResourceController.userResources()
 
 # Address
 GET 	/addresses.json		        controllers.AddressController.jsonAddresses()

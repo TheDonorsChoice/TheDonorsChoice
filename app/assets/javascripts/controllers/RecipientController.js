@@ -9,6 +9,8 @@ define([ // <-- requireJS stuff
     'collections/ResourceCollection'
 ], function($, ResourceModel, Backbone, RecipientView, ResourceCollection){
 	var resources = new ResourceCollection();
+    resources.url = "/user/resources.json";
+
 	var resource = new ResourceModel();
 
 	// this function is implicitly called
@@ -37,7 +39,7 @@ define([ // <-- requireJS stuff
 	   console.log("In update in RecipientController.js");
 	   var resourceView = new RecipientView( {model: resource} );
 	   resourceView.update();
-   } 
+   };
     
     // these are the available functions for this object
 	return {

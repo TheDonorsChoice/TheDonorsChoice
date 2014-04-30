@@ -49,33 +49,24 @@ public class Resource extends Model {
     @Constraints.Required
     @JsonProperty(required = false)
     public String description;
-	
+
 	//Need to remove these but breaks the build
     //------------------------------------------------
 	@Constraints.Required
 	@JsonProperty(required= false)
 	public String address;
-    
+
 	@Constraints.Required
 	@JsonProperty(required= false)
 	public String phoneNumber;
-	
+
 	@Constraints.Required
 	@JsonProperty(required= false)
 	public String email;
-	//----------------------------------------------
-    public static int size = 0; 
     
     public Resource() {
     	
     }
-//    public Resource(String name, String type, String postTitle, String items, String postDescription){ 
-//    	this.orgName = name; 
-//    	this.Type = type; 
-//    	this.title = postTitle;
-//    	this.itemsNeeded = items;
-//    	this.description = postDescription;
-//    }
     
 	public static Finder<Long, Resource> find = new Finder<Long, Resource>(Long.class, Resource.class);
 	
@@ -88,13 +79,11 @@ public class Resource extends Model {
 	}
 	
 	public static void create(Resource resource){
-		resource.save(); 
-		size++; 
+		resource.save();
 	}
 	
 	public static void delete(Long id){
 		find.ref(id).delete();
-		size--; 
 	}
 }
 

@@ -24,6 +24,16 @@ public class ResourceController extends Controller {
         return ok(play.libs.Json.toJson(Resource.all()));
     }
 
+    public static Result userResources() {
+        // Restricting the resource page to registered users.
+        User currentUser = UserController.getCurrentUser();
+        if (currentUser == null) {
+            return ok();
+        }
+
+        return ok(play.libs.Json.toJson(Resource.find.where().eq("user_id", currentUser.id).findList()));
+    }
+
     //delete resources
     public static Result deleteResource() {
     	DynamicForm requestData = Form.form().bindFromRequest();
