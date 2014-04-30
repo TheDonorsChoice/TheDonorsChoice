@@ -75,6 +75,7 @@ public class ResourceController extends Controller {
     }
     
     public static Result updateResource(){
+    	Logger.info("In updateresource in ResourceController.java");
     	DynamicForm requestData = Form.form().bindFromRequest();
     	Long id = Long.parseLong(requestData.get("id"));
     	String guide = session().get("guid");
