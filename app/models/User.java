@@ -19,6 +19,7 @@ import java.util.List;
  * @since 3/4/2014
  */
 @Entity
+@Table(name = "users")
 public class User extends Model {
 
     @Id

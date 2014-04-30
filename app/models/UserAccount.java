@@ -18,6 +18,7 @@ import java.util.List;
  * @since 4/20
  */
 @Entity
+@Table(name = "user_accounts")
 public class UserAccount extends Model{
 	
 	@Id
